@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { LayoutList, Cpu, Compass, Cloud, RefreshCw, Sparkles, BookOpen } from 'lucide-react';
+import { LayoutList, Cpu, Compass, Cloud, RefreshCw, Sparkles, BookOpen, LayoutGrid } from 'lucide-react';
 import { formatINR } from '@/lib/searchUtils';
 
 interface NavbarProps {
-  activeTab: 'checklist' | 'pcbuilder' | 'recommendations';
-  setActiveTab: (tab: 'checklist' | 'pcbuilder' | 'recommendations') => void;
+  activeTab: 'checklist' | 'prebuilts' | 'pcbuilder' | 'recommendations';
+  setActiveTab: (tab: 'checklist' | 'prebuilts' | 'pcbuilder' | 'recommendations') => void;
   itemsCount: number;
   totalCost: number;
   neonConnected: boolean;
@@ -43,7 +43,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   ₹ INR
                 </span>
               </div>
-              <p className="text-xs text-zinc-400">Workspace & Custom PC Architecture (Indian Standards)</p>
+              <p className="text-xs text-zinc-400">Workspace & Custom PC Architecture</p>
             </div>
           </div>
 
@@ -55,10 +55,10 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Navigation Tabs */}
-        <nav className="flex items-center p-1 rounded-xl bg-zinc-900 border border-zinc-800">
+        <nav className="flex items-center p-1 rounded-xl bg-zinc-900 border border-zinc-800 overflow-x-auto max-w-full">
           <button
             onClick={() => setActiveTab('checklist')}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
               activeTab === 'checklist'
                 ? 'bg-zinc-100 text-zinc-950 font-semibold shadow-sm'
                 : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-850'
@@ -76,38 +76,50 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
 
           <button
+            onClick={() => setActiveTab('prebuilts')}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
+              activeTab === 'prebuilts'
+                ? 'bg-zinc-100 text-zinc-950 font-semibold shadow-sm'
+                : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-850'
+            }`}
+          >
+            <LayoutGrid className="w-4 h-4" />
+            <span>Pre-Built Rigs (1L - 4L)</span>
+          </button>
+
+          <button
             onClick={() => setActiveTab('pcbuilder')}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
               activeTab === 'pcbuilder'
                 ? 'bg-zinc-100 text-zinc-950 font-semibold shadow-sm'
                 : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-850'
             }`}
           >
             <Cpu className="w-4 h-4" />
-            <span>PC Studio</span>
+            <span>Custom PC Studio</span>
           </button>
 
           <button
             onClick={() => setActiveTab('recommendations')}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
               activeTab === 'recommendations'
                 ? 'bg-zinc-100 text-zinc-950 font-semibold shadow-sm'
                 : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-850'
             }`}
           >
             <Compass className="w-4 h-4" />
-            <span>Inspiration</span>
+            <span>Workspaces</span>
           </button>
         </nav>
 
-        {/* Action Buttons: Step Guide & Neon */}
+        {/* Action Buttons */}
         <div className="hidden md:flex items-center gap-2.5">
           <button
             onClick={onOpenGuide}
             className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold shadow-md shadow-white/5 transition active:scale-95"
           >
             <BookOpen className="w-3.5 h-3.5 stroke-[2.2]" />
-            <span>Setup Guide (Step 1-6)</span>
+            <span>Setup Guide (1-6)</span>
           </button>
 
           <button

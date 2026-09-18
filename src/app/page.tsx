@@ -1,21 +1,37 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { SetupItem, PCComponent, SetupPreset } from '@/types/setup';
+import { SetupItem, PCComponent, SetupPreset, PCPartType, PCPreset } from '@/types/setup';
 import { Navbar } from '@/components/Shared/Navbar';
 import { BudgetSummaryCard } from '@/components/Checklist/BudgetSummaryCard';
 import { ChecklistManager } from '@/components/Checklist/ChecklistManager';
 import { PCBuilder } from '@/components/PCBuilder/PCBuilder';
+import { PrebuiltsGallery } from '@/components/Prebuilts/PrebuiltsGallery';
 import { RecommendationHub } from '@/components/Recommendations/RecommendationHub';
 import { SetupWizard } from '@/components/SetupWizard/SetupWizard';
 
+const EMPTY_BUILD: Record<PCPartType, PCComponent | null> = {
+  cpu: null,
+  gpu: null,
+  motherboard: null,
+  ram: null,
+  storage: null,
+  psu: null,
+  cooler: null,
+  case: null,
+};
+
 export default function HomePage() {
-  const [activeTab, setActiveTab] = useState<'checklist' | 'pcbuilder' | 'recommendations'>('checklist');
+  const [activeTab, setActiveTab] = useState<'checklist' | 'prebuilts' | 'pcbuilder' | 'recommendations'>('checklist');
   const [items, setItems] = useState<SetupItem[]>([]);
   const [neonConnected, setNeonConnected] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [setupId, setSetupId] = useState<string>('primary-setup');
   const [showGuide, setShowGuide] = useState(false);
+
+  // PC Studio state shared so loading from Prebuilts works seamlessly
+  const [selectedParts, setSelectedParts] = useState<Record<PCPartType, PCComponent | null>>(EMPTY_BUILD);
+  const [buildName, setBuildName] = useState('My Custom PC Build');
 
   useEffect(() => {
     checkNeonStatus('primary-setup');
@@ -103,17 +119,17 @@ export default function HomePage() {
     setActiveTab('checklist');
   };
 
-  const handleAddBuildToChecklist = (parts: PCComponent[], buildName: string) => {
+  const handleAddBuildToChecklist = (parts: PCComponent[], title: string) => {
     const newItems: SetupItem[] = parts.map((part) => ({
       id: 'pc-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
       name: `${part.name} (${part.type.toUpperCase()})`,
       category: 'pc',
-      url: part.url || `https://www.google.com/search?q=${encodeURIComponent(part.name + ' buy deals')}`,
+      url: part.url || `https://www.google.co.in/search?q=${encodeURIComponent(part.name + ' buy online india')}`,
       price: part.price,
       quantity: 1,
       priority: 'must-have',
       status: 'wishlist',
-      notes: `Part of ${buildName}. ${part.specs || ''}`,
+      notes: `Part of ${title}. ${part.specs || ''}`,
       createdAt: new Date().toISOString(),
     }));
 
@@ -121,12 +137,18 @@ export default function HomePage() {
     setActiveTab('checklist');
   };
 
+  const handleLoadBuildToStudio = (preset: PCPreset) => {
+    setSelectedParts(preset.parts);
+    setBuildName(preset.title);
+    setActiveTab('pcbuilder');
+  };
+
   const handleAddPresetItems = (presetItems: SetupPreset['items']) => {
     const newItems: SetupItem[] = presetItems.map((pi) => ({
       id: 'preset-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
       name: pi.name,
       category: pi.category,
-      url: `https://www.google.com/search?q=${encodeURIComponent(pi.searchQuery || pi.name)}`,
+      url: `https://www.google.co.in/search?q=${encodeURIComponent(pi.searchQuery || pi.name)}`,
       price: pi.estimatedPrice,
       quantity: 1,
       priority: pi.priority,
@@ -176,8 +198,22 @@ export default function HomePage() {
           </div>
         )}
 
+        {activeTab === 'prebuilts' && (
+          <PrebuiltsGallery
+            onLoadBuildToStudio={handleLoadBuildToStudio}
+            onAddPresetToChecklist={handleAddBuildToChecklist}
+          />
+        )}
+
         {activeTab === 'pcbuilder' && (
-          <PCBuilder onAddBuildToChecklist={handleAddBuildToChecklist} />
+          <PCBuilder 
+            selectedParts={selectedParts}
+            setSelectedParts={setSelectedParts}
+            buildName={buildName}
+            setBuildName={setBuildName}
+            onAddBuildToChecklist={handleAddBuildToChecklist}
+            onOpenPrebuiltsTab={() => setActiveTab('prebuilts')}
+          />
         )}
 
         {activeTab === 'recommendations' && (
