@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'SetupForge | Productivity Setup Checklist & Custom PC Builder',
+  title: 'SetupForge | Minimalist Workspace & PC Studio',
   description: 'Plan your dream ergonomic workspace, customize PC builds, estimate wattage, calculate total setup budget, and find curated gear recommendations.',
 };
 
@@ -13,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className="min-h-screen bg-[#090d16] text-slate-100 antialiased selection:bg-indigo-500/30 selection:text-indigo-200">
+      <body className="min-h-screen bg-[#09090b] text-zinc-100 antialiased selection:bg-zinc-100 selection:text-zinc-950">
         {children}
       </body>
     </html>

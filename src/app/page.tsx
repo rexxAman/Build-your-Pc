@@ -11,19 +11,16 @@ import { SetupWizard } from '@/components/SetupWizard/SetupWizard';
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState<'checklist' | 'pcbuilder' | 'recommendations'>('checklist');
-  // Starts completely empty — user creates items themselves or uses the step guide
   const [items, setItems] = useState<SetupItem[]>([]);
   const [neonConnected, setNeonConnected] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [setupId, setSetupId] = useState<string>('primary-setup');
   const [showGuide, setShowGuide] = useState(false);
 
-  // Check Neon Postgres connection on mount
   useEffect(() => {
     checkNeonStatus('primary-setup');
   }, []);
 
-  // Fetch Neon database status & existing data if saved
   const checkNeonStatus = async (idToQuery: string) => {
     try {
       const res = await fetch(`/api/setups?id=${idToQuery}`);
@@ -41,7 +38,6 @@ export default function HomePage() {
     }
   };
 
-  // Sync / Save to Neon database
   const handleSyncNeon = async () => {
     setSyncing(true);
     try {
@@ -72,7 +68,6 @@ export default function HomePage() {
     }
   };
 
-  // Checklist Actions
   const handleAddItem = (newItem: Omit<SetupItem, 'id' | 'createdAt'>) => {
     const item: SetupItem = {
       ...newItem,
@@ -96,7 +91,6 @@ export default function HomePage() {
     setItems([]);
   };
 
-  // Step-by-Step Wizard Finish action
   const handleFinishWizard = (wizardItems: Omit<SetupItem, 'id' | 'createdAt'>[]) => {
     const newItems: SetupItem[] = wizardItems.map((wi) => ({
       ...wi,
@@ -109,7 +103,6 @@ export default function HomePage() {
     setActiveTab('checklist');
   };
 
-  // PC Builder Sync action
   const handleAddBuildToChecklist = (parts: PCComponent[], buildName: string) => {
     const newItems: SetupItem[] = parts.map((part) => ({
       id: 'pc-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
@@ -128,7 +121,6 @@ export default function HomePage() {
     setActiveTab('checklist');
   };
 
-  // Preset import action
   const handleAddPresetItems = (presetItems: SetupPreset['items']) => {
     const newItems: SetupItem[] = presetItems.map((pi) => ({
       id: 'preset-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
@@ -150,7 +142,7 @@ export default function HomePage() {
   const totalCost = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100">
+    <div className="min-h-screen flex flex-col bg-[#09090b] text-zinc-100 font-sans">
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -162,7 +154,6 @@ export default function HomePage() {
         onOpenGuide={() => setShowGuide(true)}
       />
 
-      {/* Step-by-Step Setup Guide Modal */}
       {showGuide && (
         <SetupWizard
           onFinishWizard={handleFinishWizard}
@@ -170,7 +161,7 @@ export default function HomePage() {
         />
       )}
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6 sm:py-8">
         {activeTab === 'checklist' && (
           <div className="space-y-6">
             <BudgetSummaryCard items={items} />
@@ -208,19 +199,17 @@ export default function HomePage() {
         )}
       </main>
 
-      <footer className="border-t border-slate-800/60 py-6 px-4 text-center text-xs text-slate-500 bg-[#070a12]">
+      <footer className="border-t border-zinc-900 py-6 px-4 text-center text-xs text-zinc-500 bg-[#09090b]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div>
-            <span className="font-semibold text-slate-400">SetupForge</span> — Plan, Budget, and Build Productive Workspaces.
+          <div className="text-zinc-400">
+            <span className="font-semibold text-zinc-200">SetupForge</span> — Cozy Minimalist Workspace & PC Architecture.
           </div>
-          <div className="flex items-center gap-4 text-slate-400">
+          <div className="flex items-center gap-3 text-zinc-500">
             <span>Next.js 14</span>
             <span>•</span>
-            <span>Tailwind CSS</span>
+            <span>Neon Postgres</span>
             <span>•</span>
-            <span>Neon Database</span>
-            <span>•</span>
-            <span>Vercel Deployable</span>
+            <span>Vercel Ready</span>
           </div>
         </div>
       </footer>

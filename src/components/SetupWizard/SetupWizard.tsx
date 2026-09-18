@@ -281,38 +281,38 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
     .reduce((sum, item) => sum + (item?.price || 0), 0);
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="w-full max-w-3xl rounded-3xl bg-[#0f172a] border border-slate-700/80 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="w-full max-w-3xl rounded-3xl bg-zinc-900 border border-zinc-800 shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Wizard Top Bar */}
-        <div className="px-6 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/60">
+        <div className="px-6 py-4 border-b border-zinc-800 flex items-center justify-between bg-zinc-950/70">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-indigo-600/20 text-indigo-400 border border-indigo-500/30">
-              <Sparkles className="w-5 h-5" />
+            <div className="p-2 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700">
+              <Sparkles className="w-4 h-4 text-zinc-200" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white">Interactive Setup Guide (Step 1 to Final)</h3>
-              <p className="text-xs text-slate-400">Step-by-step guidance to assemble your ideal productive workspace</p>
+              <h3 className="text-sm font-bold text-zinc-100">Step-by-Step Setup Guide</h3>
+              <p className="text-xs text-zinc-400">Step 1 to final: build your custom workspace</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
             <div className="text-right hidden sm:block">
-              <span className="text-[11px] text-slate-400">Guide Total Budget</span>
-              <div className="text-sm font-bold font-mono text-emerald-400">
+              <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono">Planned Total</span>
+              <div className="text-sm font-bold font-mono text-zinc-100">
                 ${totalPlannedSoFar.toLocaleString()}
               </div>
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition"
+              className="p-1.5 rounded-xl text-zinc-400 hover:text-white hover:bg-zinc-800 transition"
             >
               ✕
             </button>
           </div>
         </div>
 
-        {/* Step Progress Indicators */}
-        <div className="px-6 py-3 bg-slate-950/40 border-b border-slate-800/80 flex items-center justify-between gap-1 overflow-x-auto">
+        {/* Step Progress Bar */}
+        <div className="px-6 py-3 bg-zinc-950 border-b border-zinc-800 flex items-center justify-between gap-1 overflow-x-auto">
           {WIZARD_STEPS.map((step, idx) => {
             const isCompleted = Boolean(selections[idx]);
             const isCurrent = idx === currentStepIndex;
@@ -323,44 +323,44 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
                 onClick={() => setCurrentStepIndex(idx)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs transition shrink-0 ${
                   isCurrent
-                    ? 'bg-indigo-600 text-white font-semibold'
+                    ? 'bg-zinc-100 text-zinc-950 font-semibold'
                     : isCompleted
-                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
-                    : 'text-slate-500 hover:text-slate-300'
+                    ? 'bg-zinc-800 text-zinc-200 border border-zinc-700'
+                    : 'text-zinc-500 hover:text-zinc-300'
                 }`}
               >
                 <span>{step.stepNumber}. {step.category}</span>
-                {isCompleted && !isCurrent && <Check className="w-3 h-3" />}
+                {isCompleted && !isCurrent && <Check className="w-3 h-3 text-zinc-400" />}
               </button>
             );
           })}
         </div>
 
         {/* Main Step Content */}
-        <div className="p-6 overflow-y-auto space-y-6 flex-1">
+        <div className="p-6 overflow-y-auto space-y-6 flex-1 bg-zinc-900">
           <div>
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-indigo-400 mb-1">
+            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-1">
               <span>{currentStep.title}</span>
             </div>
-            <p className="text-sm text-slate-300">{currentStep.subtitle}</p>
+            <p className="text-sm text-zinc-200">{currentStep.subtitle}</p>
             
-            <div className="mt-3 p-3 rounded-xl bg-indigo-950/30 border border-indigo-500/20 text-xs text-indigo-200 flex items-start gap-2">
-              <Info className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
-              <span><b>Ergonomic Advice:</b> {currentStep.advice}</span>
+            <div className="mt-3 p-3 rounded-xl bg-zinc-950 border border-zinc-800 text-xs text-zinc-300 flex items-start gap-2">
+              <Info className="w-4 h-4 text-zinc-400 shrink-0 mt-0.5" />
+              <span><b>Advice:</b> {currentStep.advice}</span>
             </div>
           </div>
 
           <div>
-            <div className="flex items-center justify-between text-xs font-medium text-slate-400 mb-2.5">
-              <span>Choose an option or enter your custom item below:</span>
+            <div className="flex items-center justify-between text-xs font-medium text-zinc-400 mb-2.5">
+              <span>Select an option:</span>
               <a
                 href={createGoogleSearchUrl(currentStep.searchExample)}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-1 text-indigo-300 hover:text-indigo-200 text-xs font-medium"
+                className="flex items-center gap-1 text-zinc-300 hover:text-white text-xs"
               >
                 <Search className="w-3.5 h-3.5" />
-                <span>Google Search Recommendations</span>
+                <span>Search Deals</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
             </div>
@@ -375,28 +375,28 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
                     onClick={() => handleSelectOption(opt)}
                     className={`p-4 rounded-2xl border cursor-pointer transition flex flex-col justify-between ${
                       isChosen
-                        ? 'bg-indigo-600/15 border-indigo-500 shadow-lg shadow-indigo-600/10'
-                        : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900'
+                        ? 'bg-zinc-950 border-zinc-400 shadow-md shadow-white/5'
+                        : 'bg-zinc-950/70 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-950'
                     }`}
                   >
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-slate-800 text-slate-300">
+                        <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-300">
                           {opt.priority}
                         </span>
                         {isChosen && (
-                          <span className="p-0.5 rounded-full bg-indigo-600 text-white">
+                          <span className="p-0.5 rounded-full bg-zinc-100 text-zinc-950">
                             <Check className="w-3.5 h-3.5 stroke-[3]" />
                           </span>
                         )}
                       </div>
-                      <h4 className="text-xs font-bold text-white mb-1.5">{opt.name}</h4>
-                      <p className="text-[11px] text-slate-400 leading-relaxed">{opt.description}</p>
+                      <h4 className="text-xs font-bold text-zinc-100 mb-1.5">{opt.name}</h4>
+                      <p className="text-[11px] text-zinc-400 leading-relaxed">{opt.description}</p>
                     </div>
 
-                    <div className="mt-4 pt-2 border-t border-slate-800/80 flex items-baseline justify-between">
-                      <span className="text-[10px] text-slate-500">Est. Price:</span>
-                      <span className="text-sm font-mono font-bold text-white">${opt.estimatedPrice}</span>
+                    <div className="mt-4 pt-2 border-t border-zinc-800 flex items-baseline justify-between">
+                      <span className="text-[10px] text-zinc-500">Est. Price:</span>
+                      <span className="text-sm font-mono font-bold text-zinc-100">${opt.estimatedPrice}</span>
                     </div>
                   </div>
                 );
@@ -405,38 +405,38 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
           </div>
 
           {currentSelected && (
-            <div className="p-4 rounded-2xl bg-slate-950 border border-slate-800 space-y-3">
-              <span className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                Selected Item (Customize name, price, or paste URL):
+            <div className="p-4 rounded-2xl bg-zinc-950 border border-zinc-800 space-y-3">
+              <span className="text-xs font-semibold text-zinc-300 flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-zinc-200" />
+                Customize Selected Item:
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="sm:col-span-2">
-                  <label className="block text-[10px] text-slate-400 mb-1">Item / Product Name</label>
+                  <label className="block text-[10px] text-zinc-400 mb-1">Item / Product Name</label>
                   <input
                     type="text"
                     value={currentSelected.name}
                     onChange={(e) => handleUpdateCurrentSelection({ name: e.target.value })}
-                    className="w-full px-3 py-1.5 text-xs rounded-xl bg-slate-900 border border-slate-700 text-white focus:outline-none focus:border-indigo-500"
+                    className="w-full px-3 py-1.5 text-xs rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-100 focus:outline-none focus:border-zinc-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] text-slate-400 mb-1">Price ($)</label>
+                  <label className="block text-[10px] text-zinc-400 mb-1">Price ($)</label>
                   <input
                     type="number"
                     value={currentSelected.price}
                     onChange={(e) => handleUpdateCurrentSelection({ price: parseFloat(e.target.value) || 0 })}
-                    className="w-full px-3 py-1.5 text-xs rounded-xl bg-slate-900 border border-slate-700 text-white font-mono focus:outline-none focus:border-indigo-500"
+                    className="w-full px-3 py-1.5 text-xs rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-100 font-mono focus:outline-none focus:border-zinc-500"
                   />
                 </div>
                 <div className="sm:col-span-3">
-                  <label className="block text-[10px] text-slate-400 mb-1">Product Link / URL (Optional)</label>
+                  <label className="block text-[10px] text-zinc-400 mb-1">Product Link / URL (Optional)</label>
                   <input
                     type="url"
                     placeholder="https://amazon.com/... or store link"
                     value={currentSelected.url || ''}
                     onChange={(e) => handleUpdateCurrentSelection({ url: e.target.value })}
-                    className="w-full px-3 py-1.5 text-xs rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                    className="w-full px-3 py-1.5 text-xs rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-zinc-500"
                   />
                 </div>
               </div>
@@ -445,18 +445,18 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
         </div>
 
         {/* Wizard Footer Navigation */}
-        <div className="px-6 py-4 bg-slate-900/80 border-t border-slate-800 flex items-center justify-between">
+        <div className="px-6 py-4 bg-zinc-950 border-t border-zinc-800 flex items-center justify-between">
           <button
             onClick={handleBack}
             disabled={currentStepIndex === 0}
             className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-medium transition ${
               currentStepIndex === 0
-                ? 'opacity-30 cursor-not-allowed text-slate-500'
-                : 'bg-slate-800 hover:bg-slate-700 text-slate-200'
+                ? 'opacity-30 cursor-not-allowed text-zinc-500'
+                : 'bg-zinc-800 hover:bg-zinc-700 text-zinc-200'
             }`}
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Previous Step</span>
+            <span>Previous</span>
           </button>
 
           <div className="flex items-center gap-2">
@@ -469,14 +469,14 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
                   setCurrentStepIndex((prev) => prev + 1);
                 }
               }}
-              className="px-3 py-2 text-xs text-slate-400 hover:text-slate-200"
+              className="px-3 py-2 text-xs text-zinc-400 hover:text-zinc-200"
             >
-              Skip Step
+              Skip
             </button>
 
             <button
               onClick={handleNext}
-              className="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-lg shadow-indigo-600/30 transition active:scale-95"
+              className="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold shadow-md transition active:scale-95"
             >
               <span>{isLastStep ? 'Finish & Add to Checklist' : 'Next Step'}</span>
               <ArrowRight className="w-4 h-4" />
