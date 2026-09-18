@@ -43,6 +43,8 @@ export interface PCComponent {
   wattage?: number;
   specs?: string;
   recommendedFor?: string;
+  brand?: string;
+  image?: string;
 }
 
 export interface PCBuild {
@@ -50,13 +52,28 @@ export interface PCBuild {
   parts: Record<PCPartType, PCComponent | null>;
 }
 
+export type UseCase = 
+  | 'developer'
+  | 'gamer'
+  | 'designer'
+  | 'gamer_developer'
+  | 'designer_gamer'
+  | 'ai_ml_creator';
+
+export type BudgetTier = '1_2_lakh' | '2_3_lakh' | '3_4_lakh';
+
 export interface PCPreset {
   id: string;
   title: string;
   subtitle: string;
   badge: string;
   targetBudget: number;
+  budgetTier: BudgetTier; // 1-2L, 2-3L, 3-4L
+  useCases: UseCase[];
+  image: string; // High quality showcase image
+  processorType: 'intel' | 'amd';
   parts: Record<PCPartType, PCComponent>;
+  highlights: string[];
 }
 
 export interface SetupPreset {
