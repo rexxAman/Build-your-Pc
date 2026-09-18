@@ -68,7 +68,7 @@ export const BudgetSummaryCard: React.FC<BudgetSummaryCardProps> = ({ items }) =
           </div>
           {sortedCategories.length === 0 ? (
             <div className="text-xs text-zinc-500 italic py-2">
-              Checklist is currently empty. Use the <b>Setup Guide</b> or add custom items below.
+              Checklist is currently empty. Add custom items below or customize parts in PC Studio.
             </div>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 pt-1">
@@ -126,7 +126,7 @@ export const BudgetSummaryCard: React.FC<BudgetSummaryCardProps> = ({ items }) =
 
         <div className="mt-4 pt-3 border-t border-zinc-800 flex items-center gap-2 text-xs text-zinc-400 bg-zinc-950 p-2.5 rounded-xl border border-zinc-850">
           <AlertCircle className="w-4 h-4 shrink-0 text-zinc-300" />
-          <span>Need ideas? Click <b>Setup Guide</b> or switch to <b>PC Studio</b>.</span>
+          <span>Need ideas? Switch to <b>Pre-Built Rigs</b> or <b>Custom PC Studio</b>.</span>
         </div>
       </div>
     </div>

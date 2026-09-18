@@ -16,10 +16,8 @@ A web application for planning, budgeting, and assembling productive workspaces 
 - **Smart Recommendations & Deal Search**:
   - Battle-tested setup blueprints (Minimalist Developer, Creative Studio, High-Value Ergonomic).
   - Instant Google, Amazon, and Reddit deal search launchers for any hardware or accessory.
-- **Hybrid Storage & Vercel Ready**:
-  - **Local Storage**: Works instantly in the browser without any setup required.
-  - **Neon Cloud Database**: Optional integration with Neon Serverless Postgres for cloud sync.
-  - **JSON Backup**: Import and export your checklists as JSON anytime.
+- **Vercel Ready**:
+  - Deploy instantly to Vercel with zero configuration required.
 
 ## Quick Start (Local)
 
@@ -35,10 +33,8 @@ A web application for planning, budgeting, and assembling productive workspaces 
 
 3. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Deploying to Vercel with Neon
+## Deploying to Vercel
 
 1. Push this repository to GitHub.
 2. Import the repository in [Vercel](https://vercel.com).
-3. (Optional) In your Vercel Project Settings > **Environment Variables**, add:
-   - `DATABASE_URL`: your Neon Postgres connection string.
-4. Click **Deploy**. Vercel will automatically build and host the application.
+3. Click **Deploy**. Vercel will automatically build and host the application.

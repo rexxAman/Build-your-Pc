@@ -9,8 +9,7 @@ import {
   ExternalLink, 
   Search, 
   Check, 
-  ShoppingBag,
-  BookOpen
+  ShoppingBag
 } from 'lucide-react';
 
 interface ChecklistManagerProps {
@@ -19,7 +18,6 @@ interface ChecklistManagerProps {
   onUpdateItem: (id: string, updates: Partial<SetupItem>) => void;
   onDeleteItem: (id: string) => void;
   onClearAll: () => void;
-  onOpenGuide: () => void;
 }
 
 export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
@@ -28,7 +26,6 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
   onUpdateItem,
   onDeleteItem,
   onClearAll,
-  onOpenGuide,
 }) => {
   const [name, setName] = useState('');
   const [category, setCategory] = useState<Category>('desk');
@@ -103,14 +100,6 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={onOpenGuide}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-750 text-zinc-200 text-xs font-semibold border border-zinc-700 transition active:scale-95"
-          >
-            <BookOpen className="w-3.5 h-3.5 text-zinc-300" />
-            <span>Open Step Guide</span>
-          </button>
-
           <button
             onClick={() => setIsAdding(!isAdding)}
             className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold shadow-md shadow-white/5 transition active:scale-95"
@@ -315,21 +304,14 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
             <ShoppingBag className="w-12 h-12 text-zinc-600 mx-auto mb-3" />
             <h4 className="text-sm font-semibold text-zinc-200">Your setup checklist is empty</h4>
             <p className="text-xs text-zinc-500 max-w-md mx-auto mt-1 mb-5 leading-relaxed">
-              Add your items individually, or open the step-by-step setup guide to plan your desk, seating, monitor, lighting, and cable layout with Indian market prices.
+              Add your setup items individually, or browse Pre-Built Rigs and Custom PC Studio to customize components.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <button
-                onClick={onOpenGuide}
-                className="px-4 py-2 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold shadow-md flex items-center gap-1.5"
-              >
-                <BookOpen className="w-3.5 h-3.5 stroke-[2.2]" />
-                <span>Open Step Guide</span>
-              </button>
-              <button
                 onClick={() => setIsAdding(true)}
-                className="px-4 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-semibold border border-zinc-700 flex items-center gap-1.5"
+                className="px-4 py-2 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold shadow-md flex items-center gap-1.5 transition active:scale-95"
               >
-                <Plus className="w-3.5 h-3.5" />
+                <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
                 <span>Add Item Manually</span>
               </button>
             </div>

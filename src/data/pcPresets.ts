@@ -8,7 +8,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'cpu',
       name: 'AMD Ryzen 5 7600 (AM5)',
       brand: 'AMD',
-      price: 0,
       wattage: 65,
       specs: '6 Cores / 12 Threads, up to 5.1 GHz, 38MB Cache, AM5 platform',
       recommendedFor: 'Best value 1440p gaming & solid developer multitasking in India',
@@ -19,7 +18,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'cpu',
       name: 'AMD Ryzen 7 7700X (AM5)',
       brand: 'AMD',
-      price: 0,
       wattage: 105,
       specs: '8 Cores / 16 Threads, up to 5.4 GHz, 40MB Cache',
       recommendedFor: 'Smooth video export, game dev in Unreal Engine & high FPS gaming',
@@ -30,7 +28,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'cpu',
       name: 'AMD Ryzen 7 7800X3D (3D V-Cache)',
       brand: 'AMD',
-      price: 0,
       wattage: 120,
       specs: '8 Cores / 16 Threads, 104MB Cache with 3D V-Cache, top thermal efficiency',
       recommendedFor: 'The undisputed #1 gaming CPU in the world, ideal for Gamer + Dev rigs',
@@ -41,7 +38,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'cpu',
       name: 'AMD Ryzen 9 7900X (AM5)',
       brand: 'AMD',
-      price: 0,
       wattage: 170,
       specs: '12 Cores / 24 Threads, up to 5.6 GHz, 76MB Cache',
       recommendedFor: 'Heavy Docker virtualization, large code compilation & 4K rendering',
@@ -52,7 +48,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'cpu',
       name: 'AMD Ryzen 9 7950X / 7950X3D',
       brand: 'AMD',
-      price: 0,
       wattage: 170,
       specs: '16 Cores / 32 Threads, up to 5.7 GHz, 144MB Cache',
       recommendedFor: 'Flagship powerhouse for 3D animation, LLM training & high-FPS streaming',
@@ -65,7 +60,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'cpu',
       name: 'Intel Core i5-13500 (LGA1700)',
       brand: 'Intel',
-      price: 0,
       wattage: 125,
       specs: '14 Cores (6P + 8E) / 20 Threads, Intel UHD 770 Graphics',
       recommendedFor: 'High multi-thread value for Adobe Creative Cloud & developer stacks',
@@ -76,7 +70,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'cpu',
       name: 'Intel Core i5-14600K Unlocked',
       brand: 'Intel',
-      price: 0,
       wattage: 181,
       specs: '14 Cores (6P + 8E) / 20 Threads, up to 5.3 GHz',
       recommendedFor: 'Competitive esports high-refresh gaming + quick Premiere Pro rendering',
@@ -87,7 +80,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'cpu',
       name: 'Intel Core i7-14700K Unlocked',
       brand: 'Intel',
-      price: 0,
       wattage: 253,
       specs: '20 Cores (8P + 12E) / 28 Threads, up to 5.6 GHz, 33MB Smart Cache',
       recommendedFor: 'Designer + Gamer balance, Blender 3D cycles, CAD & 4K timelines',
@@ -98,7 +90,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'cpu',
       name: 'Intel Core i9-14900K Flagship',
       brand: 'Intel',
-      price: 0,
       wattage: 253,
       specs: '24 Cores (8P + 16E) / 32 Threads, up to 6.0 GHz Thermal Velocity Boost',
       recommendedFor: 'Extreme creator workstation, massive Unreal compiles & heavy multi-tasking',
@@ -112,7 +103,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'gpu',
       name: 'Integrated Graphics (APU / iGPU - DP & HDMI)',
       brand: 'AMD / Intel',
-      price: 0,
       wattage: 15,
       specs: 'Uses CPU display controller, dual 4K monitor support',
       recommendedFor: 'Pure coding, web browsing & zero-noise workstation without gaming card',
@@ -123,7 +113,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'gpu',
       name: 'NVIDIA GeForce RTX 4060 8GB GDDR6',
       brand: 'NVIDIA',
-      price: 0,
       wattage: 115,
       specs: '8GB GDDR6, DLSS 3 Frame Gen, AV1 Encoder, 3072 CUDA Cores',
       recommendedFor: '1080p Ultra / 1440p DLSS gaming, UI/UX prototyping & video playback',
@@ -134,7 +123,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'gpu',
       name: 'NVIDIA GeForce RTX 4060 Ti 16GB VRAM Edition',
       brand: 'NVIDIA',
-      price: 0,
       wattage: 165,
       specs: '16GB GDDR6 high VRAM buffer, DLSS 3, CUDA compute',
       recommendedFor: 'Best value for local AI LLMs (7B/13B models) & video editing needing extra VRAM',
@@ -145,7 +133,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'gpu',
       name: 'AMD Radeon RX 7800 XT 16GB GDDR6',
       brand: 'AMD',
-      price: 0,
       wattage: 263,
       specs: '16GB GDDR6, 256-bit bus, AMD FSR 3, high native rasterization',
       recommendedFor: 'High VRAM value for 1440p maxed gaming & open-source Linux developer setups',
@@ -156,7 +143,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'gpu',
       name: 'NVIDIA GeForce RTX 4070 Super 12GB GDDR6X',
       brand: 'NVIDIA',
-      price: 0,
       wattage: 220,
       specs: '12GB GDDR6X, 7168 CUDA Cores, 28% faster than vanilla 4070',
       recommendedFor: 'The sweet spot in India for 1440p high-FPS gaming, 4K rendering & AI development',
@@ -167,7 +153,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'gpu',
       name: 'NVIDIA GeForce RTX 4070 Ti Super 16GB GDDR6X',
       brand: 'NVIDIA',
-      price: 0,
       wattage: 285,
       specs: '16GB GDDR6X, 256-bit memory bus, 8448 CUDA Cores, Dual AV1 Encoders',
       recommendedFor: 'Designer + Gamer heavy 4K workflows, Blender 3D render & intense gaming',
@@ -178,7 +163,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'gpu',
       name: 'NVIDIA GeForce RTX 4080 Super 16GB GDDR6X',
       brand: 'NVIDIA',
-      price: 0,
       wattage: 320,
       specs: '16GB GDDR6X ultra-fast memory, 10240 CUDA Cores, Ada Lovelace architecture',
       recommendedFor: 'Maxed 4K 144Hz AAA gaming, serious LLM fine-tuning & cinema-grade rendering',
@@ -189,7 +173,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'gpu',
       name: 'NVIDIA GeForce RTX 4090 24GB GDDR6X',
       brand: 'NVIDIA',
-      price: 0,
       wattage: 450,
       specs: '24GB GDDR6X, 16384 CUDA Cores, 384-bit bus, unmatched computing peak',
       recommendedFor: 'Ultimate titan for AI research, real-time 8K editing, and enthusiast gaming without compromise',
@@ -203,7 +186,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'motherboard',
       name: 'MSI PRO B650M-A WiFi (AMD AM5, DDR5)',
       brand: 'MSI',
-      price: 0,
       wattage: 45,
       specs: 'Micro-ATX, WiFi 6E, 2.5G LAN, Dual M.2 PCIe 4.0, strong VRMs',
       recommendedFor: 'Best value AM5 motherboard for Ryzen 7600/7700X',
@@ -214,7 +196,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'motherboard',
       name: 'ASUS TUF Gaming B760-PLUS WiFi (Intel DDR5)',
       brand: 'ASUS',
-      price: 0,
       wattage: 50,
       specs: 'ATX, LGA1700, DDR5, 3x M.2 slots, PCIe 5.0 slot, WiFi 6',
       recommendedFor: 'Military-grade durability for Intel Core i5/i7 workstations',
@@ -225,7 +206,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'motherboard',
       name: 'Gigabyte B650 AORUS ELITE AX V2 (AMD AM5)',
       brand: 'Gigabyte',
-      price: 0,
       wattage: 50,
       specs: 'Full ATX, PCIe 5.0 M.2 slot, 12+2+2 power stages, WiFi 6E, thermal guards',
       recommendedFor: 'Enthusiast AM5 board with high expandability and sound shielding',
@@ -236,7 +216,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'motherboard',
       name: 'MSI MAG Z790 TOMAHAWK MAX WiFi (Intel)',
       brand: 'MSI',
-      price: 0,
       wattage: 55,
       specs: 'Z790 chipset, 16+1+1 phases, PCIe 5.0, 4x M.2 slots, WiFi 7 ready',
       recommendedFor: 'Top-tier overclocking and stability for i7-14700K & i9-14900K',
@@ -247,7 +226,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'motherboard',
       name: 'ASUS ROG STRIX X670E-F GAMING WiFi (AMD Flagship)',
       brand: 'ASUS ROG',
-      price: 0,
       wattage: 60,
       specs: 'PCIe 5.0 x16 GPU & M.2, 16+2 teamed power stages, USB4 40Gbps, SupremeFX audio',
       recommendedFor: 'Flagship workstation for Ryzen 7950X / 7800X3D and dual GPU expansion',
@@ -256,27 +234,25 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
   ],
 
   ram: [
-    // --- DDR3 (Budget / Secondary / Clearance) ---
+    // --- DDR3 (Legacy & Clearance) ---
     {
       id: 'ram-ddr3-4gb',
       type: 'ram',
-      name: 'Simmtronics / Consistent 4GB DDR3 1600MHz',
-      brand: 'Consistent / Simmtronics',
-      price: 0,
+      name: '4GB DDR3 1600MHz (Desktop / Laptop)',
+      brand: 'Simmtronics / Consistent',
       wattage: 5,
       specs: 'DDR3 1600MHz, Non-ECC Desktop / Laptop module',
-      recommendedFor: 'Ultra-budget / older system maintenance & basic home PC',
+      recommendedFor: 'Mainly entry-level / older system replacements',
       image: 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=300&q=80',
     },
     {
       id: 'ram-ddr3-8gb',
       type: 'ram',
-      name: 'Crucial / Hynix 8GB DDR3 1600MHz',
-      brand: 'Crucial',
-      price: 0,
+      name: '8GB DDR3 1600MHz (Desktop / Laptop)',
+      brand: 'Crucial / Hynix',
       wattage: 6,
       specs: 'DDR3 1600MHz 8GB single stick, 1.5V / 1.35V low voltage',
-      recommendedFor: 'Legacy system upgrade & office workstation',
+      recommendedFor: 'Legacy builds, highly dependent on clearance stock',
       image: 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=300&q=80',
     },
 
@@ -284,34 +260,31 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
     {
       id: 'ram-ddr4-8gb',
       type: 'ram',
-      name: 'Crucial / G.Skill Ripjaws V 8GB DDR4 3200MHz CL16',
-      brand: 'Crucial / G.Skill',
-      price: 0,
+      name: '8GB DDR4 3200MHz (Desktop / Laptop)',
+      brand: 'Crucial / G.Skill Ripjaws V',
       wattage: 8,
       specs: 'DDR4 3200MHz, Low Latency CL16, aluminum heatspreader',
-      recommendedFor: 'Budget-to-midrange builds & single-channel entry gaming',
+      recommendedFor: 'Budget standard (usually 3200MHz)',
       image: 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=300&q=80',
     },
     {
       id: 'ram-ddr4-16gb',
       type: 'ram',
-      name: 'Corsair Vengeance LPX 16GB (1x16GB / 2x8GB) DDR4 3200MHz',
-      brand: 'Corsair',
-      price: 0,
+      name: '16GB DDR4 3200MHz (Desktop / Laptop)',
+      brand: 'Corsair Vengeance LPX',
       wattage: 10,
       specs: 'DDR4 3200MHz, pure aluminum heatspreader for faster heat dissipation',
-      recommendedFor: 'Reliable dual-channel memory for everyday programming & 1080p gaming',
+      recommendedFor: 'Value sweet spot for mid-range builds',
       image: 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=300&q=80',
     },
     {
       id: 'ram-ddr4-32gb',
       type: 'ram',
-      name: 'G.Skill Ripjaws V 32GB (2x16GB) DDR4 3600MHz CL18',
-      brand: 'G.Skill',
-      price: 0,
+      name: '32GB (Kit) DDR4 3600MHz (Desktop / Laptop)',
+      brand: 'G.Skill Ripjaws V',
       wattage: 14,
-      specs: 'Dual-channel 32GB DDR4 3600MHz, classic high-compatibility profile',
-      recommendedFor: 'Maximum capacity for AM4 / LGA1200 / LGA1700 DDR4 platforms',
+      specs: 'Dual-channel 32GB (2x16GB) DDR4 3600MHz CL18',
+      recommendedFor: 'High-capacity legacy workstation configurations',
       image: 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=300&q=80',
     },
 
@@ -319,44 +292,40 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
     {
       id: 'ram-ddr5-8gb',
       type: 'ram',
-      name: 'Crucial 8GB DDR5 4800MHz / 5200MHz',
+      name: '8GB DDR5 4800MHz / 5200MHz (Desktop / Laptop)',
       brand: 'Crucial',
-      price: 0,
       wattage: 10,
       specs: 'Entry DDR5 single module, on-die ECC, PMIC power efficiency',
-      recommendedFor: 'Entry-level modern AM5 / Intel 13th & 14th Gen workstations',
+      recommendedFor: 'Entry-level modern generation, wide premium scaling',
       image: 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=300&q=80',
     },
     {
       id: 'ram-ddr5-16gb',
       type: 'ram',
-      name: 'Kingston FURY Beast 16GB (1x16GB) DDR5 5600MHz',
-      brand: 'Kingston',
-      price: 0,
+      name: '16GB DDR5 5600MHz (Desktop / Laptop)',
+      brand: 'Kingston FURY Beast',
       wattage: 12,
       specs: 'DDR5 5600MHz, Intel XMP 3.0 & AMD EXPO ready, low-profile heatspreader',
-      recommendedFor: 'Solid single-stick starter for DDR5 motherboards',
+      recommendedFor: 'Standard modern standard, premium low-latency options',
       image: 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=300&q=80',
     },
     {
       id: 'ram-corsair-32gb-6000',
       type: 'ram',
-      name: 'Corsair Vengeance 32GB (2x16GB) DDR5 6000MHz CL30',
-      brand: 'Corsair',
-      price: 0,
+      name: '32GB (Kit) DDR5 6000MHz CL30 (Desktop / Laptop)',
+      brand: 'Corsair Vengeance',
       wattage: 15,
-      specs: 'DDR5 6000MHz, Low Latency CL30-36-36, optimal AMD EXPO & Intel XMP',
-      recommendedFor: 'The sweet spot in India for gaming, software dev, and fast compiling',
+      specs: 'Dual-channel 32GB (2x16GB) DDR5 6000MHz, Low Latency CL30, AMD EXPO & Intel XMP',
+      recommendedFor: 'High-performance setups, premium RGB or high frequency (6000MHz+)',
       image: 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=300&q=80',
     },
     {
       id: 'ram-gskill-ripjaws-64gb',
       type: 'ram',
-      name: 'G.Skill Ripjaws S5 / Flare X5 64GB (2x32GB) DDR5 6000MHz CL32',
-      brand: 'G.Skill',
-      price: 0,
+      name: '64GB (Kit) DDR5 6000MHz CL32 (Desktop / Laptop)',
+      brand: 'G.Skill Ripjaws S5 / Flare X5',
       wattage: 20,
-      specs: '64GB Dual Kit, DDR5 6000MHz, high density for Docker & VM labs',
+      specs: '64GB Dual Kit (2x32GB), DDR5 6000MHz, high density for Docker & VM labs',
       recommendedFor: 'Designers editing 4K/6K footage, Docker microservices & VM labs',
       image: 'https://images.unsplash.com/photo-1562976540-1502c2145186?w=300&q=80',
     },
@@ -365,7 +334,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'ram',
       name: 'G.Skill Trident Z5 RGB 64GB (2x32GB) DDR5 6400MHz CL32',
       brand: 'G.Skill',
-      price: 0,
       wattage: 22,
       specs: 'Ultra-fast 6400MHz, sleek aluminum heatspreader with diffused RGB',
       recommendedFor: 'High-frequency gamer + creator aesthetic rigs',
@@ -376,7 +344,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'ram',
       name: 'Corsair Dominator Titanium 96GB (2x48GB) DDR5 6000MHz',
       brand: 'Corsair',
-      price: 0,
       wattage: 28,
       specs: 'Non-binary 96GB capacity, forged aluminum, DHX patented cooling',
       recommendedFor: 'Extreme 3D animation, large language model inference & heavy VFX',
@@ -387,7 +354,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'ram',
       name: 'Corsair Dominator Titanium 128GB (4x32GB) DDR5 6000MHz',
       brand: 'Corsair',
-      price: 0,
       wattage: 35,
       specs: 'Quad-channel 128GB DDR5 6000MHz, top-tier binned ICs, titanium heatspreaders',
       recommendedFor: 'Heavy enterprise AI training, virtual studios & massive CAD simulation',
@@ -397,36 +363,53 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
 
   storage: [
     {
-      id: 'ssd-wd-sn580-1tb',
+      id: 'ssd-kingston-kc3000-512gb',
       type: 'storage',
-      name: 'WD Blue SN580 1TB NVMe PCIe Gen4 SSD',
-      brand: 'Western Digital',
-      price: 0,
+      name: 'Kingston KC3000 512GB (Gen4)',
+      brand: 'Kingston',
       wattage: 6,
-      specs: 'Up to 4150 MB/s read, nCache 4.0 technology, 5-year warranty',
-      recommendedFor: 'Best value Gen4 boot and project drive in India',
+      specs: 'Heavy-workload reliability & dedicated DRAM cache, up to 7000 MB/s',
+      recommendedFor: 'Heavy-workload reliability & dedicated DRAM cache',
       image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=300&q=80',
     },
     {
-      id: 'ssd-crucial-t500-1tb',
+      id: 'ssd-samsung-990-pro-1tb',
       type: 'storage',
-      name: 'Crucial T500 1TB NVMe Gen4 (with DRAM Cache)',
-      brand: 'Crucial',
-      price: 0,
+      name: 'Samsung 990 PRO 1TB (Gen4)',
+      brand: 'Samsung',
       wattage: 8,
-      specs: 'Up to 7300 MB/s, dedicated LPDDR4 cache, TLC NAND',
-      recommendedFor: 'High compile speed, fast database indexing & zero-stutter gaming',
+      specs: 'PCIe 4.0 NVMe, up to 7450 MB/s, dedicated DRAM',
+      recommendedFor: 'Gold standard for PS5 & premium PC boot drives',
+      image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=300&q=80',
+    },
+    {
+      id: 'ssd-crucial-p510-1tb',
+      type: 'storage',
+      name: 'Crucial P510 1TB (Gen5)',
+      brand: 'Crucial',
+      wattage: 9,
+      specs: 'Blazing 11,000 MB/s speed for next-gen setups, PCIe Gen5 x4',
+      recommendedFor: 'Blazing 11,000 MB/s speed for next-gen setups',
       image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=300&q=80',
     },
     {
       id: 'ssd-samsung-990-pro-2tb',
       type: 'storage',
-      name: 'Samsung 990 PRO 2TB NVMe PCIe 4.0 SSD (with Heatsink)',
+      name: 'Samsung 990 PRO 2TB (Gen4 with Heatsink)',
       brand: 'Samsung',
-      price: 0,
       wattage: 9,
-      specs: 'Up to 7450 MB/s read, 2GB LPDDR4 DRAM, nickel-coated thermal controller',
-      recommendedFor: 'The benchmark of speed for heavy 4K footage editing & heavy game libraries',
+      specs: 'PCIe 4.0 NVMe with Heatsink, high sustained writes',
+      recommendedFor: 'High sustained writes for gaming and 4K video editing',
+      image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=300&q=80',
+    },
+    {
+      id: 'ssd-kingston-fury-renegade-g5-2tb',
+      type: 'storage',
+      name: 'Kingston Fury Renegade G5 2TB (Gen5)',
+      brand: 'Kingston',
+      wattage: 12,
+      specs: 'PCIe Gen5 x4 NVMe, Absolute maximum speed up to 14,800 MB/s',
+      recommendedFor: 'Absolute maximum speed up to 14,800 MB/s',
       image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=300&q=80',
     },
     {
@@ -434,7 +417,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'storage',
       name: 'WD_BLACK SN850X 4TB NVMe SSD',
       brand: 'Western Digital',
-      price: 0,
       wattage: 10,
       specs: 'Massive 4TB single M.2 capacity, up to 7300 MB/s, Game Mode 2.0',
       recommendedFor: 'All-in-one extreme storage: entire project portfolios, games, and OS on one drive',
@@ -448,7 +430,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'psu',
       name: 'Deepcool PM750D 750W 80+ Gold Power Supply',
       brand: 'Deepcool',
-      price: 0,
       wattage: 0,
       specs: '80 Plus Gold certified, Japanese primary capacitor, flat black cables',
       recommendedFor: 'Solid 750W Gold power for builds up to RTX 4070 Super',
@@ -459,7 +440,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'psu',
       name: 'Corsair RM750e 750W 80+ Gold Fully Modular (ATX 3.0)',
       brand: 'Corsair',
-      price: 0,
       wattage: 0,
       specs: 'ATX 3.0 & PCIe 5.0 12VHPWR cable, Zero-RPM fan mode, 105°C capacitors',
       recommendedFor: 'Quiet operation & clean interior with detachable modular cables',
@@ -470,7 +450,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'psu',
       name: 'Corsair RM850e 850W 80+ Gold Fully Modular (ATX 3.0)',
       brand: 'Corsair',
-      price: 0,
       wattage: 0,
       specs: '850W continuous power, native 12VHPWR for RTX 4070Ti/4080 Super',
       recommendedFor: 'Optimal headroom for demanding GPUs and high-wattage CPUs',
@@ -481,7 +460,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'psu',
       name: 'Seasonic Focus GX-1000 1000W 80+ Gold (ATX 3.0)',
       brand: 'Seasonic',
-      price: 0,
       wattage: 0,
       specs: '1000W output, 100% Japanese capacitors, 10-year warranty, fluid dynamic fan',
       recommendedFor: 'End-game reliability for RTX 4090 and i9-14900K workstation builds',
@@ -495,7 +473,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'cooler',
       name: 'Deepcool AK400 / AG400 Single Tower Air Cooler',
       brand: 'Deepcool',
-      price: 0,
       wattage: 4,
       specs: '4 direct-touch heat pipes, 120mm FDB PWM fan, 220W TDP support',
       recommendedFor: 'Zero maintenance, ultra-reliable cooling for Ryzen 7600 / Core i5',
@@ -506,7 +483,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'cooler',
       name: 'Deepcool AK620 Dual Tower Air Cooler (Zero Zero Dark)',
       brand: 'Deepcool',
-      price: 0,
       wattage: 6,
       specs: 'Dual-tower heatsink, 6 copper pipes, 260W TDP capacity, clean matte black',
       recommendedFor: 'Legendary quiet air cooling that rivals liquid AIOs with zero pump failure risk',
@@ -517,7 +493,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'cooler',
       name: 'Deepcool LT720 / LE720 360mm Liquid AIO Cooler',
       brand: 'Deepcool',
-      price: 0,
       wattage: 15,
       specs: '360mm aluminum radiator, multi-dimensional infinity mirror block, Anti-Leak tech',
       recommendedFor: 'Essential for cooling Intel i7/i9 and Ryzen 7950X under sustained rendering',
@@ -528,7 +503,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'cooler',
       name: 'NZXT Kraken Elite 360 RGB (Custom LCD Display)',
       brand: 'NZXT',
-      price: 0,
       wattage: 18,
       specs: '2.36" wide-angle LCD screen (real-time CPU/GPU temp or GIF), 7th Gen Asetek pump',
       recommendedFor: 'The ultimate showcase aesthetic cooler for high-end studio desks',
@@ -542,7 +516,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'case',
       name: 'Lian Li Lancool 205M Mesh (Micro-ATX)',
       brand: 'Lian Li',
-      price: 0,
       wattage: 0,
       specs: 'Compact desk footprint, mesh front, tempered glass side, 2x 140mm fans',
       recommendedFor: 'Minimalist clean desk rig without taking over your entire workspace',
@@ -553,7 +526,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'case',
       name: 'Montech Air 903 Base / Max (High Airflow ATX)',
       brand: 'Montech',
-      price: 0,
       wattage: 0,
       specs: 'Ultra-fine mesh front, 3x 140mm fans included, Type-C 3.2 port, fits 4090',
       recommendedFor: 'Unbeatable value and airflow in Indian market with modern front USB-C',
@@ -564,7 +536,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'case',
       name: 'Fractal Design North (Charcoal Black with Real Walnut Wood)',
       brand: 'Fractal Design',
-      price: 0,
       wattage: 0,
       specs: 'Genuine FSC-certified walnut wood front, brass accents, Scandinavian furniture design',
       recommendedFor: 'The premier aesthetic centerpiece for designers, architects & warm studio setups',
@@ -575,7 +546,6 @@ export const COMPONENT_CATALOG: Record<PCPartType, PCComponent[]> = {
       type: 'case',
       name: 'Lian Li O11 Vision (Triple Seamless Glass Aquarium)',
       brand: 'Lian Li',
-      price: 0,
       wattage: 0,
       specs: 'Three sides of uninterrupted tempered glass, dual-chamber cable management',
       recommendedFor: 'Breathtaking 270-degree view of your custom PC hardware on the desk',
@@ -608,7 +578,7 @@ export const PC_PRESETS: PCPreset[] = [
       cpu: COMPONENT_CATALOG.cpu[0], // AMD Ryzen 5 7600
       gpu: COMPONENT_CATALOG.gpu[4], // RTX 4070 Super 12GB
       motherboard: COMPONENT_CATALOG.motherboard[0], // MSI PRO B650M-A
-      ram: COMPONENT_CATALOG.ram[0], // Corsair 32GB DDR5
+      ram: COMPONENT_CATALOG.ram[7], // Corsair 32GB DDR5
       storage: COMPONENT_CATALOG.storage[0], // WD SN580 1TB
       psu: COMPONENT_CATALOG.psu[0], // Deepcool 750W Gold
       cooler: COMPONENT_CATALOG.cooler[0], // Deepcool AK400
@@ -634,7 +604,7 @@ export const PC_PRESETS: PCPreset[] = [
       cpu: COMPONENT_CATALOG.cpu[6], // Intel i5-14600K
       gpu: COMPONENT_CATALOG.gpu[2], // RTX 4060 Ti 16GB VRAM
       motherboard: COMPONENT_CATALOG.motherboard[1], // ASUS TUF B760-PLUS
-      ram: COMPONENT_CATALOG.ram[1], // G.Skill 64GB DDR5
+      ram: COMPONENT_CATALOG.ram[8], // G.Skill 64GB DDR5
       storage: COMPONENT_CATALOG.storage[1], // Crucial T500 1TB DRAM
       psu: COMPONENT_CATALOG.psu[1], // Corsair RM750e
       cooler: COMPONENT_CATALOG.cooler[1], // Deepcool AK620
@@ -660,7 +630,7 @@ export const PC_PRESETS: PCPreset[] = [
       cpu: COMPONENT_CATALOG.cpu[2], // Ryzen 7 7800X3D
       gpu: COMPONENT_CATALOG.gpu[4], // RTX 4070 Super
       motherboard: COMPONENT_CATALOG.motherboard[2], // Gigabyte B650 AORUS Elite
-      ram: COMPONENT_CATALOG.ram[0], // Corsair 32GB 6000 CL30
+      ram: COMPONENT_CATALOG.ram[7], // Corsair 32GB 6000 CL30
       storage: COMPONENT_CATALOG.storage[1], // Crucial T500 1TB
       psu: COMPONENT_CATALOG.psu[1], // Corsair RM750e
       cooler: COMPONENT_CATALOG.cooler[1], // Deepcool AK620
@@ -690,7 +660,7 @@ export const PC_PRESETS: PCPreset[] = [
       cpu: COMPONENT_CATALOG.cpu[7], // Intel i7-14700K
       gpu: COMPONENT_CATALOG.gpu[5], // RTX 4070 Ti Super 16GB
       motherboard: COMPONENT_CATALOG.motherboard[3], // MSI Z790 Tomahawk
-      ram: COMPONENT_CATALOG.ram[1], // 64GB DDR5
+      ram: COMPONENT_CATALOG.ram[8], // 64GB DDR5
       storage: COMPONENT_CATALOG.storage[2], // Samsung 990 Pro 2TB
       psu: COMPONENT_CATALOG.psu[2], // Corsair RM850e
       cooler: COMPONENT_CATALOG.cooler[2], // Deepcool 360mm AIO
@@ -716,7 +686,7 @@ export const PC_PRESETS: PCPreset[] = [
       cpu: COMPONENT_CATALOG.cpu[2], // Ryzen 7 7800X3D
       gpu: COMPONENT_CATALOG.gpu[5], // RTX 4070 Ti Super 16GB
       motherboard: COMPONENT_CATALOG.motherboard[2], // Gigabyte B650 Aorus Elite
-      ram: COMPONENT_CATALOG.ram[1], // 64GB DDR5
+      ram: COMPONENT_CATALOG.ram[8], // 64GB DDR5
       storage: COMPONENT_CATALOG.storage[2], // Samsung 990 Pro 2TB
       psu: COMPONENT_CATALOG.psu[2], // Corsair RM850e
       cooler: COMPONENT_CATALOG.cooler[1], // Deepcool AK620 Black
@@ -742,7 +712,7 @@ export const PC_PRESETS: PCPreset[] = [
       cpu: COMPONENT_CATALOG.cpu[3], // Ryzen 9 7900X
       gpu: COMPONENT_CATALOG.gpu[6], // RTX 4080 Super 16GB
       motherboard: COMPONENT_CATALOG.motherboard[2], // Gigabyte B650 Aorus Elite
-      ram: COMPONENT_CATALOG.ram[1], // 64GB DDR5
+      ram: COMPONENT_CATALOG.ram[8], // 64GB DDR5
       storage: COMPONENT_CATALOG.storage[2], // Samsung 990 Pro 2TB
       psu: COMPONENT_CATALOG.psu[2], // Corsair RM850e
       cooler: COMPONENT_CATALOG.cooler[2], // Deepcool 360mm AIO
@@ -772,7 +742,7 @@ export const PC_PRESETS: PCPreset[] = [
       cpu: COMPONENT_CATALOG.cpu[2], // Ryzen 7 7800X3D
       gpu: COMPONENT_CATALOG.gpu[7], // RTX 4090 24GB
       motherboard: COMPONENT_CATALOG.motherboard[4], // ASUS ROG X670E
-      ram: COMPONENT_CATALOG.ram[1], // 64GB DDR5
+      ram: COMPONENT_CATALOG.ram[8], // 64GB DDR5
       storage: COMPONENT_CATALOG.storage[2], // Samsung 990 Pro 2TB
       psu: COMPONENT_CATALOG.psu[3], // Seasonic 1000W Gold
       cooler: COMPONENT_CATALOG.cooler[2], // Deepcool 360mm AIO
@@ -799,7 +769,7 @@ export const PC_PRESETS: PCPreset[] = [
       cpu: COMPONENT_CATALOG.cpu[8], // Intel i9-14900K
       gpu: COMPONENT_CATALOG.gpu[7], // RTX 4090 24GB
       motherboard: COMPONENT_CATALOG.motherboard[3], // MSI Z790 Tomahawk
-      ram: COMPONENT_CATALOG.ram[3], // Corsair 96GB DDR5
+      ram: COMPONENT_CATALOG.ram[10], // Corsair 96GB DDR5
       storage: COMPONENT_CATALOG.storage[3], // WD Black 4TB NVMe
       psu: COMPONENT_CATALOG.psu[3], // Seasonic 1000W Gold
       cooler: COMPONENT_CATALOG.cooler[3], // NZXT Kraken Elite LCD
@@ -825,7 +795,7 @@ export const PC_PRESETS: PCPreset[] = [
       cpu: COMPONENT_CATALOG.cpu[4], // Ryzen 9 7950X
       gpu: COMPONENT_CATALOG.gpu[7], // RTX 4090 24GB
       motherboard: COMPONENT_CATALOG.motherboard[4], // ASUS ROG X670E
-      ram: COMPONENT_CATALOG.ram[1], // 64GB DDR5
+      ram: COMPONENT_CATALOG.ram[8], // 64GB DDR5
       storage: COMPONENT_CATALOG.storage[2], // Samsung 990 Pro 2TB
       psu: COMPONENT_CATALOG.psu[3], // Seasonic 1000W Gold
       cooler: COMPONENT_CATALOG.cooler[2], // Deepcool 360mm AIO

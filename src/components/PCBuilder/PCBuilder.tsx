@@ -14,7 +14,6 @@ import {
   AlertTriangle, 
   PlusCircle, 
   Search, 
-  BookOpen,
   RotateCcw,
   SlidersHorizontal,
   LayoutGrid
@@ -70,7 +69,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
       return;
     }
     const comp = COMPONENT_CATALOG[type]?.find((c) => c.id === componentId) || null;
-    setSelectedParts((prev) => ({ ...prev, [type]: comp }));
+    setSelectedParts((prev) => ({ ...prev, [type]: comp ? { ...comp, price: comp.price || 0 } : null }));
   };
 
   const handleUpdateComponentPrice = (type: PCPartType, price: number) => {
@@ -88,7 +87,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
   };
 
   const chosenComponents = Object.values(selectedParts).filter(Boolean) as PCComponent[];
-  const totalCost = chosenComponents.reduce((sum, item) => sum + item.price, 0);
+  const totalCost = chosenComponents.reduce((sum, item) => sum + (item.price || 0), 0);
   const estimatedWattage = chosenComponents.length > 0 
     ? chosenComponents.reduce((sum, item) => sum + (item.wattage || 0), 0) + 50 
     : 0;
@@ -328,7 +327,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
                         min="0"
                         step="1"
                         placeholder="Live Price"
-                        value={currentPart.price > 0 ? currentPart.price : ''}
+                        value={(currentPart.price && currentPart.price > 0) ? currentPart.price : ''}
                         onChange={(e) => {
                           const val = parseFloat(e.target.value) || 0;
                           handleUpdateComponentPrice(type, val);

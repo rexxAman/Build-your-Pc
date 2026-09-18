@@ -7,7 +7,6 @@ import { BudgetSummaryCard } from '@/components/Checklist/BudgetSummaryCard';
 import { ChecklistManager } from '@/components/Checklist/ChecklistManager';
 import { PCBuilder } from '@/components/PCBuilder/PCBuilder';
 import { PrebuiltsGallery } from '@/components/Prebuilts/PrebuiltsGallery';
-import { SetupWizard } from '@/components/SetupWizard/SetupWizard';
 
 const EMPTY_BUILD: Record<PCPartType, PCComponent | null> = {
   cpu: null,
@@ -23,64 +22,9 @@ const EMPTY_BUILD: Record<PCPartType, PCComponent | null> = {
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState<'checklist' | 'prebuilts' | 'pcbuilder'>('checklist');
   const [items, setItems] = useState<SetupItem[]>([]);
-  const [neonConnected, setNeonConnected] = useState(false);
-  const [syncing, setSyncing] = useState(false);
-  const [setupId, setSetupId] = useState<string>('primary-setup');
-  const [showGuide, setShowGuide] = useState(false);
 
   const [selectedParts, setSelectedParts] = useState<Record<PCPartType, PCComponent | null>>(EMPTY_BUILD);
   const [buildName, setBuildName] = useState('My Custom PC Build');
-
-  useEffect(() => {
-    checkNeonStatus('primary-setup');
-  }, []);
-
-  const checkNeonStatus = async (idToQuery: string) => {
-    try {
-      const res = await fetch(`/api/setups?id=${idToQuery}`);
-      const data = await res.json();
-      if (data.onlineStorageAvailable) {
-        setNeonConnected(true);
-        if (data.setup?.data?.items && Array.isArray(data.setup.data.items)) {
-          setItems(data.setup.data.items);
-        }
-      } else {
-        setNeonConnected(false);
-      }
-    } catch (e) {
-      setNeonConnected(false);
-    }
-  };
-
-  const handleSyncNeon = async () => {
-    setSyncing(true);
-    try {
-      const res = await fetch('/api/setups', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          id: setupId,
-          name: 'My Productivity Workspace',
-          data: { items },
-        }),
-      });
-      const result = await res.json();
-      if (res.ok) {
-        setNeonConnected(true);
-        alert('Setup saved to Neon Database successfully!');
-      } else {
-        if (!result.onlineStorageAvailable) {
-          alert('Neon is not configured yet. Set DATABASE_URL in your Vercel Project Settings or .env file to enable Neon Database.');
-        } else {
-          alert(`Neon sync status: ${result.message || result.error}`);
-        }
-      }
-    } catch (error) {
-      alert('Unable to connect to Neon database. Please make sure DATABASE_URL is set in your Vercel project environment variables.');
-    } finally {
-      setSyncing(false);
-    }
-  };
 
   const handleAddItem = (newItem: Omit<SetupItem, 'id' | 'createdAt'>) => {
     const item: SetupItem = {
@@ -105,25 +49,13 @@ export default function HomePage() {
     setItems([]);
   };
 
-  const handleFinishWizard = (wizardItems: Omit<SetupItem, 'id' | 'createdAt'>[]) => {
-    const newItems: SetupItem[] = wizardItems.map((wi) => ({
-      ...wi,
-      id: 'guide-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
-      createdAt: new Date().toISOString(),
-    }));
-
-    setItems((prev) => [...prev, ...newItems]);
-    setShowGuide(false);
-    setActiveTab('checklist');
-  };
-
   const handleAddBuildToChecklist = (parts: PCComponent[], title: string) => {
     const newItems: SetupItem[] = parts.map((part) => ({
       id: 'pc-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
       name: `${part.name} (${part.type.toUpperCase()})`,
       category: 'pc',
       url: part.url || `https://www.google.co.in/search?q=${encodeURIComponent(part.name + ' buy online india')}`,
-      price: part.price,
+      price: part.price || 0,
       quantity: 1,
       priority: 'must-have',
       status: 'wishlist',
@@ -150,18 +82,7 @@ export default function HomePage() {
         setActiveTab={setActiveTab}
         itemsCount={items.length}
         totalCost={totalCost}
-        neonConnected={neonConnected}
-        syncing={syncing}
-        onSync={handleSyncNeon}
-        onOpenGuide={() => setShowGuide(true)}
       />
-
-      {showGuide && (
-        <SetupWizard
-          onFinishWizard={handleFinishWizard}
-          onClose={() => setShowGuide(false)}
-        />
-      )}
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6 sm:py-8">
         {activeTab === 'checklist' && (
@@ -173,7 +94,6 @@ export default function HomePage() {
               onUpdateItem={handleUpdateItem}
               onDeleteItem={handleDeleteItem}
               onClearAll={handleClearAll}
-              onOpenGuide={() => setShowGuide(true)}
             />
           </div>
         )}
@@ -205,7 +125,7 @@ export default function HomePage() {
           <div className="flex items-center gap-3 text-zinc-500">
             <span>Next.js 14</span>
             <span>•</span>
-            <span>Neon Postgres</span>
+            <span>Tailwind CSS</span>
             <span>•</span>
             <span>Vercel Ready</span>
           </div>

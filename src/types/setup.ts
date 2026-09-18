@@ -38,7 +38,7 @@ export interface PCComponent {
   id: string;
   name: string;
   type: PCPartType;
-  price: number;
+  price?: number;
   url?: string;
   wattage?: number;
   specs?: string;

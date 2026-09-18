@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { LayoutList, Cpu, Compass, Cloud, RefreshCw, Sparkles, BookOpen, LayoutGrid } from 'lucide-react';
+import { LayoutList, Cpu, Sparkles, LayoutGrid } from 'lucide-react';
 import { formatINR } from '@/lib/searchUtils';
 
 interface NavbarProps {
@@ -9,10 +9,6 @@ interface NavbarProps {
   setActiveTab: (tab: 'checklist' | 'prebuilts' | 'pcbuilder') => void;
   itemsCount: number;
   totalCost: number;
-  neonConnected: boolean;
-  syncing: boolean;
-  onSync: () => void;
-  onOpenGuide: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -20,10 +16,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveTab,
   itemsCount,
   totalCost,
-  neonConnected,
-  syncing,
-  onSync,
-  onOpenGuide,
 }) => {
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-zinc-950/90 backdrop-blur-md px-4 lg:px-8 py-3.5 transition-all">
@@ -100,35 +92,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         </nav>
 
-        {/* Action Buttons */}
-        <div className="hidden md:flex items-center gap-2.5">
-          <button
-            onClick={onOpenGuide}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold shadow-md shadow-white/5 transition active:scale-95"
-          >
-            <BookOpen className="w-3.5 h-3.5 stroke-[2.2]" />
-            <span>Setup Guide (1-6)</span>
-          </button>
 
-          <button
-            onClick={onSync}
-            disabled={syncing}
-            title={
-              neonConnected
-                ? 'Neon Database Connected'
-                : 'Configure DATABASE_URL to connect Neon Cloud Database'
-            }
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium border transition-colors ${
-              neonConnected
-                ? 'bg-zinc-800 text-zinc-100 border-zinc-700'
-                : 'bg-zinc-900 text-zinc-400 border-zinc-800 hover:text-zinc-200'
-            }`}
-          >
-            <Cloud className="w-3.5 h-3.5 text-zinc-300" />
-            <span>{neonConnected ? 'Neon Connected' : 'Neon DB'}</span>
-            <RefreshCw className={`w-3 h-3 ml-0.5 ${syncing ? 'animate-spin text-zinc-200' : 'text-zinc-500'}`} />
-          </button>
-        </div>
       </div>
     </header>
   );
