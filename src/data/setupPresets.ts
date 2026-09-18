@@ -11,7 +11,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Electric Standing Desk (Jin Office / FlowDesk Dual Motor 5x2.5 ft)',
         category: 'desk',
-        estimatedPrice: 24999,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: 'Dual motor, solid engineered wood or teak top with memory presets',
         searchQuery: 'jin office dual motor standing desk 5x2.5 ft buy online india'
@@ -19,7 +19,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Ergonomic Mesh Chair (Green Soul Monster Ultimate / Featherlite Helix)',
         category: 'chair',
-        estimatedPrice: 16999,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: 'Breathable mesh, dynamic lumbar support, 3D adjustable armrests',
         searchQuery: 'featherlite helix or green soul ergonomic chair lumbar support india'
@@ -27,7 +27,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: '34" Ultrawide USB-C Monitor (LG 34WP65C / Dell S3422DWG)',
         category: 'monitor',
-        estimatedPrice: 38999,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: 'Curved display, USB-C connectivity, high refresh rate for smooth code scrolling',
         searchQuery: '34 inch curved ultrawide monitor price in india'
@@ -35,7 +35,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Single Monitor Gas Spring Arm (AmazonBasics / Rife / Jin)',
         category: 'accessories',
-        estimatedPrice: 2499,
+        estimatedPrice: 0,
         priority: 'recommended',
         notes: 'Clears desk space, supports up to 34" ultrawide',
         searchQuery: 'heavy duty gas spring monitor arm desk mount india'
@@ -43,7 +43,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'ScreenBar Monitor Light (Baseus i-Wok / BenQ ScreenBar)',
         category: 'lighting',
-        estimatedPrice: 2999,
+        estimatedPrice: 0,
         priority: 'recommended',
         notes: 'Zero screen reflection, auto dimming sensor, warm to cool light',
         searchQuery: 'baseus screenbar monitor light bar price in india'
@@ -51,7 +51,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Wireless Mechanical Keyboard (Keychron K2 V2 / RK84 Hot-Swap)',
         category: 'peripherals',
-        estimatedPrice: 6999,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: 'Bluetooth + Type-C, Mac & Windows support, Gateron brown tactile switches',
         searchQuery: 'keychron k2 v2 wireless mechanical keyboard price in india'
@@ -59,7 +59,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Logitech MX Master 3S Wireless Mouse',
         category: 'peripherals',
-        estimatedPrice: 8495,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: 'Whisper-quiet clicks, MagSpeed wheel, multi-computer flow',
         searchQuery: 'logitech mx master 3s wireless mouse price india'
@@ -67,7 +67,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Under-Desk Metal Cable Management Tray & Wire Sleeve',
         category: 'accessories',
-        estimatedPrice: 1299,
+        estimatedPrice: 0,
         priority: 'recommended',
         notes: 'Keeps power extensions and heavy adapters hidden beneath desk',
         searchQuery: 'under desk cable management tray metal organizer india'
@@ -84,7 +84,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Solid Wood Finish Standing Desk (6x3 ft Heavy Duty Frame)',
         category: 'desk',
-        estimatedPrice: 32999,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: 'Extra spacious 72x36" surface for dual monitors and studio speakers',
         searchQuery: 'solid wood electric standing desk 6x3 ft india'
@@ -92,7 +92,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: '27" 4K Color-Accurate Monitor (ASUS ProArt PA279CV / BenQ PD2705U)',
         category: 'monitor',
-        estimatedPrice: 37999,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: '100% sRGB, Calman verified, factory calibrated Delta E < 2',
         searchQuery: 'asus proart 27 inch 4k monitor price in india'
@@ -100,7 +100,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Studio Active Desktop Speakers (PreSonus Eris 3.5 / 4.5)',
         category: 'audio',
-        estimatedPrice: 11999,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: 'Flat frequency response for accurate audio monitoring',
         searchQuery: 'presonus eris studio monitor speakers price in india'
@@ -108,7 +108,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'USB-C Audio Interface (Focusrite Scarlett Solo / 2i2 4th Gen)',
         category: 'audio',
-        estimatedPrice: 11499,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: 'XLR mic preamp with 48V phantom power and direct monitoring',
         searchQuery: 'focusrite scarlett solo 4th gen price in india'
@@ -116,7 +116,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Dynamic Microphone Kit with Boom Arm (Fifine K688 / Shure MV7)',
         category: 'audio',
-        estimatedPrice: 6999,
+        estimatedPrice: 0,
         priority: 'recommended',
         notes: 'Voice isolation, USB & XLR dual output with boom arm mount',
         searchQuery: 'fifine k688 dynamic microphone boom arm kit price india'
@@ -124,7 +124,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Dual Tier Wooden Desk Shelf / Monitor Riser',
         category: 'accessories',
-        estimatedPrice: 3499,
+        estimatedPrice: 0,
         priority: 'recommended',
         notes: 'Elevates display while providing storage for audio interface & notebook',
         searchQuery: 'wooden desk shelf monitor riser groovemade style india'
@@ -132,7 +132,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Smart Ambient Bias Backlight Strip (Warm White)',
         category: 'lighting',
-        estimatedPrice: 1499,
+        estimatedPrice: 0,
         priority: 'optional',
         notes: 'Wipro / Philips Hue warm white bias lighting behind monitors',
         searchQuery: 'smart led light strip warm white price india'
@@ -141,7 +141,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
   },
   {
     id: 'setup-ergonomic-budget-in',
-    title: 'High-Value Ergonomic Home Office (Under ₹45,000)',
+    title: 'High-Value Ergonomic Home Office',
     description: 'Every rupee maximized: dependable ergonomic chair, electric sit-stand desk, and clean 1440p monitor.',
     categoryTag: 'Best Value / Budget',
     accentColor: 'from-zinc-800 to-zinc-900 border-zinc-700',
@@ -149,7 +149,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Motorized Sit-Stand Desk (FlowDesk / Jin Single/Dual Motor 4x2 ft)',
         category: 'desk',
-        estimatedPrice: 14999,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: 'Preset memory controller, anti-collision sensor',
         searchQuery: 'motorized standing desk 4x2 ft price in india'
@@ -157,7 +157,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Ergonomic Office Chair (Green Soul Seoul / Savya Home Apex)',
         category: 'chair',
-        estimatedPrice: 7999,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: 'Breathable mesh back, lumbar support, tilting mechanism',
         searchQuery: 'green soul ergonomic office chair price in india'
@@ -165,7 +165,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: '27" 1440p QHD IPS Monitor (Acer Nitro / LG 27QN600)',
         category: 'monitor',
-        estimatedPrice: 15999,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: 'Sharp 2K resolution for crystal-clear code & text without eye strain',
         searchQuery: '27 inch 1440p qhd ips monitor price in india'
@@ -173,7 +173,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Full Desk Felt & Vegan Leather Desk Pad (90x40cm)',
         category: 'accessories',
-        estimatedPrice: 699,
+        estimatedPrice: 0,
         priority: 'recommended',
         notes: 'Dampens typing noise and protects tabletop',
         searchQuery: 'large desk mat pad 90x40 cm price in india'
@@ -181,7 +181,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Portronics 6-in-1 USB-C Hub (4K HDMI + 100W PD)',
         category: 'accessories',
-        estimatedPrice: 1899,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: 'HDMI 4K, 100W Power Delivery, 3x USB 3.0 ports',
         searchQuery: 'portronics usb c hub multiport adapter 100w pd india'
@@ -189,7 +189,7 @@ export const SETUP_PRESETS: SetupPreset[] = [
       {
         name: 'Logitech MK295 Silent Wireless Keyboard & Mouse Combo',
         category: 'peripherals',
-        estimatedPrice: 2295,
+        estimatedPrice: 0,
         priority: 'must-have',
         notes: 'SilentTouch technology, 24-month battery life, spill-resistant',
         searchQuery: 'logitech mk295 silent wireless combo price in india'

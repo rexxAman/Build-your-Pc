@@ -121,7 +121,7 @@ export const RecommendationHub: React.FC<RecommendationHubProps> = ({
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {SETUP_PRESETS.map((preset) => {
-            const totalEstimated = preset.items.reduce((s, i) => s + i.estimatedPrice, 0);
+            const totalEstimated = preset.items.reduce((s, i) => s + (i.estimatedPrice || 0), 0);
             const isCopied = copiedPresetId === preset.id;
 
             return (
@@ -134,9 +134,11 @@ export const RecommendationHub: React.FC<RecommendationHubProps> = ({
                     <span className="text-[10px] uppercase font-semibold tracking-wider px-2.5 py-1 rounded-full bg-zinc-800 text-zinc-300 border border-zinc-700">
                       {preset.categoryTag}
                     </span>
-                    <span className="text-xs font-mono font-semibold text-zinc-200">
-                      ~{formatINR(totalEstimated)}
-                    </span>
+                    {totalEstimated > 0 && (
+                      <span className="text-xs font-mono font-semibold text-zinc-200">
+                        ~{formatINR(totalEstimated)}
+                      </span>
+                    )}
                   </div>
 
                   <h4 className="text-sm font-bold text-zinc-100">
@@ -160,7 +162,11 @@ export const RecommendationHub: React.FC<RecommendationHubProps> = ({
                             <span className="text-zinc-200 font-medium">{item.name}</span>
                           </div>
                           <div className="flex items-center gap-2 shrink-0">
-                            <span className="font-mono text-zinc-400 text-[11px]">{formatINR(item.estimatedPrice)}</span>
+                            {item.estimatedPrice ? (
+                              <span className="font-mono text-zinc-400 text-[11px]">{formatINR(item.estimatedPrice)}</span>
+                            ) : (
+                              <span className="text-zinc-500 text-[10px]">Live Price</span>
+                            )}
                             <a
                               href={createGoogleSearchUrl(item.searchQuery || item.name)}
                               target="_blank"

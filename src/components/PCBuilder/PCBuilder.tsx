@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { PCPartType, PCComponent, PCPreset } from '@/types/setup';
 import { COMPONENT_CATALOG, PC_PRESETS } from '@/data/pcPresets';
-import { createGoogleSearchUrl, createRedditSearchUrl, createMdComputersSearchUrl, formatINR } from '@/lib/searchUtils';
+import { createGoogleSearchUrl, createAmazonSearchUrl, createRedditSearchUrl, createMdComputersSearchUrl, formatINR } from '@/lib/searchUtils';
 import { 
   Cpu, 
   Layers, 
@@ -71,6 +71,20 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
     }
     const comp = COMPONENT_CATALOG[type]?.find((c) => c.id === componentId) || null;
     setSelectedParts((prev) => ({ ...prev, [type]: comp }));
+  };
+
+  const handleUpdateComponentPrice = (type: PCPartType, price: number) => {
+    setSelectedParts((prev) => {
+      const existing = prev[type];
+      if (!existing) return prev;
+      return {
+        ...prev,
+        [type]: {
+          ...existing,
+          price: Math.max(0, price),
+        },
+      };
+    });
   };
 
   const chosenComponents = Object.values(selectedParts).filter(Boolean) as PCComponent[];
@@ -155,6 +169,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
           </div>
           <p className="text-xs text-zinc-500 mt-1">
             {chosenComponents.length} of 8 components selected
+            {chosenComponents.length > 0 && totalCost === 0 && ' • Enter live prices below'}
           </p>
         </div>
 
@@ -250,7 +265,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
                   <option value="">-- {meta.placeholder} --</option>
                   {availableOptions.map((opt) => (
                     <option key={opt.id} value={opt.id}>
-                      {opt.name} ({formatINR(opt.price)}) {opt.wattage ? `[${opt.wattage}W]` : ''}
+                      {opt.name} {opt.wattage ? `[${opt.wattage}W]` : ''}
                     </option>
                   ))}
                 </select>
@@ -271,8 +286,8 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
                 )}
               </div>
 
-              {/* Price & Search Links */}
-              <div className="flex items-center justify-between md:justify-end gap-3 md:w-1/4 border-t md:border-t-0 pt-2 md:pt-0 border-zinc-800">
+              {/* Price Input & Search Links */}
+              <div className="flex flex-wrap items-center justify-between md:justify-end gap-2.5 md:w-auto border-t md:border-t-0 pt-2.5 md:pt-0 border-zinc-800">
                 {currentPart ? (
                   <>
                     <div className="flex items-center gap-1.5">
@@ -296,18 +311,31 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
                         <span>MDComp</span>
                       </a>
                       <a
-                        href={createRedditSearchUrl(currentPart.name)}
+                        href={createAmazonSearchUrl(currentPart.name)}
                         target="_blank"
                         rel="noreferrer"
-                        title="Search r/IndianGaming"
+                        title="Search Amazon.in"
                         className="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] flex items-center gap-1"
                       >
-                        <BookOpen className="w-3 h-3 text-zinc-400" />
-                        <span className="hidden xl:inline">Reddit</span>
+                        <span>Amazon</span>
                       </a>
                     </div>
-                    <div className="text-right font-mono font-semibold text-sm text-zinc-100">
-                      {formatINR(currentPart.price)}
+
+                    <div className="flex items-center gap-1.5 bg-zinc-950 border border-zinc-700 focus-within:border-zinc-400 rounded-xl px-2.5 py-1.5">
+                      <span className="text-xs text-zinc-400 font-mono">₹</span>
+                      <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        placeholder="Live Price"
+                        value={currentPart.price > 0 ? currentPart.price : ''}
+                        onChange={(e) => {
+                          const val = parseFloat(e.target.value) || 0;
+                          handleUpdateComponentPrice(type, val);
+                        }}
+                        className="w-24 bg-transparent text-xs text-zinc-100 font-mono focus:outline-none placeholder-zinc-600"
+                        title="Enter current live market price in ₹"
+                      />
                     </div>
                   </>
                 ) : (

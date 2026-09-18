@@ -3,13 +3,14 @@
 import React, { useState } from 'react';
 import { PCPreset, BudgetTier, UseCase, PCComponent } from '@/types/setup';
 import { PC_PRESETS } from '@/data/pcPresets';
-import { formatINR } from '@/lib/searchUtils';
+import { createGoogleSearchUrl, createMdComputersSearchUrl, createAmazonSearchUrl } from '@/lib/searchUtils';
 import { 
   Sparkles, 
   Tag, 
   Check, 
   PlusCircle, 
-  Cpu
+  Cpu,
+  Search
 } from 'lucide-react';
 
 interface PrebuiltsGalleryProps {
@@ -40,13 +41,13 @@ export const PrebuiltsGallery: React.FC<PrebuiltsGalleryProps> = ({
         <div className="max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-semibold mb-3">
             <Sparkles className="w-3.5 h-3.5 text-zinc-300" />
-            Curated Showcase (₹1 Lakh to ₹4 Lakh)
+            Curated Showcase & Blueprints
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-zinc-100 tracking-tight">
             Pre-Built Rigs Showcase
           </h2>
           <p className="text-sm text-zinc-400 mt-2 leading-relaxed">
-            Explore complete, fully-configured builds tailored for Developers, Competitive Gamers, 3D Designers, and AI/ML Workstations with genuine Indian market pricing and high-resolution visuals.
+            Explore complete, fully-configured builds tailored for Developers, Competitive Gamers, 3D Designers, and AI/ML Workstations. Click any part to check live prices across Indian retailers.
           </p>
         </div>
 
@@ -56,7 +57,7 @@ export const PrebuiltsGallery: React.FC<PrebuiltsGalleryProps> = ({
           <div className="flex flex-wrap items-center gap-1.5">
             <span className="text-xs text-zinc-400 font-medium mr-1 flex items-center gap-1">
               <Tag className="w-3.5 h-3.5 text-zinc-500" />
-              Budget:
+              Tier:
             </span>
             <button
               onClick={() => setActiveBudgetTier('all')}
@@ -66,7 +67,7 @@ export const PrebuiltsGallery: React.FC<PrebuiltsGalleryProps> = ({
                   : 'bg-zinc-950 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
               }`}
             >
-              All (1L – 4L)
+              All Tiers
             </button>
             <button
               onClick={() => setActiveBudgetTier('1_2_lakh')}
@@ -76,7 +77,7 @@ export const PrebuiltsGallery: React.FC<PrebuiltsGalleryProps> = ({
                   : 'bg-zinc-950 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
               }`}
             >
-              ₹1 Lakh – ₹2 Lakh
+              Tier 1: High Performance
             </button>
             <button
               onClick={() => setActiveBudgetTier('2_3_lakh')}
@@ -86,7 +87,7 @@ export const PrebuiltsGallery: React.FC<PrebuiltsGalleryProps> = ({
                   : 'bg-zinc-950 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
               }`}
             >
-              ₹2 Lakh – ₹3 Lakh
+              Tier 2: Enthusiast & Creator
             </button>
             <button
               onClick={() => setActiveBudgetTier('3_4_lakh')}
@@ -96,7 +97,7 @@ export const PrebuiltsGallery: React.FC<PrebuiltsGalleryProps> = ({
                   : 'bg-zinc-950 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800'
               }`}
             >
-              ₹3 Lakh – ₹4 Lakh
+              Tier 3: Extreme Flagship
             </button>
           </div>
 
@@ -160,10 +161,10 @@ export const PrebuiltsGallery: React.FC<PrebuiltsGalleryProps> = ({
                   </div>
 
                   <div className="absolute bottom-3 left-4 right-4 flex items-baseline justify-between">
-                    <span className="text-xl font-bold font-mono text-zinc-100 drop-shadow-md">
-                      {formatINR(preset.targetBudget)}
+                    <span className="text-xs font-semibold text-zinc-200 drop-shadow-md">
+                      8 Components Configured
                     </span>
-                    <span className="text-[10px] text-zinc-400 font-medium">Est. Street Price</span>
+                    <span className="text-[10px] text-zinc-400 font-medium">Check Live Prices</span>
                   </div>
                 </div>
 
@@ -231,29 +232,61 @@ export const PrebuiltsGallery: React.FC<PrebuiltsGalleryProps> = ({
                   {selectedPresetModal.badge}
                 </span>
                 <h3 className="text-lg font-bold text-white mt-1">{selectedPresetModal.title}</h3>
-                <span className="text-sm font-mono font-bold text-zinc-200">
-                  Target Budget: {formatINR(selectedPresetModal.targetBudget)}
+                <span className="text-xs font-medium text-zinc-400">
+                  Complete balanced system • Check live dealer pricing below
                 </span>
               </div>
             </div>
 
             <div className="p-6 overflow-y-auto space-y-4 flex-1">
               <h4 className="text-xs uppercase font-semibold text-zinc-400 tracking-wider">
-                Full Parts Breakdown
+                Full Parts Breakdown & Current Deal Links
               </h4>
               <div className="space-y-2">
                 {Object.entries(selectedPresetModal.parts).map(([partType, part]) => (
                   <div
                     key={partType}
-                    className="flex items-center justify-between p-2.5 rounded-xl bg-zinc-950 border border-zinc-850 text-xs"
+                    className="flex flex-col sm:flex-row sm:items-center justify-between p-3 rounded-xl bg-zinc-950 border border-zinc-850 text-xs gap-2"
                   >
                     <div>
                       <span className="text-[10px] uppercase font-mono text-zinc-500 block">
                         {partType}
                       </span>
                       <span className="text-zinc-200 font-medium">{part.name}</span>
+                      {part.specs && (
+                        <span className="text-[11px] text-zinc-400 block mt-0.5">{part.specs}</span>
+                      )}
                     </div>
-                    <span className="font-mono font-semibold text-zinc-100">{formatINR(part.price)}</span>
+                    <div className="flex items-center gap-1.5 shrink-0 pt-1 sm:pt-0">
+                      <a
+                        href={createGoogleSearchUrl(part.name)}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[10px] flex items-center gap-1"
+                        title="Search current price on Google India"
+                      >
+                        <Search className="w-3 h-3 text-zinc-400" />
+                        <span>Google</span>
+                      </a>
+                      <a
+                        href={createMdComputersSearchUrl(part.name)}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[10px]"
+                        title="Search MDComputers"
+                      >
+                        <span>MDComp</span>
+                      </a>
+                      <a
+                        href={createAmazonSearchUrl(part.name)}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[10px]"
+                        title="Search Amazon.in"
+                      >
+                        <span>Amazon</span>
+                      </a>
+                    </div>
                   </div>
                 ))}
               </div>

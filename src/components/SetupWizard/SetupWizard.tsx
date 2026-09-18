@@ -46,19 +46,19 @@ const WIZARD_STEPS: StepQuestion[] = [
       {
         name: 'Electric Standing Desk (Dual Motor, 5x2.5 ft / 60x30")',
         description: 'Sit-to-stand motorized adjustment with digital memory presets and solid engineered wood top.',
-        estimatedPrice: 24999,
+        estimatedPrice: 0,
         priority: 'must-have',
       },
       {
         name: 'Compact Motorized Standing Desk (4x2 ft)',
         description: 'Ideal for compact Indian bedrooms and home offices without sacrificing ergonomics.',
-        estimatedPrice: 15499,
+        estimatedPrice: 0,
         priority: 'must-have',
       },
       {
         name: 'Fixed Sturdy Solid Wood / Sheesham Desk (5x2.5 ft)',
         description: 'Heavy solid wooden surface, zero motor electronics, clean minimal look with steel legs.',
-        estimatedPrice: 8999,
+        estimatedPrice: 0,
         priority: 'must-have',
       },
     ],
@@ -74,19 +74,19 @@ const WIZARD_STEPS: StepQuestion[] = [
       {
         name: 'Ergonomic Breathable Mesh Chair (Green Soul / Featherlite Helix)',
         description: 'Full-mesh back and seat with self-adjusting lumbar support and 3D armrests.',
-        estimatedPrice: 16999,
+        estimatedPrice: 0,
         priority: 'must-have',
       },
       {
         name: 'High-Value Ergonomic Office Chair (Savya Home / Green Soul Seoul)',
         description: 'Dependable lower back cushion, tilt recline, and adjustable headrest under ₹9,000.',
-        estimatedPrice: 7999,
+        estimatedPrice: 0,
         priority: 'must-have',
       },
       {
         name: 'Premium Workstation Chair (Steelcase Gesture / Herman Miller Aeron)',
         description: 'Gold-standard posture engineering with multi-year warranty for 10+ hour workdays.',
-        estimatedPrice: 75000,
+        estimatedPrice: 0,
         priority: 'recommended',
       },
     ],
@@ -102,19 +102,19 @@ const WIZARD_STEPS: StepQuestion[] = [
       {
         name: '34" Ultrawide Curved Monitor (LG / Dell / Acer QHD)',
         description: 'Side-by-side code editor and browser with built-in laptop charging and smooth refresh rate.',
-        estimatedPrice: 38999,
+        estimatedPrice: 0,
         priority: 'must-have',
       },
       {
         name: '27" 4K UHD Color-Calibrated Display (ASUS ProArt / BenQ IPS)',
         description: 'Razor sharp text rendering for reading docs, UI design, and photo/video editing.',
-        estimatedPrice: 36999,
+        estimatedPrice: 0,
         priority: 'must-have',
       },
       {
         name: '27" 1440p QHD Productivity Display (LG / Acer IPS 100Hz+)',
         description: 'The sweet spot in India for high resolution without scaling issues or high cost.',
-        estimatedPrice: 17499,
+        estimatedPrice: 0,
         priority: 'must-have',
       },
     ],
@@ -130,19 +130,19 @@ const WIZARD_STEPS: StepQuestion[] = [
       {
         name: 'Logitech MX Master 3S + Keychron Wireless Mechanical Keyboard',
         description: 'The industry-standard productivity combo: MagSpeed wheel + tactile quiet typing.',
-        estimatedPrice: 15499,
+        estimatedPrice: 0,
         priority: 'must-have',
       },
       {
         name: 'Logitech MK295 Silent Wireless Keyboard & Mouse Set',
         description: 'Reliable, spill-resistant, 2-year battery life, and whisper-quiet operation.',
-        estimatedPrice: 2295,
+        estimatedPrice: 0,
         priority: 'must-have',
       },
       {
         name: 'RK Royal Kludge RK84 Wireless Hot-Swap Mechanical Keyboard',
         description: 'Compact 75% layout, hot-swappable switches, Bluetooth + 2.4GHz + Type-C wired.',
-        estimatedPrice: 5499,
+        estimatedPrice: 0,
         priority: 'recommended',
       },
     ],
@@ -158,19 +158,19 @@ const WIZARD_STEPS: StepQuestion[] = [
       {
         name: 'Asymmetrical Monitor ScreenBar Light (Baseus / BenQ)',
         description: 'Zero glare on the screen glass, warm to cool color temperature adjustment.',
-        estimatedPrice: 2999,
+        estimatedPrice: 0,
         priority: 'recommended',
       },
       {
         name: 'Smart Ambient Bias Backlight Strip (Wipro / Philips Hue)',
         description: 'Even glow behind displays that minimizes eye fatigue during late-night focus sessions.',
-        estimatedPrice: 1499,
+        estimatedPrice: 0,
         priority: 'optional',
       },
       {
         name: 'Architect Metal Clamp Desk Lamp with Warm LED',
         description: 'Flexible swing arm lighting with diffuse broad coverage across your desk surface.',
-        estimatedPrice: 1899,
+        estimatedPrice: 0,
         priority: 'optional',
       },
     ],
@@ -186,19 +186,19 @@ const WIZARD_STEPS: StepQuestion[] = [
       {
         name: 'Gas-Spring Counterbalance Single Monitor Arm (AmazonBasics / Rife)',
         description: 'Effortless tilt, swivel, and height adjustment, clearing clutter beneath the screen.',
-        estimatedPrice: 2499,
+        estimatedPrice: 0,
         priority: 'recommended',
       },
       {
         name: 'Under-Desk Steel Cable Tray + Spike Guard Wire Sleeve Kit',
         description: 'Keeps surge protectors, laptop bricks, and wire spaghetti neatly hidden under the table.',
-        estimatedPrice: 1299,
+        estimatedPrice: 0,
         priority: 'must-have',
       },
       {
         name: 'Large Felt & Vegan Leather Desk Pad (90x40cm)',
         description: 'Covers the work area, dampens typing acoustics, and protects desk finish.',
-        estimatedPrice: 699,
+        estimatedPrice: 0,
         priority: 'recommended',
       },
     ],
@@ -297,9 +297,11 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
 
           <div className="flex items-center gap-3">
             <div className="text-right hidden sm:block">
-              <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono">Planned Total</span>
+              <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono">
+                {totalPlannedSoFar > 0 ? 'Planned Total' : 'Pricing Mode'}
+              </span>
               <div className="text-sm font-bold font-mono text-zinc-100">
-                {formatINR(totalPlannedSoFar)}
+                {totalPlannedSoFar > 0 ? formatINR(totalPlannedSoFar) : 'Custom INR (₹)'}
               </div>
             </div>
             <button
@@ -395,8 +397,8 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
                     </div>
 
                     <div className="mt-4 pt-2 border-t border-zinc-800 flex items-baseline justify-between">
-                      <span className="text-[10px] text-zinc-500">Est. Price:</span>
-                      <span className="text-sm font-mono font-bold text-zinc-100">{formatINR(opt.estimatedPrice)}</span>
+                      <span className="text-[10px] text-zinc-500">Live Price:</span>
+                      <span className="text-xs text-zinc-400">Custom input below</span>
                     </div>
                   </div>
                 );
@@ -424,7 +426,9 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
                   <label className="block text-[10px] text-zinc-400 mb-1">Price (₹ INR)</label>
                   <input
                     type="number"
-                    value={currentSelected.price}
+                    min="0"
+                    placeholder="Enter price (₹)"
+                    value={currentSelected.price > 0 ? currentSelected.price : ''}
                     onChange={(e) => handleUpdateCurrentSelection({ price: parseFloat(e.target.value) || 0 })}
                     className="w-full px-3 py-1.5 text-xs rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-100 font-mono focus:outline-none focus:border-zinc-500"
                   />

@@ -67,8 +67,8 @@ export interface PCPreset {
   title: string;
   subtitle: string;
   badge: string;
-  targetBudget: number;
-  budgetTier: BudgetTier; // 1-2L, 2-3L, 3-4L
+  targetBudget?: number;
+  budgetTier: BudgetTier;
   useCases: UseCase[];
   image: string; // High quality showcase image
   processorType: 'intel' | 'amd';
@@ -85,7 +85,7 @@ export interface SetupPreset {
   items: Array<{
     name: string;
     category: Category;
-    estimatedPrice: number;
+    estimatedPrice?: number;
     priority: ItemPriority;
     notes?: string;
     searchQuery?: string;

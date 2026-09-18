@@ -200,15 +200,16 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-zinc-300 mb-1">Price per unit (₹ INR) *</label>
+              <label className="block text-xs font-medium text-zinc-300 mb-1">
+                Price per unit (₹ INR) <span className="text-zinc-500 font-normal">(Optional)</span>
+              </label>
               <input
                 type="number"
                 step="1"
                 min="0"
-                required
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                placeholder="e.g. 14999"
+                placeholder="e.g. 14999 (or leave blank)"
                 className="w-full px-3 py-2 text-sm rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-500 text-zinc-100 placeholder-zinc-500 font-mono"
               />
             </div>
@@ -453,14 +454,42 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                     </a>
                   </div>
 
-                  <div className="text-right min-w-[90px]">
-                    <div className="text-sm font-semibold text-zinc-100 font-mono">
-                      {formatINR(itemTotal)}
-                    </div>
-                    {item.quantity > 1 && (
-                      <div className="text-[10px] text-zinc-500 font-mono">
-                        {formatINR(item.price)} each
+                  <div className="text-right min-w-[95px]">
+                    {item.price > 0 ? (
+                      <div>
+                        <div
+                          onClick={() => {
+                            const newPriceStr = prompt(`Update price for "${item.name}" in ₹:`, item.price.toString());
+                            if (newPriceStr !== null) {
+                              const p = parseFloat(newPriceStr) || 0;
+                              onUpdateItem(item.id, { price: p });
+                            }
+                          }}
+                          className="text-sm font-semibold text-zinc-100 font-mono cursor-pointer hover:underline hover:text-white"
+                          title="Click to update price"
+                        >
+                          {formatINR(itemTotal)}
+                        </div>
+                        {item.quantity > 1 && (
+                          <div className="text-[10px] text-zinc-500 font-mono">
+                            {formatINR(item.price)} each
+                          </div>
+                        )}
                       </div>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          const newPriceStr = prompt(`Enter price for "${item.name}" in ₹:`, '');
+                          if (newPriceStr !== null) {
+                            const p = parseFloat(newPriceStr) || 0;
+                            onUpdateItem(item.id, { price: p });
+                          }
+                        }}
+                        className="text-[11px] px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-medium border border-zinc-700 transition"
+                        title="Click to enter price"
+                      >
+                        + Enter Price
+                      </button>
                     )}
                   </div>
 
