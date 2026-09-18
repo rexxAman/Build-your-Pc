@@ -88,21 +88,21 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
   return (
     <div className="space-y-6">
       {/* Action Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl bg-zinc-900 border border-zinc-800">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl bg-white border border-tan">
         <div>
-          <h2 className="text-base font-semibold text-zinc-100 flex items-center gap-2">
+          <h2 className="text-base font-semibold text-olive flex items-center gap-2">
             <span>Setup Checklist & Cost Tracker</span>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-300 font-mono">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-cream-dark text-olive-light font-mono">
               {filteredItems.length} items
             </span>
           </h2>
-          <p className="text-xs text-zinc-400">Track your workspace gear in INR (₹), paste purchase links, enter prices, and track orders.</p>
+          <p className="text-xs text-olive-light">Track your workspace gear in INR (₹), paste purchase links, enter prices, and track orders.</p>
         </div>
 
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsAdding(!isAdding)}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold shadow-md shadow-white/5 transition active:scale-95"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-olive hover:bg-olive/90 text-white text-xs font-semibold shadow-md transition active:scale-95"
           >
             <Plus className="w-4 h-4 stroke-[2.5]" />
             <span>{isAdding ? 'Close Form' : 'Add Item'}</span>
@@ -115,7 +115,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                   onClearAll();
                 }
               }}
-              className="p-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-400 hover:text-zinc-100 border border-zinc-700 transition"
+              className="p-2 rounded-xl bg-cream-dark hover:bg-tan text-olive-muted hover:text-terra border border-tan-dark transition"
               title="Clear all checklist items"
             >
               <Trash2 className="w-4 h-4" />
@@ -126,33 +126,33 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
 
       {/* Add Item Form */}
       {isAdding && (
-        <form onSubmit={handleSubmit} className="p-5 rounded-2xl bg-zinc-900 border border-zinc-700 shadow-2xl space-y-4 animate-in fade-in slide-in-from-top duration-200">
-          <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
-            <h3 className="text-sm font-semibold text-zinc-100">
+        <form onSubmit={handleSubmit} className="p-5 rounded-2xl bg-white border border-tan-dark shadow-md space-y-4 animate-in fade-in slide-in-from-top duration-200">
+          <div className="flex items-center justify-between border-b border-tan pb-3">
+            <h3 className="text-sm font-semibold text-olive">
               Add Setup Item (India Standard)
             </h3>
-            <span className="text-xs text-zinc-500">Calculates total cost in ₹ INR</span>
+            <span className="text-xs text-olive-muted">Calculates total cost in ₹ INR</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="lg:col-span-2">
-              <label className="block text-xs font-medium text-zinc-300 mb-1">Item / Product Name *</label>
+              <label className="block text-xs font-medium text-olive-light mb-1">Item / Product Name *</label>
               <input
                 type="text"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. Standing Desk, Featherlite Chair, or MX Master 3S"
-                className="w-full px-3 py-2 text-sm rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-500 text-zinc-100 placeholder-zinc-500"
+                className="w-full px-3 py-2 text-sm rounded-xl bg-cream-light border border-tan focus:outline-none focus:border-olive text-olive placeholder-olive-muted"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-zinc-300 mb-1">Category</label>
+              <label className="block text-xs font-medium text-olive-light mb-1">Category</label>
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value as Category)}
-                className="w-full px-3 py-2 text-sm rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-500 text-zinc-100"
+                className="w-full px-3 py-2 text-sm rounded-xl bg-cream-light border border-tan focus:outline-none focus:border-olive text-olive"
               >
                 {Object.entries(CATEGORY_LABELS).map(([catKey, info]) => (
                   <option key={catKey} value={catKey}>
@@ -163,11 +163,11 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-zinc-300 mb-1">Priority</label>
+              <label className="block text-xs font-medium text-olive-light mb-1">Priority</label>
               <select
                 value={priority}
                 onChange={(e) => setPriority(e.target.value as ItemPriority)}
-                className="w-full px-3 py-2 text-sm rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-500 text-zinc-100"
+                className="w-full px-3 py-2 text-sm rounded-xl bg-cream-light border border-tan focus:outline-none focus:border-olive text-olive"
               >
                 <option value="must-have">Must-Have (Essential)</option>
                 <option value="recommended">Recommended</option>
@@ -176,21 +176,21 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
             </div>
 
             <div className="lg:col-span-2">
-              <label className="block text-xs font-medium text-zinc-300 mb-1">
-                Product Link / URL <span className="text-zinc-500 font-normal">(Amazon.in / MDComputers / Store)</span>
+              <label className="block text-xs font-medium text-olive-light mb-1">
+                Product Link / URL <span className="text-olive-muted font-normal">(Amazon.in / MDComputers / Store)</span>
               </label>
               <input
                 type="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="https://amazon.in/... or store link"
-                className="w-full px-3 py-2 text-sm rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-500 text-zinc-100 placeholder-zinc-500"
+                className="w-full px-3 py-2 text-sm rounded-xl bg-cream-light border border-tan focus:outline-none focus:border-olive text-olive placeholder-olive-muted"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-zinc-300 mb-1">
-                Price per unit (₹ INR) <span className="text-zinc-500 font-normal">(Optional)</span>
+              <label className="block text-xs font-medium text-olive-light mb-1">
+                Price per unit (₹ INR) <span className="text-olive-muted font-normal">(Optional)</span>
               </label>
               <input
                 type="number"
@@ -199,31 +199,31 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
                 placeholder="e.g. 14999 (or leave blank)"
-                className="w-full px-3 py-2 text-sm rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-500 text-zinc-100 placeholder-zinc-500 font-mono"
+                className="w-full px-3 py-2 text-sm rounded-xl bg-cream-light border border-tan focus:outline-none focus:border-olive text-olive placeholder-olive-muted font-mono"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-zinc-300 mb-1">Quantity</label>
+              <label className="block text-xs font-medium text-olive-light mb-1">Quantity</label>
               <input
                 type="number"
                 min="1"
                 value={quantity}
                 onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
-                className="w-full px-3 py-2 text-sm rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-500 text-zinc-100 font-mono"
+                className="w-full px-3 py-2 text-sm rounded-xl bg-cream-light border border-tan focus:outline-none focus:border-olive text-olive font-mono"
               />
             </div>
 
             <div className="lg:col-span-4">
-              <label className="block text-xs font-medium text-zinc-300 mb-1">
-                Notes / Specs / Warranty <span className="text-zinc-500 font-normal">(Optional)</span>
+              <label className="block text-xs font-medium text-olive-light mb-1">
+                Notes / Specs / Warranty <span className="text-olive-muted font-normal">(Optional)</span>
               </label>
               <input
                 type="text"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="e.g. 3-year warranty in India, dual motor, 65W Type-C"
-                className="w-full px-3 py-2 text-sm rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-500 text-zinc-100 placeholder-zinc-500"
+                className="w-full px-3 py-2 text-sm rounded-xl bg-cream-light border border-tan focus:outline-none focus:border-olive text-olive placeholder-olive-muted"
               />
             </div>
           </div>
@@ -232,13 +232,13 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
             <button
               type="button"
               onClick={() => setIsAdding(false)}
-              className="px-4 py-2 text-xs rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300"
+              className="px-4 py-2 text-xs rounded-xl bg-cream-dark hover:bg-tan text-olive-light"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-5 py-2 text-xs font-semibold rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 shadow-sm"
+              className="px-5 py-2 text-xs font-semibold rounded-xl bg-olive hover:bg-olive/90 text-white shadow-sm"
             >
               Save Item
             </button>
@@ -247,15 +247,15 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
       )}
 
       {/* Filter & Search Bar */}
-      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 p-3 rounded-2xl bg-zinc-900 border border-zinc-800">
+      <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 p-3 rounded-2xl bg-white border border-tan">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-olive-muted absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search items by name or specs..."
-            className="w-full pl-10 pr-4 py-1.5 text-xs rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-600 text-zinc-100 placeholder-zinc-500"
+            className="w-full pl-10 pr-4 py-1.5 text-xs rounded-xl bg-cream-light border border-tan focus:outline-none focus:border-olive text-olive placeholder-olive-muted"
           />
         </div>
 
@@ -263,7 +263,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="px-3 py-1.5 text-xs rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-300 focus:outline-none focus:border-zinc-600"
+            className="px-3 py-1.5 text-xs rounded-xl bg-cream-light border border-tan text-olive-light focus:outline-none focus:border-olive"
           >
             <option value="all">All Categories</option>
             {Object.entries(CATEGORY_LABELS).map(([key, info]) => (
@@ -276,7 +276,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-1.5 text-xs rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-300 focus:outline-none focus:border-zinc-600"
+            className="px-3 py-1.5 text-xs rounded-xl bg-cream-light border border-tan text-olive-light focus:outline-none focus:border-olive"
           >
             <option value="all">All Statuses</option>
             <option value="wishlist">Wishlist / Planned</option>
@@ -287,7 +287,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="px-3 py-1.5 text-xs rounded-xl bg-zinc-950 border border-zinc-800 text-zinc-300 focus:outline-none focus:border-zinc-600"
+            className="px-3 py-1.5 text-xs rounded-xl bg-cream-light border border-tan text-olive-light focus:outline-none focus:border-olive"
           >
             <option value="newest">Recently Added</option>
             <option value="price-desc">Highest Price</option>
@@ -300,16 +300,16 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
       {/* Items List */}
       <div className="space-y-2.5">
         {filteredItems.length === 0 ? (
-          <div className="text-center py-16 px-4 rounded-3xl border border-dashed border-zinc-800 bg-zinc-900/40">
-            <ShoppingBag className="w-12 h-12 text-zinc-600 mx-auto mb-3" />
-            <h4 className="text-sm font-semibold text-zinc-200">Your setup checklist is empty</h4>
-            <p className="text-xs text-zinc-500 max-w-md mx-auto mt-1 mb-5 leading-relaxed">
+          <div className="text-center py-16 px-4 rounded-3xl border border-dashed border-tan bg-cream-light">
+            <ShoppingBag className="w-12 h-12 text-olive-muted mx-auto mb-3" />
+            <h4 className="text-sm font-semibold text-olive">Your setup checklist is empty</h4>
+            <p className="text-xs text-olive-muted max-w-md mx-auto mt-1 mb-5 leading-relaxed">
               Add your setup items individually, or browse Pre-Built Rigs and Custom PC Studio to customize components.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <button
                 onClick={() => setIsAdding(true)}
-                className="px-4 py-2 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-semibold shadow-md flex items-center gap-1.5 transition active:scale-95"
+                className="px-4 py-2 rounded-xl bg-olive hover:bg-olive/90 text-white text-xs font-semibold shadow-md flex items-center gap-1.5 transition active:scale-95"
               >
                 <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
                 <span>Add Item Manually</span>
@@ -320,7 +320,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
           filteredItems.map((item) => {
             const catInfo = CATEGORY_LABELS[item.category] || {
               label: item.category,
-              color: 'bg-zinc-800 text-zinc-200 border-zinc-700',
+              color: 'bg-cream-dark text-olive border-tan-dark',
             };
             const itemTotal = item.price * item.quantity;
 
@@ -329,10 +329,10 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                 key={item.id}
                 className={`group flex flex-col md:flex-row md:items-center justify-between p-4 rounded-2xl border transition-all ${
                   item.status === 'received'
-                    ? 'bg-zinc-900/90 border-zinc-700'
+                    ? 'bg-white border-tan-dark'
                     : item.status === 'ordered'
-                    ? 'bg-zinc-900/70 border-zinc-750'
-                    : 'bg-zinc-900 border-zinc-800 hover:border-zinc-700'
+                    ? 'bg-white border-tan-dark'
+                    : 'bg-white border-tan hover:border-tan-dark'
                 }`}
               >
                 {/* Left side */}
@@ -350,10 +350,10 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                     title={`Current: ${item.status}. Click to cycle: Wishlist -> Ordered -> Received`}
                     className={`mt-1 w-5 h-5 rounded-lg border flex items-center justify-center transition-colors shrink-0 ${
                       item.status === 'received'
-                        ? 'bg-zinc-100 border-white text-zinc-950'
+                        ? 'bg-olive border-olive text-white'
                         : item.status === 'ordered'
-                        ? 'bg-zinc-700 border-zinc-500 text-zinc-100'
-                        : 'border-zinc-700 bg-zinc-950 hover:border-zinc-500 text-transparent'
+                        ? 'bg-tan border-tan-dark text-olive'
+                        : 'border-tan-dark bg-cream-light hover:border-olive text-transparent'
                     }`}
                   >
                     <Check className="w-3.5 h-3.5 stroke-[3]" />
@@ -366,40 +366,40 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                       </span>
 
                       {item.priority === 'must-have' && (
-                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-zinc-800 text-zinc-200 border border-zinc-700">
+                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-cream-dark text-olive border border-tan-dark">
                           Must-have
                         </span>
                       )}
                       {item.priority === 'recommended' && (
-                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-zinc-850 text-zinc-300 border border-zinc-750">
+                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-cream-dark text-olive-light border border-tan-dark">
                           Recommended
                         </span>
                       )}
 
-                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-400">
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-cream-dark text-olive-light">
                         {item.status.toUpperCase()}
                       </span>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-semibold text-zinc-100">
+                      <span className="text-sm font-semibold text-olive">
                         {item.name}
                       </span>
                       {item.quantity > 1 && (
-                        <span className="text-xs px-1.5 py-0.2 rounded bg-zinc-800 text-zinc-300 font-mono">
+                        <span className="text-xs px-1.5 py-0.2 rounded bg-cream-dark text-olive-light font-mono">
                           x{item.quantity}
                         </span>
                       )}
                     </div>
 
                     {item.notes && (
-                      <p className="text-xs text-zinc-400 leading-relaxed">{item.notes}</p>
+                      <p className="text-xs text-olive-light leading-relaxed">{item.notes}</p>
                     )}
                   </div>
                 </div>
 
                 {/* Right side */}
-                <div className="flex items-center justify-between md:justify-end gap-4 mt-3 md:mt-0 pt-3 md:pt-0 border-t md:border-t-0 border-zinc-800">
+                <div className="flex items-center justify-between md:justify-end gap-4 mt-3 md:mt-0 pt-3 md:pt-0 border-t md:border-t-0 border-tan">
                   <div className="flex items-center gap-1.5">
                     {item.url ? (
                       <a
@@ -407,10 +407,10 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                         target="_blank"
                         rel="noreferrer"
                         title="Open product link"
-                        className="flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 border border-zinc-700"
+                        className="flex items-center gap-1 text-[11px] px-2.5 py-1 rounded-lg bg-cream-dark hover:bg-tan text-olive border border-tan-dark"
                       >
                         <span>Link</span>
-                        <ExternalLink className="w-3 h-3 text-zinc-400" />
+                        <ExternalLink className="w-3 h-3 text-olive-muted" />
                       </a>
                     ) : null}
 
@@ -419,9 +419,9 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                       target="_blank"
                       rel="noreferrer"
                       title="Search Google India"
-                      className="flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-zinc-300 border border-zinc-800"
+                      className="flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg bg-cream-light hover:bg-cream-dark text-olive-light border border-tan"
                     >
-                      <Search className="w-3 h-3 text-zinc-400" />
+                      <Search className="w-3 h-3 text-olive-muted" />
                       <span>Google</span>
                     </a>
 
@@ -430,7 +430,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                       target="_blank"
                       rel="noreferrer"
                       title="Search Amazon.in"
-                      className="hidden sm:flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-zinc-300 border border-zinc-800"
+                      className="hidden sm:flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg bg-cream-light hover:bg-cream-dark text-olive-light border border-tan"
                     >
                       <span>Amazon.in</span>
                     </a>
@@ -447,13 +447,13 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                               onUpdateItem(item.id, { price: p });
                             }
                           }}
-                          className="text-sm font-semibold text-zinc-100 font-mono cursor-pointer hover:underline hover:text-white"
+                          className="text-sm font-semibold text-olive font-mono cursor-pointer hover:underline hover:text-olive"
                           title="Click to update price"
                         >
                           {formatINR(itemTotal)}
                         </div>
                         {item.quantity > 1 && (
-                          <div className="text-[10px] text-zinc-500 font-mono">
+                          <div className="text-[10px] text-olive-muted font-mono">
                             {formatINR(item.price)} each
                           </div>
                         )}
@@ -467,7 +467,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                             onUpdateItem(item.id, { price: p });
                           }
                         }}
-                        className="text-[11px] px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 font-medium border border-zinc-700 transition"
+                        className="text-[11px] px-2.5 py-1 rounded-lg bg-cream-dark hover:bg-tan text-olive-light font-medium border border-tan-dark transition"
                         title="Click to enter price"
                       >
                         + Enter Price
@@ -477,7 +477,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
 
                   <button
                     onClick={() => onDeleteItem(item.id)}
-                    className="p-1.5 rounded-lg text-zinc-500 hover:text-zinc-200 hover:bg-zinc-800 transition"
+                    className="p-1.5 rounded-lg text-olive-muted hover:text-terra hover:bg-terra-faint transition"
                     title="Delete item"
                   >
                     <Trash2 className="w-4 h-4" />

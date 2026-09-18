@@ -76,7 +76,7 @@ export default function HomePage() {
   const totalCost = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#09090b] text-zinc-100 font-sans">
+    <div className="min-h-screen flex flex-col bg-cream text-olive font-sans">
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -117,12 +117,12 @@ export default function HomePage() {
         )}
       </main>
 
-      <footer className="border-t border-zinc-900 py-6 px-4 text-center text-xs text-zinc-500 bg-[#09090b]">
+      <footer className="border-t border-tan py-6 px-4 text-center text-xs text-olive-muted bg-cream">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="text-zinc-400">
-            <span className="font-semibold text-zinc-200">SetupForge</span> — Minimalist Workspace & PC Architecture.
+          <div className="text-olive-light">
+            <span className="font-semibold text-olive">SetupForge</span> — Minimalist Workspace & PC Architecture.
           </div>
-          <div className="flex items-center gap-3 text-zinc-500">
+          <div className="flex items-center gap-3 text-olive-muted">
             <span>Next.js 14</span>
             <span>•</span>
             <span>Tailwind CSS</span>

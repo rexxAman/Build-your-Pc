@@ -116,21 +116,21 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
   return (
     <div className="space-y-6">
       {/* Header Banner with Link to Pre-builts Gallery */}
-      <div className="p-6 rounded-3xl bg-zinc-900 border border-zinc-800 shadow-xl">
+      <div className="p-6 rounded-3xl bg-white border border-tan shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="p-1.5 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700">
-                <SlidersHorizontal className="w-4 h-4 text-zinc-300" />
+              <span className="p-1.5 rounded-xl bg-cream-dark text-olive border border-tan-dark">
+                <SlidersHorizontal className="w-4 h-4 text-olive-light" />
               </span>
-              <h2 className="text-xl font-bold text-zinc-100">
+              <h2 className="text-xl font-bold text-olive">
                 Custom PC Builder Studio
               </h2>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700 font-mono">
+              <span className="text-[10px] px-2 py-0.5 rounded-full bg-cream-dark text-olive-light border border-tan-dark font-mono">
                 {buildName}
               </span>
             </div>
-            <p className="text-xs text-zinc-400 mt-1">
+            <p className="text-xs text-olive-light mt-1">
               Select each hardware part individually from Intel & AMD processors, RTX/Radeon graphics, memory, and cooling.
             </p>
           </div>
@@ -138,16 +138,16 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={onOpenPrebuiltsTab}
-              className="px-3.5 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-750 text-zinc-200 text-xs font-semibold border border-zinc-700 transition flex items-center gap-1.5 shadow-sm"
+              className="px-3.5 py-2 rounded-xl bg-cream-dark hover:bg-tan text-olive text-xs font-semibold border border-tan-dark transition flex items-center gap-1.5 shadow-sm"
             >
-              <LayoutGrid className="w-3.5 h-3.5 text-zinc-300" />
+              <LayoutGrid className="w-3.5 h-3.5 text-olive-light" />
               <span>Browse Pre-Built Gallery</span>
             </button>
 
             {chosenComponents.length > 0 && (
               <button
                 onClick={handleResetBuild}
-                className="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-750 text-zinc-400 hover:text-zinc-100 text-xs font-medium border border-zinc-700 transition flex items-center gap-1.5"
+                className="px-3 py-2 rounded-xl bg-cream-dark hover:bg-tan text-olive-light hover:text-olive text-xs font-medium border border-tan-dark transition flex items-center gap-1.5"
                 title="Reset build"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
@@ -161,37 +161,37 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
       {/* Build Summary Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Total Cost */}
-        <div className="p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
-          <span className="text-xs text-zinc-400 uppercase tracking-wider font-medium">Total PC Build Cost</span>
-          <div className="text-3xl font-semibold text-zinc-100 mt-1 font-mono">
+        <div className="p-5 rounded-2xl bg-white border border-tan">
+          <span className="text-xs text-olive-light uppercase tracking-wider font-medium">Total PC Build Cost</span>
+          <div className="text-3xl font-semibold text-olive mt-1 font-mono">
             {formatINR(totalCost)}
           </div>
-          <p className="text-xs text-zinc-500 mt-1">
+          <p className="text-xs text-olive-muted mt-1">
             {chosenComponents.length} of 8 components selected
             {chosenComponents.length > 0 && totalCost === 0 && ' • Enter live prices below'}
           </p>
         </div>
 
         {/* Wattage Estimate */}
-        <div className="p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
+        <div className="p-5 rounded-2xl bg-white border border-tan">
           <div className="flex items-center justify-between">
-            <span className="text-xs text-zinc-400 uppercase tracking-wider font-medium">Estimated Power</span>
+            <span className="text-xs text-olive-light uppercase tracking-wider font-medium">Estimated Power</span>
             {chosenComponents.length > 0 && selectedPsu && (
               isPowerSufficient ? (
-                <span className="flex items-center gap-1 text-[11px] text-zinc-300 font-medium">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-zinc-200" /> PSU Headroom Safe
+                <span className="flex items-center gap-1 text-[11px] text-olive-light font-medium">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-olive" /> PSU Headroom Safe
                 </span>
               ) : (
-                <span className="flex items-center gap-1 text-[11px] text-zinc-400 font-medium">
-                  <AlertTriangle className="w-3.5 h-3.5 text-zinc-300" /> Higher PSU Advised
+                <span className="flex items-center gap-1 text-[11px] text-olive-light font-medium">
+                  <AlertTriangle className="w-3.5 h-3.5 text-terra" /> Higher PSU Advised
                 </span>
               )
             )}
           </div>
-          <div className="text-3xl font-semibold text-zinc-100 mt-1 font-mono">
+          <div className="text-3xl font-semibold text-olive mt-1 font-mono">
             {estimatedWattage > 0 ? `~${estimatedWattage}W` : '0W'}
           </div>
-          <p className="text-xs text-zinc-500 mt-1">
+          <p className="text-xs text-olive-muted mt-1">
             {selectedPsu
               ? `PSU: ${psuWattage}W (Buffer: ${psuWattage - estimatedWattage}W)`
               : chosenComponents.length > 0
@@ -201,12 +201,12 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
         </div>
 
         {/* Sync into Setup Checklist CTA */}
-        <div className="p-5 rounded-2xl bg-zinc-900 border border-zinc-700/80 flex flex-col justify-between">
+        <div className="p-5 rounded-2xl bg-white border border-tan-dark flex flex-col justify-between">
           <div>
-            <span className="text-xs text-zinc-200 font-semibold uppercase tracking-wider">
+            <span className="text-xs text-olive font-semibold uppercase tracking-wider">
               Add to Setup Checklist
             </span>
-            <p className="text-xs text-zinc-400 mt-1">
+            <p className="text-xs text-olive-light mt-1">
               Add all chosen PC parts with prices and Indian dealer links into your checklist.
             </p>
           </div>
@@ -215,8 +215,8 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
             disabled={chosenComponents.length === 0}
             className={`mt-3 w-full py-2.5 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition active:scale-95 ${
               chosenComponents.length > 0
-                ? 'bg-zinc-100 hover:bg-white text-zinc-950 shadow-md shadow-white/5'
-                : 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+                ? 'bg-olive hover:bg-olive/90 text-white shadow-md'
+                : 'bg-cream-dark text-olive-muted cursor-not-allowed'
             }`}
           >
             <PlusCircle className="w-4 h-4 stroke-[2.2]" />
@@ -237,18 +237,18 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
               key={type}
               className={`p-4 rounded-2xl border transition flex flex-col md:flex-row md:items-center justify-between gap-4 ${
                 currentPart
-                  ? 'bg-zinc-900 border-zinc-700'
-                  : 'bg-zinc-900/60 border-zinc-800 hover:border-zinc-700'
+                  ? 'bg-white border-tan-dark'
+                  : 'bg-white border-tan hover:border-tan-dark'
               }`}
             >
               {/* Part Label & Icon */}
               <div className="flex items-center gap-3 md:w-1/4">
-                <div className={`p-2 rounded-xl shrink-0 ${currentPart ? 'bg-zinc-800 text-zinc-100' : 'bg-zinc-950 text-zinc-500'}`}>
+                <div className={`p-2 rounded-xl shrink-0 ${currentPart ? 'bg-cream-dark text-olive' : 'bg-cream-light text-olive-muted'}`}>
                   <meta.icon className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-semibold text-zinc-200 uppercase tracking-wide">{meta.label}</h4>
-                  <span className="text-[11px] text-zinc-500">
+                  <h4 className="text-xs font-semibold text-olive uppercase tracking-wide">{meta.label}</h4>
+                  <span className="text-[11px] text-olive-muted">
                     {availableOptions.length} models available
                   </span>
                 </div>
@@ -259,7 +259,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
                 <select
                   value={currentPart?.id || ''}
                   onChange={(e) => handleSelectComponent(type, e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-500 text-zinc-100"
+                  className="w-full px-3 py-2 text-xs rounded-xl bg-cream-light border border-tan focus:outline-none focus:border-olive text-olive"
                 >
                   <option value="">-- {meta.placeholder} --</option>
                   {availableOptions.map((opt) => (
@@ -270,14 +270,14 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
                 </select>
 
                 {currentPart && (
-                  <div className="flex flex-wrap items-center gap-2 text-[11px] text-zinc-400">
+                  <div className="flex flex-wrap items-center gap-2 text-[11px] text-olive-light">
                     {currentPart.specs && (
-                      <span className="text-zinc-300 bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700">
+                      <span className="text-olive-light bg-cream-dark px-2 py-0.5 rounded border border-tan-dark">
                         {currentPart.specs}
                       </span>
                     )}
                     {currentPart.recommendedFor && (
-                      <span className="text-zinc-400 italic">
+                      <span className="text-olive-light italic">
                         Why: {currentPart.recommendedFor}
                       </span>
                     )}
@@ -286,7 +286,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
               </div>
 
               {/* Price Input & Search Links */}
-              <div className="flex flex-wrap items-center justify-between md:justify-end gap-2.5 md:w-auto border-t md:border-t-0 pt-2.5 md:pt-0 border-zinc-800">
+              <div className="flex flex-wrap items-center justify-between md:justify-end gap-2.5 md:w-auto border-t md:border-t-0 pt-2.5 md:pt-0 border-tan">
                 {currentPart ? (
                   <>
                     <div className="flex items-center gap-1.5">
@@ -295,9 +295,9 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
                         target="_blank"
                         rel="noreferrer"
                         title="Google Price in India"
-                        className="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] flex items-center gap-1"
+                        className="p-1.5 rounded-lg bg-cream-dark hover:bg-tan text-olive-light border border-tan-dark text-[11px] flex items-center gap-1"
                       >
-                        <Search className="w-3 h-3 text-zinc-400" />
+                        <Search className="w-3 h-3 text-olive-light" />
                         <span className="hidden xl:inline">Google</span>
                       </a>
                       <a
@@ -305,7 +305,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
                         target="_blank"
                         rel="noreferrer"
                         title="Search MDComputers"
-                        className="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] flex items-center gap-1"
+                        className="p-1.5 rounded-lg bg-cream-dark hover:bg-tan text-olive-light border border-tan-dark text-[11px] flex items-center gap-1"
                       >
                         <span>MDComp</span>
                       </a>
@@ -314,14 +314,14 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
                         target="_blank"
                         rel="noreferrer"
                         title="Search Amazon.in"
-                        className="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] flex items-center gap-1"
+                        className="p-1.5 rounded-lg bg-cream-dark hover:bg-tan text-olive-light border border-tan-dark text-[11px] flex items-center gap-1"
                       >
                         <span>Amazon</span>
                       </a>
                     </div>
 
-                    <div className="flex items-center gap-1.5 bg-zinc-950 border border-zinc-700 focus-within:border-zinc-400 rounded-xl px-2.5 py-1.5">
-                      <span className="text-xs text-zinc-400 font-mono">₹</span>
+                    <div className="flex items-center gap-1.5 bg-cream-light border border-tan-dark focus-within:border-olive rounded-xl px-2.5 py-1.5">
+                      <span className="text-xs text-olive-light font-mono">₹</span>
                       <input
                         type="number"
                         min="0"
@@ -332,13 +332,13 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
                           const val = parseFloat(e.target.value) || 0;
                           handleUpdateComponentPrice(type, val);
                         }}
-                        className="w-24 bg-transparent text-xs text-zinc-100 font-mono focus:outline-none placeholder-zinc-600"
+                        className="w-24 bg-transparent text-xs text-olive font-mono focus:outline-none placeholder-olive-muted"
                         title="Enter current live market price in ₹"
                       />
                     </div>
                   </>
                 ) : (
-                  <div className="text-xs text-zinc-500 italic">Select model</div>
+                  <div className="text-xs text-olive-muted italic">Select model</div>
                 )}
               </div>
             </div>
