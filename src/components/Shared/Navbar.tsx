@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { LayoutList, Cpu, Cloud, RefreshCw, Sparkles, BookOpen, LayoutGrid } from 'lucide-react';
+import { LayoutList, Cpu, Compass, Cloud, RefreshCw, Sparkles, BookOpen, LayoutGrid } from 'lucide-react';
 import { formatINR } from '@/lib/searchUtils';
 
 interface NavbarProps {
@@ -54,11 +54,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Navigation Tabs (Checklist, Prebuilts, PC Studio) */}
+        {/* Navigation Tabs */}
         <nav className="flex items-center p-1 rounded-xl bg-zinc-900 border border-zinc-800 overflow-x-auto max-w-full">
           <button
             onClick={() => setActiveTab('checklist')}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
               activeTab === 'checklist'
                 ? 'bg-zinc-100 text-zinc-950 font-semibold shadow-sm'
                 : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-850'
@@ -77,19 +77,19 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => setActiveTab('prebuilts')}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
               activeTab === 'prebuilts'
                 ? 'bg-zinc-100 text-zinc-950 font-semibold shadow-sm'
                 : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-850'
             }`}
           >
             <LayoutGrid className="w-4 h-4" />
-            <span>Pre-Built Rigs (1L - 4L)</span>
+            <span>Pre-Built Rigs</span>
           </button>
 
           <button
             onClick={() => setActiveTab('pcbuilder')}
-            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
               activeTab === 'pcbuilder'
                 ? 'bg-zinc-100 text-zinc-950 font-semibold shadow-sm'
                 : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-850'

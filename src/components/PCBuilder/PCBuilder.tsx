@@ -128,7 +128,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({
               className="px-3.5 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-750 text-zinc-200 text-xs font-semibold border border-zinc-700 transition flex items-center gap-1.5 shadow-sm"
             >
               <LayoutGrid className="w-3.5 h-3.5 text-zinc-300" />
-              <span>Browse Pre-Built Gallery (1L - 4L)</span>
+              <span>Browse Pre-Built Gallery</span>
             </button>
 
             {chosenComponents.length > 0 && (
