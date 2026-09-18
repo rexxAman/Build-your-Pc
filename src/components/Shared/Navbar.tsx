@@ -1,18 +1,17 @@
 'use client';
 
 import React from 'react';
-import { LayoutList, Cpu, Compass, Cloud, CloudOff, RefreshCw, Sparkles, Download, Upload } from 'lucide-react';
+import { LayoutList, Cpu, Compass, Cloud, RefreshCw, Sparkles, BookOpen } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: 'checklist' | 'pcbuilder' | 'recommendations';
   setActiveTab: (tab: 'checklist' | 'pcbuilder' | 'recommendations') => void;
   itemsCount: number;
   totalCost: number;
-  onlineStorageConnected: boolean;
+  neonConnected: boolean;
   syncing: boolean;
   onSync: () => void;
-  onExport: () => void;
-  onImport: () => void;
+  onOpenGuide: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -20,11 +19,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   setActiveTab,
   itemsCount,
   totalCost,
-  onlineStorageConnected,
+  neonConnected,
   syncing,
   onSync,
-  onExport,
-  onImport,
+  onOpenGuide,
 }) => {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-800/80 bg-[#0c1222]/90 backdrop-blur-md px-4 lg:px-8 py-3.5 transition-all">
@@ -43,7 +41,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   SetupForge
                 </h1>
                 <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                  Vercel Ready
+                  Neon Database
                 </span>
               </div>
               <p className="text-xs text-slate-400">Workspace & Custom PC Cost Architecture</p>
@@ -69,9 +67,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <LayoutList className="w-4 h-4" />
             <span>Setup Checklist</span>
-            <span className="px-1.5 py-0.2 text-xs rounded-full bg-black/30 font-mono">
-              {itemsCount}
-            </span>
+            {itemsCount > 0 && (
+              <span className="px-1.5 py-0.2 text-xs rounded-full bg-black/30 font-mono">
+                {itemsCount}
+              </span>
+            )}
           </button>
 
           <button
@@ -95,50 +95,39 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             <Compass className="w-4 h-4" />
-            <span>Inspiration & Search</span>
+            <span>Recommendations & Deals</span>
           </button>
         </nav>
 
-        {/* Controls & Neon / Sync status */}
+        {/* Action Buttons: Step-by-Step Guide & Neon Cloud Sync */}
         <div className="hidden md:flex items-center gap-2.5">
-          {/* Neon Storage Status Indicator */}
+          {/* Step-by-step Setup Guide Trigger */}
+          <button
+            onClick={onOpenGuide}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white text-xs font-semibold shadow-md shadow-indigo-600/20 transition active:scale-95"
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>Setup Guide (Step 1 to Final)</span>
+          </button>
+
+          {/* Neon Database Cloud Sync */}
           <button
             onClick={onSync}
             disabled={syncing}
             title={
-              onlineStorageConnected
-                ? 'Connected to Neon cloud storage. Click to sync.'
-                : 'Using Local Storage. Add DATABASE_URL to your environment or Vercel to activate Neon.'
+              neonConnected
+                ? 'Connected to Neon Postgres. Click to sync.'
+                : 'Neon Cloud: set DATABASE_URL in your environment or Vercel settings.'
             }
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
-              onlineStorageConnected
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium border transition-colors ${
+              neonConnected
                 ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30 hover:bg-emerald-500/20'
                 : 'bg-slate-800/70 text-slate-400 border-slate-700/60 hover:text-slate-300'
             }`}
           >
-            {onlineStorageConnected ? (
-              <Cloud className="w-3.5 h-3.5 text-emerald-400" />
-            ) : (
-              <CloudOff className="w-3.5 h-3.5 text-slate-500" />
-            )}
-            <span>{onlineStorageConnected ? 'Neon Cloud' : 'Local Storage'}</span>
+            <Cloud className={`w-3.5 h-3.5 ${neonConnected ? 'text-emerald-400' : 'text-slate-400'}`} />
+            <span>Neon Database</span>
             <RefreshCw className={`w-3 h-3 ml-0.5 ${syncing ? 'animate-spin text-indigo-400' : ''}`} />
-          </button>
-
-          {/* Backup Actions */}
-          <button
-            onClick={onExport}
-            title="Export setup data as JSON"
-            className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition"
-          >
-            <Download className="w-4 h-4" />
-          </button>
-          <button
-            onClick={onImport}
-            title="Import setup data JSON"
-            className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition"
-          >
-            <Upload className="w-4 h-4" />
           </button>
         </div>
       </div>

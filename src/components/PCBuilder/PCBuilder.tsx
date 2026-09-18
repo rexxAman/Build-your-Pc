@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
-import { PCPartType, PCComponent, PCBuild } from '@/types/setup';
+import { PCPartType, PCComponent } from '@/types/setup';
 import { COMPONENT_CATALOG, PC_PRESETS } from '@/data/pcPresets';
-import { createGoogleSearchUrl, createPCPartPickerSearchUrl, createRedditSearchUrl } from '@/lib/searchUtils';
+import { createGoogleSearchUrl, createRedditSearchUrl } from '@/lib/searchUtils';
 import { 
   Cpu, 
   Layers, 
@@ -13,10 +13,10 @@ import {
   CheckCircle2, 
   AlertTriangle, 
   PlusCircle, 
-  ExternalLink, 
   Search,
   Sparkles,
-  BookOpen
+  BookOpen,
+  RotateCcw
 } from 'lucide-react';
 
 interface PCBuilderProps {
@@ -34,27 +34,34 @@ const PART_METADATA: Record<PCPartType, { label: string; icon: any; placeholder:
   case: { label: 'PC Case', icon: Layers, placeholder: 'Select Case' },
 };
 
+const EMPTY_BUILD: Record<PCPartType, PCComponent | null> = {
+  cpu: null,
+  gpu: null,
+  motherboard: null,
+  ram: null,
+  storage: null,
+  psu: null,
+  cooler: null,
+  case: null,
+};
+
 export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) => {
-  const [selectedParts, setSelectedParts] = useState<Record<PCPartType, PCComponent | null>>({
-    cpu: COMPONENT_CATALOG.cpu[0],
-    gpu: COMPONENT_CATALOG.gpu[1],
-    motherboard: COMPONENT_CATALOG.motherboard[0],
-    ram: COMPONENT_CATALOG.ram[0],
-    storage: COMPONENT_CATALOG.storage[0],
-    psu: COMPONENT_CATALOG.psu[0],
-    cooler: COMPONENT_CATALOG.cooler[0],
-    case: COMPONENT_CATALOG.case[0],
-  });
+  // Start clean with NO pre-filled parts
+  const [selectedParts, setSelectedParts] = useState<Record<PCPartType, PCComponent | null>>(EMPTY_BUILD);
+  const [buildName, setBuildName] = useState('My Custom PC Build');
 
-  const [buildName, setBuildName] = useState('Custom Productivity Rig');
-
-  // Load a preset
+  // Load a preset if the user explicitly wants guidance
   const handleLoadPreset = (presetId: string) => {
     const found = PC_PRESETS.find((p) => p.id === presetId);
     if (found) {
       setSelectedParts(found.parts);
       setBuildName(found.title);
     }
+  };
+
+  const handleResetBuild = () => {
+    setSelectedParts(EMPTY_BUILD);
+    setBuildName('My Custom PC Build');
   };
 
   // Select a component
@@ -70,7 +77,9 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
   // Calculations
   const chosenComponents = Object.values(selectedParts).filter(Boolean) as PCComponent[];
   const totalCost = chosenComponents.reduce((sum, item) => sum + item.price, 0);
-  const estimatedWattage = chosenComponents.reduce((sum, item) => sum + (item.wattage || 0), 0) + 50; // +50W buffer for fans, chipset
+  const estimatedWattage = chosenComponents.length > 0 
+    ? chosenComponents.reduce((sum, item) => sum + (item.wattage || 0), 0) + 50 
+    : 0;
 
   // Determine PSU capacity if selected
   const selectedPsu = selectedParts.psu;
@@ -82,10 +91,13 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
       : 750
     : 0;
 
-  const isPowerSufficient = !selectedPsu || psuWattage >= estimatedWattage + 100;
+  const isPowerSufficient = !selectedPsu || (psuWattage >= estimatedWattage + 100);
 
   const handleSyncToChecklist = () => {
-    if (chosenComponents.length === 0) return;
+    if (chosenComponents.length === 0) {
+      alert('Please select at least one component before adding to your checklist.');
+      return;
+    }
     onAddBuildToChecklist(chosenComponents, buildName);
   };
 
@@ -100,27 +112,37 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
                 <Cpu className="w-5 h-5" />
               </span>
               <h2 className="text-xl font-bold text-white">Custom PC Builder Studio</h2>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                Realtime Compatibility
+              <span className="text-xs px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                Build From Scratch
               </span>
             </div>
             <p className="text-xs text-slate-400 mt-1">
-              Select parts or pick a curated preset. Calculate wattage, check pricing, and sync directly to your workspace setup checklist.
+              Select parts step-by-step or load an optional preset template. Calculates power wattage and total price automatically.
             </p>
           </div>
 
-          {/* Presets Button Group */}
+          {/* Presets & Reset */}
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-xs text-slate-400 font-medium">Load Preset:</span>
+            <span className="text-xs text-slate-400 font-medium">Optional Presets:</span>
             {PC_PRESETS.map((preset) => (
               <button
                 key={preset.id}
                 onClick={() => handleLoadPreset(preset.id)}
                 className="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700/80 text-xs font-medium transition hover:border-indigo-500/50"
               >
-                {preset.title.split(' ')[0]} ({preset.badge})
+                {preset.title.split(' ')[0]}
               </button>
             ))}
+            {chosenComponents.length > 0 && (
+              <button
+                onClick={handleResetBuild}
+                className="p-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white transition text-xs flex items-center gap-1"
+                title="Reset build to clean slate"
+              >
+                <RotateCcw className="w-3.5 h-3.5" />
+                <span>Clear</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -133,28 +155,36 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
           <div className="text-3xl font-extrabold text-white mt-1 font-mono">
             ${totalCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
           </div>
-          <p className="text-xs text-slate-400 mt-1">{chosenComponents.length} of 8 components picked</p>
+          <p className="text-xs text-slate-400 mt-1">
+            {chosenComponents.length} of 8 components selected
+          </p>
         </div>
 
         {/* Wattage Estimate */}
         <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800">
           <div className="flex items-center justify-between">
             <span className="text-xs text-slate-400 font-medium uppercase tracking-wider">Estimated Draw</span>
-            {isPowerSufficient ? (
-              <span className="flex items-center gap-1 text-[11px] text-emerald-400 font-medium">
-                <CheckCircle2 className="w-3.5 h-3.5" /> PSU Adequate
-              </span>
-            ) : (
-              <span className="flex items-center gap-1 text-[11px] text-amber-400 font-medium">
-                <AlertTriangle className="w-3.5 h-3.5" /> Recommend Higher PSU
-              </span>
+            {chosenComponents.length > 0 && selectedPsu && (
+              isPowerSufficient ? (
+                <span className="flex items-center gap-1 text-[11px] text-emerald-400 font-medium">
+                  <CheckCircle2 className="w-3.5 h-3.5" /> PSU Adequate
+                </span>
+              ) : (
+                <span className="flex items-center gap-1 text-[11px] text-amber-400 font-medium">
+                  <AlertTriangle className="w-3.5 h-3.5" /> Higher PSU Suggested
+                </span>
+              )
             )}
           </div>
           <div className="text-3xl font-extrabold text-indigo-400 mt-1 font-mono">
-            ~{estimatedWattage}W
+            {estimatedWattage > 0 ? `~${estimatedWattage}W` : '0W'}
           </div>
           <p className="text-xs text-slate-400 mt-1">
-            {selectedPsu ? `Selected PSU: ${psuWattage}W (Headroom: ${psuWattage - estimatedWattage}W)` : 'No PSU chosen'}
+            {selectedPsu
+              ? `Selected PSU: ${psuWattage}W (Headroom: ${psuWattage - estimatedWattage}W)`
+              : chosenComponents.length > 0
+              ? 'Select a PSU below to check power headroom'
+              : 'Add components to compute wattage'}
           </p>
         </div>
 
@@ -162,18 +192,23 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
         <div className="p-4 rounded-2xl bg-gradient-to-br from-indigo-950/40 to-slate-900 border border-indigo-500/30 flex flex-col justify-between">
           <div>
             <span className="text-xs text-indigo-300 font-semibold uppercase tracking-wider flex items-center gap-1.5">
-              <Sparkles className="w-3.5 h-3.5" /> Add to Workspace
+              <Sparkles className="w-3.5 h-3.5" /> Add to Workspace Checklist
             </span>
             <p className="text-xs text-slate-400 mt-1">
-              Add this entire PC build into your primary setup checklist with all prices & links.
+              Add your chosen PC parts with prices and deal links into your main budget tracker.
             </p>
           </div>
           <button
             onClick={handleSyncToChecklist}
-            className="mt-3 w-full py-2 px-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-1.5 transition active:scale-95"
+            disabled={chosenComponents.length === 0}
+            className={`mt-3 w-full py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition active:scale-95 ${
+              chosenComponents.length > 0
+                ? 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30'
+                : 'bg-slate-800 text-slate-500 cursor-not-allowed'
+            }`}
           >
             <PlusCircle className="w-4 h-4" />
-            <span>Add PC Build into Checklist</span>
+            <span>Add Selected PC Parts to Checklist</span>
           </button>
         </div>
       </div>
@@ -188,17 +223,21 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
           return (
             <div
               key={type}
-              className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 hover:border-slate-700/80 transition flex flex-col md:flex-row md:items-center justify-between gap-4"
+              className={`p-4 rounded-2xl border transition flex flex-col md:flex-row md:items-center justify-between gap-4 ${
+                currentPart
+                  ? 'bg-slate-900/80 border-indigo-500/30'
+                  : 'bg-slate-900/40 border-slate-800/80 hover:border-slate-700'
+              }`}
             >
               {/* Part Label & Icon */}
               <div className="flex items-center gap-3 md:w-1/4">
-                <div className="p-2 rounded-xl bg-slate-800 text-indigo-400 shrink-0">
+                <div className={`p-2 rounded-xl shrink-0 ${currentPart ? 'bg-indigo-600/20 text-indigo-400' : 'bg-slate-800 text-slate-500'}`}>
                   <meta.icon className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-semibold text-slate-300 uppercase tracking-wide">{meta.label}</h4>
+                  <h4 className="text-xs font-semibold text-slate-200 uppercase tracking-wide">{meta.label}</h4>
                   <span className="text-[11px] text-slate-500">
-                    {availableOptions.length} recommendations available
+                    {currentPart ? 'Selected' : 'Not chosen yet'}
                   </span>
                 </div>
               </div>
@@ -227,7 +266,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
                     )}
                     {currentPart.recommendedFor && (
                       <span className="text-indigo-300/90 italic">
-                        Why: {currentPart.recommendedFor}
+                        Highlight: {currentPart.recommendedFor}
                       </span>
                     )}
                   </div>
@@ -247,7 +286,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
                         className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] flex items-center gap-1"
                       >
                         <Search className="w-3 h-3 text-slate-400" />
-                        <span className="hidden xl:inline">Google</span>
+                        <span className="hidden xl:inline">Deals</span>
                       </a>
                       <a
                         href={createRedditSearchUrl(currentPart.name)}
@@ -265,7 +304,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
                     </div>
                   </>
                 ) : (
-                  <div className="text-xs text-slate-500 italic">None selected</div>
+                  <div className="text-xs text-slate-500 italic">Select to compare</div>
                 )}
               </div>
             </div>

@@ -1,117 +1,47 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { SetupItem, Category, ItemPriority, PCComponent, SetupPreset } from '@/types/setup';
+import { SetupItem, PCComponent, SetupPreset } from '@/types/setup';
 import { Navbar } from '@/components/Shared/Navbar';
 import { BudgetSummaryCard } from '@/components/Checklist/BudgetSummaryCard';
 import { ChecklistManager } from '@/components/Checklist/ChecklistManager';
 import { PCBuilder } from '@/components/PCBuilder/PCBuilder';
 import { RecommendationHub } from '@/components/Recommendations/RecommendationHub';
-
-const STORAGE_KEY = 'setupforge_items_v1';
-const SETUP_ID_KEY = 'setupforge_current_id';
+import { SetupWizard } from '@/components/SetupWizard/SetupWizard';
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState<'checklist' | 'pcbuilder' | 'recommendations'>('checklist');
+  // Starts completely empty — user creates items themselves or uses the step guide
   const [items, setItems] = useState<SetupItem[]>([]);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [onlineStorageConnected, setOnlineStorageConnected] = useState(false);
+  const [neonConnected, setNeonConnected] = useState(false);
   const [syncing, setSyncing] = useState(false);
-  const [setupId, setSetupId] = useState<string>('default-setup');
+  const [setupId, setSetupId] = useState<string>('primary-setup');
+  const [showGuide, setShowGuide] = useState(false);
 
-  // Initial load
+  // Check Neon Postgres connection on mount
   useEffect(() => {
-    // Generate or fetch ID
-    let currentId = localStorage.getItem(SETUP_ID_KEY);
-    if (!currentId) {
-      currentId = 'setup_' + Math.random().toString(36).substring(2, 9);
-      localStorage.setItem(SETUP_ID_KEY, currentId);
-    }
-    setSetupId(currentId);
-
-    // Try loading local items
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      try {
-        setItems(JSON.parse(saved));
-      } catch (e) {
-        console.error('Failed to parse local storage items', e);
-      }
-    } else {
-      // Seed default welcoming item if empty
-      const initialItems: SetupItem[] = [
-        {
-          id: 'item-demo-1',
-          name: 'Motorized Dual-Motor Standing Desk (60x30")',
-          category: 'desk',
-          url: 'https://www.google.com/search?q=dual+motor+standing+desk+60x30',
-          price: 549,
-          quantity: 1,
-          priority: 'must-have',
-          status: 'wishlist',
-          notes: 'Bamboo desktop, solid T-frame, memory presets',
-          createdAt: new Date().toISOString(),
-        },
-        {
-          id: 'item-demo-2',
-          name: 'Dell UltraSharp 34" Curved USB-C Hub Monitor (U3423WE)',
-          category: 'monitor',
-          url: 'https://www.google.com/search?q=Dell+UltraSharp+34+Curved+USB-C+Hub+Monitor',
-          price: 799,
-          quantity: 1,
-          priority: 'must-have',
-          status: 'wishlist',
-          notes: 'Built-in KVM & 90W PD charging for laptop',
-          createdAt: new Date().toISOString(),
-        },
-        {
-          id: 'item-demo-3',
-          name: 'Logitech MX Master 3S Ergonomic Mouse',
-          category: 'peripherals',
-          url: 'https://www.amazon.com/s?k=logitech+mx+master+3s',
-          price: 99,
-          quantity: 1,
-          priority: 'recommended',
-          status: 'received',
-          notes: 'Quiet clicks, MagSpeed scroll wheel',
-          createdAt: new Date().toISOString(),
-        }
-      ];
-      setItems(initialItems);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(initialItems));
-    }
-
-    // Check Neon online availability
-    checkNeonStatus(currentId);
-    setIsLoaded(true);
+    checkNeonStatus('primary-setup');
   }, []);
 
-  // Save to local storage whenever items change
-  useEffect(() => {
-    if (!isLoaded) return;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-  }, [items, isLoaded]);
-
-  // Neon check function
+  // Fetch Neon database status & existing data if saved
   const checkNeonStatus = async (idToQuery: string) => {
     try {
       const res = await fetch(`/api/setups?id=${idToQuery}`);
       const data = await res.json();
       if (data.onlineStorageAvailable) {
-        setOnlineStorageConnected(true);
-        if (data.setup?.data?.items && data.setup.data.items.length > 0) {
-          // If remote exists and local is default or user wants to sync
-          // we can retain or load
+        setNeonConnected(true);
+        if (data.setup?.data?.items && Array.isArray(data.setup.data.items)) {
+          setItems(data.setup.data.items);
         }
       } else {
-        setOnlineStorageConnected(false);
+        setNeonConnected(false);
       }
     } catch (e) {
-      setOnlineStorageConnected(false);
+      setNeonConnected(false);
     }
   };
 
-  // Sync to Neon
+  // Sync / Save to Neon database
   const handleSyncNeon = async () => {
     setSyncing(true);
     try {
@@ -126,58 +56,20 @@ export default function HomePage() {
       });
       const result = await res.json();
       if (res.ok) {
-        setOnlineStorageConnected(true);
-        alert('Setup saved to Neon Cloud database successfully!');
+        setNeonConnected(true);
+        alert('Setup saved to Neon Database successfully!');
       } else {
         if (!result.onlineStorageAvailable) {
-          alert('Neon is not configured yet. You can set DATABASE_URL in your Vercel project environment variables to enable cloud syncing.');
+          alert('Neon is not configured yet. Set DATABASE_URL in your Vercel Project Settings or .env file to enable Neon Database.');
         } else {
-          alert(`Sync note: ${result.message || result.error}`);
+          alert(`Neon sync status: ${result.message || result.error}`);
         }
       }
     } catch (error) {
-      alert('Local storage is active. To connect Neon cloud database, specify DATABASE_URL in your environment or Vercel settings.');
+      alert('Unable to connect to Neon database. Please make sure DATABASE_URL is set in your Vercel project environment variables.');
     } finally {
       setSyncing(false);
     }
-  };
-
-  // Export JSON
-  const handleExport = () => {
-    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(items, null, 2));
-    const downloadAnchor = document.createElement('a');
-    downloadAnchor.setAttribute('href', dataStr);
-    downloadAnchor.setAttribute('download', `setupforge-backup-${new Date().toISOString().slice(0, 10)}.json`);
-    document.body.appendChild(downloadAnchor);
-    downloadAnchor.click();
-    downloadAnchor.remove();
-  };
-
-  // Import JSON
-  const handleImport = () => {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'application/json';
-    input.onchange = (e: any) => {
-      const file = e.target?.files?.[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        try {
-          const imported = JSON.parse(event.target?.result as string);
-          if (Array.isArray(imported)) {
-            setItems(imported);
-            alert(`Imported ${imported.length} items successfully!`);
-          } else {
-            alert('Invalid file format: expected an array of items.');
-          }
-        } catch (err) {
-          alert('Error parsing JSON file.');
-        }
-      };
-      reader.readAsText(file);
-    };
-    input.click();
   };
 
   // Checklist Actions
@@ -204,13 +96,26 @@ export default function HomePage() {
     setItems([]);
   };
 
+  // Step-by-Step Wizard Finish action
+  const handleFinishWizard = (wizardItems: Omit<SetupItem, 'id' | 'createdAt'>[]) => {
+    const newItems: SetupItem[] = wizardItems.map((wi) => ({
+      ...wi,
+      id: 'guide-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
+      createdAt: new Date().toISOString(),
+    }));
+
+    setItems((prev) => [...prev, ...newItems]);
+    setShowGuide(false);
+    setActiveTab('checklist');
+  };
+
   // PC Builder Sync action
   const handleAddBuildToChecklist = (parts: PCComponent[], buildName: string) => {
     const newItems: SetupItem[] = parts.map((part) => ({
       id: 'pc-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
       name: `${part.name} (${part.type.toUpperCase()})`,
       category: 'pc',
-      url: part.url || `https://www.google.com/search?q=${encodeURIComponent(part.name + ' buy')}`,
+      url: part.url || `https://www.google.com/search?q=${encodeURIComponent(part.name + ' buy deals')}`,
       price: part.price,
       quantity: 1,
       priority: 'must-have',
@@ -251,12 +156,19 @@ export default function HomePage() {
         setActiveTab={setActiveTab}
         itemsCount={items.length}
         totalCost={totalCost}
-        onlineStorageConnected={onlineStorageConnected}
+        neonConnected={neonConnected}
         syncing={syncing}
         onSync={handleSyncNeon}
-        onExport={handleExport}
-        onImport={handleImport}
+        onOpenGuide={() => setShowGuide(true)}
       />
+
+      {/* Step-by-Step Setup Guide Modal */}
+      {showGuide && (
+        <SetupWizard
+          onFinishWizard={handleFinishWizard}
+          onClose={() => setShowGuide(false)}
+        />
+      )}
 
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6">
         {activeTab === 'checklist' && (
@@ -268,6 +180,7 @@ export default function HomePage() {
               onUpdateItem={handleUpdateItem}
               onDeleteItem={handleDeleteItem}
               onClearAll={handleClearAll}
+              onOpenGuide={() => setShowGuide(true)}
             />
           </div>
         )}
@@ -305,7 +218,7 @@ export default function HomePage() {
             <span>•</span>
             <span>Tailwind CSS</span>
             <span>•</span>
-            <span>Neon Postgres Ready</span>
+            <span>Neon Database</span>
             <span>•</span>
             <span>Vercel Deployable</span>
           </div>

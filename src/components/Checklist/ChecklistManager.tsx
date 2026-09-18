@@ -8,13 +8,10 @@ import {
   Trash2, 
   ExternalLink, 
   Search, 
-  SlidersHorizontal, 
   Check, 
   Sparkles, 
   ShoppingBag,
-  Filter,
-  DollarSign,
-  ArrowUpDown
+  BookOpen
 } from 'lucide-react';
 
 interface ChecklistManagerProps {
@@ -23,6 +20,7 @@ interface ChecklistManagerProps {
   onUpdateItem: (id: string, updates: Partial<SetupItem>) => void;
   onDeleteItem: (id: string) => void;
   onClearAll: () => void;
+  onOpenGuide: () => void;
 }
 
 export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
@@ -31,6 +29,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
   onUpdateItem,
   onDeleteItem,
   onClearAll,
+  onOpenGuide,
 }) => {
   // New item form state
   const [name, setName] = useState('');
@@ -101,7 +100,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
           <h2 className="text-lg font-bold text-white flex items-center gap-2">
             <span>Setup Checklist & Cost Tracker</span>
             <span className="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-normal">
-              {filteredItems.length} displayed
+              {filteredItems.length} items
             </span>
           </h2>
           <p className="text-xs text-slate-400">Add productive gear, paste links, enter prices, and track what you've ordered.</p>
@@ -109,12 +108,21 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
 
         <div className="flex items-center gap-2">
           <button
+            onClick={onOpenGuide}
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-indigo-300 text-xs font-semibold border border-indigo-500/30 transition active:scale-95"
+          >
+            <BookOpen className="w-3.5 h-3.5" />
+            <span>Open Step Guide</span>
+          </button>
+
+          <button
             onClick={() => setIsAdding(!isAdding)}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/20 transition active:scale-95"
+            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-lg shadow-indigo-600/20 transition active:scale-95"
           >
             <Plus className="w-4 h-4" />
-            <span>{isAdding ? 'Close Form' : 'Add Setup Item'}</span>
+            <span>{isAdding ? 'Close Form' : 'Add Custom Item'}</span>
           </button>
+
           {items.length > 0 && (
             <button
               onClick={() => {
@@ -150,7 +158,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Uplift V2 Standing Desk 60x30 or Dell U3423WE"
+                placeholder="e.g. Standing Desk 60x30, 4K Monitor, or MX Master 3S"
                 className="w-full px-3 py-2 text-sm rounded-xl bg-slate-950 border border-slate-700 focus:outline-none focus:border-indigo-500 text-white placeholder-slate-500"
               />
             </div>
@@ -261,7 +269,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search items by title or notes..."
+            placeholder="Search your items by name or notes..."
             className="w-full pl-10 pr-4 py-1.5 text-xs rounded-xl bg-slate-950/80 border border-slate-800 focus:outline-none focus:border-indigo-500 text-slate-200 placeholder-slate-500"
           />
         </div>
@@ -310,22 +318,28 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
       {/* Items List */}
       <div className="space-y-2.5">
         {filteredItems.length === 0 ? (
-          <div className="text-center py-16 px-4 rounded-2xl border border-dashed border-slate-800 bg-slate-900/20">
+          <div className="text-center py-16 px-4 rounded-3xl border border-dashed border-slate-800 bg-slate-900/20">
             <ShoppingBag className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-            <h4 className="text-base font-medium text-slate-300">No setup gear found</h4>
-            <p className="text-xs text-slate-500 max-w-md mx-auto mt-1 mb-4">
-              {items.length === 0
-                ? "Start planning your productive desk setup. Add custom items with prices and links, or load our curated presets from the Inspiration tab."
-                : "No items match your filter criteria. Try adjusting your search query."}
+            <h4 className="text-base font-medium text-slate-300">Your setup checklist is empty</h4>
+            <p className="text-xs text-slate-500 max-w-md mx-auto mt-1 mb-5">
+              Add your items by yourself, or launch the step-by-step setup guide to pick desk, chair, monitors, audio, and accessories.
             </p>
-            {items.length === 0 && (
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <button
+                onClick={onOpenGuide}
+                className="px-4 py-2 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white text-xs font-semibold shadow-lg shadow-indigo-600/30 flex items-center gap-1.5"
+              >
+                <BookOpen className="w-3.5 h-3.5" />
+                <span>Launch Step-by-Step Guide</span>
+              </button>
               <button
                 onClick={() => setIsAdding(true)}
-                className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow-lg shadow-indigo-600/20"
+                className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 flex items-center gap-1.5"
               >
-                Add Your First Gear Item
+                <Plus className="w-3.5 h-3.5" />
+                <span>Add Item Manually</span>
               </button>
-            )}
+            </div>
           </div>
         ) : (
           filteredItems.map((item) => {
@@ -427,7 +441,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                         href={item.url}
                         target="_blank"
                         rel="noreferrer"
-                        title="Open provided product link"
+                        title="Open product link"
                         className="flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-indigo-300 border border-slate-700"
                       >
                         <span>Link</span>
@@ -436,10 +450,10 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                     ) : null}
 
                     <a
-                      href={createGoogleSearchUrl(`${item.name} best price reviews`)}
+                      href={createGoogleSearchUrl(`${item.name} best price deals`)}
                       target="_blank"
                       rel="noreferrer"
-                      title="Search Google for lowest prices & reviews"
+                      title="Search Google for lowest prices"
                       className="flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg bg-slate-800/60 hover:bg-slate-700 text-slate-300 border border-slate-800"
                     >
                       <Search className="w-3 h-3 text-slate-400" />
