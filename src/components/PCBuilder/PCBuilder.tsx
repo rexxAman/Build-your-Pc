@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { PCPartType, PCComponent } from '@/types/setup';
 import { COMPONENT_CATALOG, PC_PRESETS } from '@/data/pcPresets';
-import { createGoogleSearchUrl, createRedditSearchUrl } from '@/lib/searchUtils';
+import { createGoogleSearchUrl, createRedditSearchUrl, createMdComputersSearchUrl, formatINR } from '@/lib/searchUtils';
 import { 
   Cpu, 
   Layers, 
@@ -30,7 +30,7 @@ const PART_METADATA: Record<PCPartType, { label: string; icon: any; placeholder:
   storage: { label: 'Primary Storage (SSD)', icon: HardDrive, placeholder: 'Select NVMe SSD' },
   psu: { label: 'Power Supply (PSU)', icon: Zap, placeholder: 'Select Power Supply' },
   cooler: { label: 'CPU Cooler', icon: Activity, placeholder: 'Select Cooler' },
-  case: { label: 'PC Case', icon: Layers, placeholder: 'Select Case' },
+  case: { label: 'PC Cabinet / Case', icon: Layers, placeholder: 'Select Cabinet' },
 };
 
 const EMPTY_BUILD: Record<PCPartType, PCComponent | null> = {
@@ -78,11 +78,11 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
 
   const selectedPsu = selectedParts.psu;
   const psuWattage = selectedPsu
-    ? selectedPsu.name.includes('1000W')
-      ? 1000
-      : selectedPsu.name.includes('850W')
+    ? selectedPsu.name.includes('850W')
       ? 850
-      : 750
+      : selectedPsu.name.includes('750W')
+      ? 750
+      : 650
     : 0;
 
   const isPowerSufficient = !selectedPsu || (psuWattage >= estimatedWattage + 100);
@@ -105,13 +105,13 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
               <span className="p-1.5 rounded-xl bg-zinc-800 text-zinc-200 border border-zinc-700">
                 <Cpu className="w-5 h-5" />
               </span>
-              <h2 className="text-lg font-semibold text-zinc-100">Custom PC Builder Studio</h2>
+              <h2 className="text-lg font-semibold text-zinc-100">Custom PC Builder Studio (India)</h2>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700 font-mono">
-                Clean Slate
+                Indian Standard (₹)
               </span>
             </div>
             <p className="text-xs text-zinc-400 mt-1">
-              Select components from scratch or test a curated preset template. Calculates power wattage and cost automatically.
+              Select components with Indian street pricing (Amazon.in / MDComputers). Calculates power wattage and total cost in ₹ INR.
             </p>
           </div>
 
@@ -124,7 +124,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
                 onClick={() => handleLoadPreset(preset.id)}
                 className="px-3 py-1.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-zinc-200 border border-zinc-800 text-xs font-medium transition hover:border-zinc-700"
               >
-                {preset.title.split(' ')[0]}
+                {preset.title.split(' ')[0]} ({formatINR(preset.targetBudget)})
               </button>
             ))}
             {chosenComponents.length > 0 && (
@@ -147,7 +147,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
         <div className="p-5 rounded-2xl bg-zinc-900 border border-zinc-800">
           <span className="text-xs text-zinc-400 uppercase tracking-wider font-medium">Total PC Build Cost</span>
           <div className="text-3xl font-semibold text-zinc-100 mt-1 font-mono">
-            ${totalCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            {formatINR(totalCost)}
           </div>
           <p className="text-xs text-zinc-500 mt-1">
             {chosenComponents.length} of 8 components selected
@@ -189,7 +189,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
               Add to Setup Checklist
             </span>
             <p className="text-xs text-zinc-400 mt-1">
-              Add all chosen PC parts with prices and search links directly into your checklist.
+              Add all chosen PC parts with prices and Indian dealer links into your checklist.
             </p>
           </div>
           <button
@@ -246,7 +246,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
                   <option value="">-- Choose {meta.label} --</option>
                   {availableOptions.map((opt) => (
                     <option key={opt.id} value={opt.id}>
-                      {opt.name} (${opt.price}) {opt.wattage ? `[${opt.wattage}W]` : ''}
+                      {opt.name} ({formatINR(opt.price)}) {opt.wattage ? `[${opt.wattage}W]` : ''}
                     </option>
                   ))}
                 </select>
@@ -273,20 +273,29 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
                   <>
                     <div className="flex items-center gap-1.5">
                       <a
-                        href={createGoogleSearchUrl(`${currentPart.name} best price`)}
+                        href={createGoogleSearchUrl(currentPart.name)}
                         target="_blank"
                         rel="noreferrer"
-                        title="Google Deals"
+                        title="Google Price in India"
                         className="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] flex items-center gap-1"
                       >
                         <Search className="w-3 h-3 text-zinc-400" />
-                        <span className="hidden xl:inline">Deals</span>
+                        <span className="hidden xl:inline">Google</span>
+                      </a>
+                      <a
+                        href={createMdComputersSearchUrl(currentPart.name)}
+                        target="_blank"
+                        rel="noreferrer"
+                        title="Search MDComputers"
+                        className="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] flex items-center gap-1"
+                      >
+                        <span>MDComp</span>
                       </a>
                       <a
                         href={createRedditSearchUrl(currentPart.name)}
                         target="_blank"
                         rel="noreferrer"
-                        title="Search Reddit reviews"
+                        title="Search r/IndianGaming"
                         className="p-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-300 text-[11px] flex items-center gap-1"
                       >
                         <BookOpen className="w-3 h-3 text-zinc-400" />
@@ -294,7 +303,7 @@ export const PCBuilder: React.FC<PCBuilderProps> = ({ onAddBuildToChecklist }) =
                       </a>
                     </div>
                     <div className="text-right font-mono font-semibold text-sm text-zinc-100">
-                      ${currentPart.price.toFixed(2)}
+                      {formatINR(currentPart.price)}
                     </div>
                   </>
                 ) : (

@@ -1,17 +1,25 @@
+export function formatINR(amount: number): string {
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
 export function createGoogleSearchUrl(query: string): string {
-  return `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+  return `https://www.google.co.in/search?q=${encodeURIComponent(query + ' price in India buy online')}`;
 }
 
 export function createAmazonSearchUrl(query: string): string {
-  return `https://www.amazon.com/s?k=${encodeURIComponent(query)}`;
+  return `https://www.amazon.in/s?k=${encodeURIComponent(query)}`;
 }
 
 export function createRedditSearchUrl(query: string): string {
-  return `https://www.google.com/search?q=${encodeURIComponent(query + ' site:reddit.com/r/buildapc OR site:reddit.com/r/battlestations')}`;
+  return `https://www.google.co.in/search?q=${encodeURIComponent(query + ' site:reddit.com/r/IndianGaming OR site:reddit.com/r/developersIndia')}`;
 }
 
-export function createPCPartPickerSearchUrl(query: string): string {
-  return `https://pcpartpicker.com/search/?q=${encodeURIComponent(query)}`;
+export function createMdComputersSearchUrl(query: string): string {
+  return `https://mdcomputers.in/index.php?category_id=0&search=${encodeURIComponent(query)}&submit_search=&route=product%2Fsearch`;
 }
 
 export const CATEGORY_LABELS: Record<string, { label: string; iconName: string; color: string }> = {

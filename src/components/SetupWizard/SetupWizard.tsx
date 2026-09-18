@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Category, ItemPriority, SetupItem } from '@/types/setup';
-import { createGoogleSearchUrl } from '@/lib/searchUtils';
+import { createGoogleSearchUrl, formatINR } from '@/lib/searchUtils';
 import { 
   Sparkles, 
   ArrowRight, 
@@ -39,26 +39,26 @@ const WIZARD_STEPS: StepQuestion[] = [
     stepNumber: 1,
     category: 'desk',
     title: 'Step 1: Choose Your Desk Foundation',
-    subtitle: 'The cornerstone of your workspace. Consider height adjustability and tabletop size.',
-    advice: 'Dual-motor desks support heavier multi-monitor arms and stay stable at standing heights.',
-    searchExample: 'best electric dual motor standing desk 60x30 walnut bamboo',
+    subtitle: 'The cornerstone of your workspace. Consider height adjustability and tabletop size in Indian homes.',
+    advice: 'Dual-motor desks (like Jin Office or FlowDesk) handle heavier dual monitor arms and stay steady.',
+    searchExample: 'electric standing desk dual motor 5x2.5 ft buy online india',
     options: [
       {
-        name: 'Electric Standing Desk (Dual Motor, 60x30")',
-        description: 'Sit-to-stand motorized adjustment with memory presets and high weight capacity.',
-        estimatedPrice: 550,
+        name: 'Electric Standing Desk (Dual Motor, 5x2.5 ft / 60x30")',
+        description: 'Sit-to-stand motorized adjustment with digital memory presets and solid engineered wood top.',
+        estimatedPrice: 24999,
         priority: 'must-have',
       },
       {
-        name: 'Compact Electric Standing Desk (48x24")',
-        description: 'Ideal for smaller apartments or cozy bedrooms without sacrificing ergonomics.',
-        estimatedPrice: 280,
+        name: 'Compact Motorized Standing Desk (4x2 ft)',
+        description: 'Ideal for compact Indian bedrooms and home offices without sacrificing ergonomics.',
+        estimatedPrice: 15499,
         priority: 'must-have',
       },
       {
-        name: 'Fixed Sturdy Hardwood Minimalist Desk (55" or 60")',
-        description: 'Solid surface, zero motor electronics, clean minimal look on heavy steel legs.',
-        estimatedPrice: 220,
+        name: 'Fixed Sturdy Solid Wood / Sheesham Desk (5x2.5 ft)',
+        description: 'Heavy solid wooden surface, zero motor electronics, clean minimal look with steel legs.',
+        estimatedPrice: 8999,
         priority: 'must-have',
       },
     ],
@@ -67,26 +67,26 @@ const WIZARD_STEPS: StepQuestion[] = [
     stepNumber: 2,
     category: 'chair',
     title: 'Step 2: Ergonomic Seating',
-    subtitle: 'Protect your posture, back, and focus during long creative or coding sessions.',
-    advice: 'Look for breathable mesh backrests and 3D/4D adjustable armrests to relieve shoulder strain.',
-    searchExample: 'ergonomic mesh office chair dynamic lumbar support',
+    subtitle: 'Protect your back, posture, and focus during long Indian summer days and coding marathons.',
+    advice: 'Full breathable mesh is essential for Indian climate to keep you cool and sweat-free.',
+    searchExample: 'featherlite helix or green soul monster ergonomic chair india',
     options: [
       {
-        name: 'Ergonomic Breathable Mesh Chair (Dynamic Lumbar)',
+        name: 'Ergonomic Breathable Mesh Chair (Green Soul / Featherlite Helix)',
         description: 'Full-mesh back and seat with self-adjusting lumbar support and 3D armrests.',
-        estimatedPrice: 380,
+        estimatedPrice: 16999,
         priority: 'must-have',
       },
       {
-        name: 'High-Value Ergonomic Office Chair',
-        description: 'Dependable lower back cushion, tilt recline, and adjustable headrest under $200.',
-        estimatedPrice: 180,
+        name: 'High-Value Ergonomic Office Chair (Savya Home / Green Soul Seoul)',
+        description: 'Dependable lower back cushion, tilt recline, and adjustable headrest under ₹9,000.',
+        estimatedPrice: 7999,
         priority: 'must-have',
       },
       {
-        name: 'Premium Ergonomic Workstation Chair (Aeron / Embody Tier)',
-        description: 'Gold-standard 12-year warranty posture engineering for 10+ hour daily work.',
-        estimatedPrice: 950,
+        name: 'Premium Workstation Chair (Steelcase Gesture / Herman Miller Aeron)',
+        description: 'Gold-standard posture engineering with multi-year warranty for 10+ hour workdays.',
+        estimatedPrice: 75000,
         priority: 'recommended',
       },
     ],
@@ -94,27 +94,27 @@ const WIZARD_STEPS: StepQuestion[] = [
   {
     stepNumber: 3,
     category: 'monitor',
-    title: 'Step 3: Display & Visual Canvas',
-    subtitle: 'Determine your screen real estate: single ultrawide vs dual color-accurate monitors.',
-    advice: 'Monitors with 90W+ USB-C Power Delivery and built-in KVM eliminate heavy docking bricks.',
-    searchExample: 'ultrawide 34 inch curved monitor 90w usb c kvm ips',
+    title: 'Step 3: Display & Screen Canvas',
+    subtitle: 'Determine your visual real estate: single ultrawide vs dual sharp productivity monitors.',
+    advice: 'Monitors with 65W–90W USB-C Power Delivery charge your MacBook or ThinkPad via one single cable.',
+    searchExample: 'ultrawide 34 inch curved usb c monitor price in india',
     options: [
       {
-        name: '34" Ultrawide Curved USB-C Hub Monitor (1440p)',
-        description: 'Seamless wide timeline and side-by-side code editor with built-in laptop charging.',
-        estimatedPrice: 650,
+        name: '34" Ultrawide Curved Monitor (LG / Dell / Acer QHD)',
+        description: 'Side-by-side code editor and browser with built-in laptop charging and smooth refresh rate.',
+        estimatedPrice: 38999,
         priority: 'must-have',
       },
       {
-        name: '27" 4K UHD Color-Calibrated Display (IPS)',
-        description: 'Razor sharp text clarity for reading docs, UI design, and photo/video creation.',
-        estimatedPrice: 420,
+        name: '27" 4K UHD Color-Calibrated Display (ASUS ProArt / BenQ IPS)',
+        description: 'Razor sharp text rendering for reading docs, UI design, and photo/video editing.',
+        estimatedPrice: 36999,
         priority: 'must-have',
       },
       {
-        name: 'Dual 27" 1440p QHD Productivity Displays',
-        description: 'Two separate monitors for dedicated Slack/browser on one and code on the other.',
-        estimatedPrice: 500,
+        name: '27" 1440p QHD Productivity Display (LG / Acer IPS 100Hz+)',
+        description: 'The sweet spot in India for high resolution without scaling issues or high cost.',
+        estimatedPrice: 17499,
         priority: 'must-have',
       },
     ],
@@ -123,27 +123,27 @@ const WIZARD_STEPS: StepQuestion[] = [
     stepNumber: 4,
     category: 'peripherals',
     title: 'Step 4: Input Devices (Keyboard & Mouse)',
-    subtitle: 'Tactile feel and precision for continuous typing without wrist fatigue.',
-    advice: 'Wireless multi-device pairing lets you switch between work laptop and home PC in 1 click.',
-    searchExample: 'ergonomic mouse wireless mechanical keyboard hot swap mac windows',
+    subtitle: 'Tactile feel and wrist precision for continuous daily productivity.',
+    advice: 'Wireless multi-device pairing lets you switch between work laptop and personal PC in 1 click.',
+    searchExample: 'logitech mx master 3s or keychron wireless mechanical keyboard india',
     options: [
       {
-        name: 'Logitech MX Master 3S + Mechanical Wireless Keyboard',
+        name: 'Logitech MX Master 3S + Keychron Wireless Mechanical Keyboard',
         description: 'The industry-standard productivity combo: MagSpeed wheel + tactile quiet typing.',
-        estimatedPrice: 220,
+        estimatedPrice: 15499,
         priority: 'must-have',
       },
       {
-        name: 'Split Ergonomic Keyboard + Vertical Ergonomic Mouse',
-        description: 'Natural forearm alignment preventing repetitive strain injury (RSI).',
-        estimatedPrice: 180,
+        name: 'Logitech MK295 Silent Wireless Keyboard & Mouse Set',
+        description: 'Reliable, spill-resistant, 2-year battery life, and whisper-quiet operation.',
+        estimatedPrice: 2295,
+        priority: 'must-have',
+      },
+      {
+        name: 'RK Royal Kludge RK84 Wireless Hot-Swap Mechanical Keyboard',
+        description: 'Compact 75% layout, hot-swappable switches, Bluetooth + 2.4GHz + Type-C wired.',
+        estimatedPrice: 5499,
         priority: 'recommended',
-      },
-      {
-        name: 'Minimalist Silent Wireless Keyboard & Mouse Set',
-        description: 'Low profile, lightweight, rechargeable, and whisper-quiet operation.',
-        estimatedPrice: 65,
-        priority: 'must-have',
       },
     ],
   },
@@ -151,26 +151,26 @@ const WIZARD_STEPS: StepQuestion[] = [
     stepNumber: 5,
     category: 'lighting',
     title: 'Step 5: Eye Comfort & Desk Lighting',
-    subtitle: 'Reduce eye fatigue from screen glare and illuminate your workspace evenly.',
-    advice: 'Screenbar light bars hang on top of your monitor, taking up 0 square inches of desk surface.',
-    searchExample: 'monitor light bar screenbar auto dimming asymmetrical light',
+    subtitle: 'Reduce eye strain from screen glare and illuminate your workspace evenly.',
+    advice: 'A monitor screenbar light hangs on top of your display, taking 0 square inches of desk surface.',
+    searchExample: 'baseus screenbar monitor light bar price in india',
     options: [
       {
-        name: 'Asymmetrical Monitor ScreenBar Light (Auto-Dimming)',
+        name: 'Asymmetrical Monitor ScreenBar Light (Baseus / BenQ)',
         description: 'Zero glare on the screen glass, warm to cool color temperature adjustment.',
-        estimatedPrice: 85,
+        estimatedPrice: 2999,
         priority: 'recommended',
       },
       {
-        name: 'Smart Ambient Bias Backlight Strip (Warm White)',
-        description: 'Even glow behind displays that minimizes eye strain during evening focus sessions.',
-        estimatedPrice: 35,
+        name: 'Smart Ambient Bias Backlight Strip (Wipro / Philips Hue)',
+        description: 'Even glow behind displays that minimizes eye fatigue during late-night focus sessions.',
+        estimatedPrice: 1499,
         priority: 'optional',
       },
       {
-        name: 'Architect Metal Clamp Desk Lamp',
-        description: 'Flexible swing arm lighting with diffuse broad coverage across the work surface.',
-        estimatedPrice: 40,
+        name: 'Architect Metal Clamp Desk Lamp with Warm LED',
+        description: 'Flexible swing arm lighting with diffuse broad coverage across your desk surface.',
+        estimatedPrice: 1899,
         priority: 'optional',
       },
     ],
@@ -179,26 +179,26 @@ const WIZARD_STEPS: StepQuestion[] = [
     stepNumber: 6,
     category: 'accessories',
     title: 'Step 6: Cable Management & Ergonomic Mounts',
-    subtitle: 'The secret to clean aesthetics: zero dangling wires and floating displays.',
+    subtitle: 'The secret to clean Indian desk setups: zero dangling wires and floating monitors.',
     advice: 'A gas-spring monitor arm clears the bulky monitor stand, unlocking 30% more usable desk depth.',
-    searchExample: 'under desk cable management raceway gas spring monitor mount',
+    searchExample: 'gas spring monitor arm under desk cable tray organizer india',
     options: [
       {
-        name: 'Gas-Spring Counterbalance Monitor Arm',
+        name: 'Gas-Spring Counterbalance Single Monitor Arm (AmazonBasics / Rife)',
         description: 'Effortless tilt, swivel, and height adjustment, clearing clutter beneath the screen.',
-        estimatedPrice: 55,
+        estimatedPrice: 2499,
         priority: 'recommended',
       },
       {
-        name: 'Under-Desk Steel Cable Tray + Power Strip Organizer Kit',
-        description: 'Keeps surge protectors, chargers, and wires neatly hidden beneath the desktop.',
-        estimatedPrice: 35,
+        name: 'Under-Desk Steel Cable Tray + Spike Guard Wire Sleeve Kit',
+        description: 'Keeps surge protectors, laptop bricks, and wire spaghetti neatly hidden under the table.',
+        estimatedPrice: 1299,
         priority: 'must-have',
       },
       {
-        name: 'Premium Wool Felt & Leather Desk Pad (90x40cm)',
+        name: 'Large Felt & Vegan Leather Desk Pad (90x40cm)',
         description: 'Covers the work area, dampens typing acoustics, and protects desk finish.',
-        estimatedPrice: 28,
+        estimatedPrice: 699,
         priority: 'recommended',
       },
     ],
@@ -290,8 +290,8 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
               <Sparkles className="w-4 h-4 text-zinc-200" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-zinc-100">Step-by-Step Setup Guide</h3>
-              <p className="text-xs text-zinc-400">Step 1 to final: build your custom workspace</p>
+              <h3 className="text-sm font-bold text-zinc-100">Step-by-Step Setup Guide (India)</h3>
+              <p className="text-xs text-zinc-400">Step 1 to final: build your custom workspace in INR (₹)</p>
             </div>
           </div>
 
@@ -299,7 +299,7 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
             <div className="text-right hidden sm:block">
               <span className="text-[10px] text-zinc-500 uppercase tracking-wider font-mono">Planned Total</span>
               <div className="text-sm font-bold font-mono text-zinc-100">
-                ${totalPlannedSoFar.toLocaleString()}
+                {formatINR(totalPlannedSoFar)}
               </div>
             </div>
             <button
@@ -352,7 +352,7 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
 
           <div>
             <div className="flex items-center justify-between text-xs font-medium text-zinc-400 mb-2.5">
-              <span>Select an option:</span>
+              <span>Select an option or enter your custom item below:</span>
               <a
                 href={createGoogleSearchUrl(currentStep.searchExample)}
                 target="_blank"
@@ -360,7 +360,7 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
                 className="flex items-center gap-1 text-zinc-300 hover:text-white text-xs"
               >
                 <Search className="w-3.5 h-3.5" />
-                <span>Search Deals</span>
+                <span>Search Indian Deals</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
             </div>
@@ -396,7 +396,7 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
 
                     <div className="mt-4 pt-2 border-t border-zinc-800 flex items-baseline justify-between">
                       <span className="text-[10px] text-zinc-500">Est. Price:</span>
-                      <span className="text-sm font-mono font-bold text-zinc-100">${opt.estimatedPrice}</span>
+                      <span className="text-sm font-mono font-bold text-zinc-100">{formatINR(opt.estimatedPrice)}</span>
                     </div>
                   </div>
                 );
@@ -421,7 +421,7 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] text-zinc-400 mb-1">Price ($)</label>
+                  <label className="block text-[10px] text-zinc-400 mb-1">Price (₹ INR)</label>
                   <input
                     type="number"
                     value={currentSelected.price}
@@ -430,10 +430,10 @@ export const SetupWizard: React.FC<SetupWizardProps> = ({ onFinishWizard, onClos
                   />
                 </div>
                 <div className="sm:col-span-3">
-                  <label className="block text-[10px] text-zinc-400 mb-1">Product Link / URL (Optional)</label>
+                  <label className="block text-[10px] text-zinc-400 mb-1">Product Link / URL (Amazon.in / Store link)</label>
                   <input
                     type="url"
-                    placeholder="https://amazon.com/... or store link"
+                    placeholder="https://amazon.in/... or store link"
                     value={currentSelected.url || ''}
                     onChange={(e) => handleUpdateCurrentSelection({ url: e.target.value })}
                     className="w-full px-3 py-1.5 text-xs rounded-xl bg-zinc-900 border border-zinc-700 text-zinc-100 placeholder-zinc-500 focus:outline-none focus:border-zinc-500"

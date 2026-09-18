@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { LayoutList, Cpu, Compass, Cloud, RefreshCw, Sparkles, BookOpen } from 'lucide-react';
+import { formatINR } from '@/lib/searchUtils';
 
 interface NavbarProps {
   activeTab: 'checklist' | 'pcbuilder' | 'recommendations';
@@ -39,17 +40,17 @@ export const Navbar: React.FC<NavbarProps> = ({
                   SetupForge
                 </h1>
                 <span className="text-[10px] uppercase font-semibold px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-300 border border-zinc-700">
-                  Cozy Noir
+                  ₹ INR
                 </span>
               </div>
-              <p className="text-xs text-zinc-400">Minimalist Workspace & Custom PC Architecture</p>
+              <p className="text-xs text-zinc-400">Workspace & Custom PC Architecture (Indian Standards)</p>
             </div>
           </div>
 
           {/* Mobile Quick Cost */}
           <div className="md:hidden flex flex-col items-end text-xs">
             <span className="text-zinc-400">{itemsCount} items</span>
-            <span className="font-semibold text-zinc-100">${totalCost.toLocaleString()}</span>
+            <span className="font-semibold text-zinc-100">{formatINR(totalCost)}</span>
           </div>
         </div>
 
@@ -99,7 +100,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </button>
         </nav>
 
-        {/* Controls: Step Guide & Neon */}
+        {/* Action Buttons: Step Guide & Neon */}
         <div className="hidden md:flex items-center gap-2.5">
           <button
             onClick={onOpenGuide}

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { SetupItem } from '@/types/setup';
-import { CATEGORY_LABELS } from '@/lib/searchUtils';
+import { CATEGORY_LABELS, formatINR } from '@/lib/searchUtils';
 import { CheckCircle2, Clock, AlertCircle } from 'lucide-react';
 
 interface BudgetSummaryCardProps {
@@ -32,10 +32,10 @@ export const BudgetSummaryCard: React.FC<BudgetSummaryCardProps> = ({ items }) =
       <div className="lg:col-span-2 p-5 sm:p-6 rounded-2xl bg-zinc-900 border border-zinc-800 shadow-xl relative overflow-hidden">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-zinc-800/80 pb-5">
           <div>
-            <span className="text-xs uppercase font-medium tracking-wider text-zinc-400">Total Setup Budget</span>
+            <span className="text-xs uppercase font-medium tracking-wider text-zinc-400">Total Setup Budget (INR)</span>
             <div className="flex items-baseline gap-2 mt-1">
               <span className="text-3xl sm:text-4xl font-semibold text-zinc-100 tracking-tight font-mono">
-                ${totalCost.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                {formatINR(totalCost)}
               </span>
               <span className="text-xs text-zinc-500 font-medium">({items.length} items)</span>
             </div>
@@ -46,7 +46,7 @@ export const BudgetSummaryCard: React.FC<BudgetSummaryCardProps> = ({ items }) =
               <CheckCircle2 className="w-4 h-4 text-zinc-300" />
               <div>
                 <div className="text-[10px] text-zinc-400">Committed / Ordered</div>
-                <div className="font-semibold font-mono text-zinc-100">${purchasedCost.toLocaleString()}</div>
+                <div className="font-semibold font-mono text-zinc-100">{formatINR(purchasedCost)}</div>
               </div>
             </div>
 
@@ -54,7 +54,7 @@ export const BudgetSummaryCard: React.FC<BudgetSummaryCardProps> = ({ items }) =
               <Clock className="w-4 h-4 text-zinc-400" />
               <div>
                 <div className="text-[10px] text-zinc-500">Remaining Planned</div>
-                <div className="font-semibold font-mono text-zinc-200">${pendingCost.toLocaleString()}</div>
+                <div className="font-semibold font-mono text-zinc-200">{formatINR(pendingCost)}</div>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@ export const BudgetSummaryCard: React.FC<BudgetSummaryCardProps> = ({ items }) =
                       <span className="truncate text-zinc-300 font-medium">{info.label}</span>
                       <span className="font-mono text-zinc-400 text-[10px]">{pct}%</span>
                     </div>
-                    <div className="text-xs font-semibold text-zinc-100 font-mono">${amount.toLocaleString()}</div>
+                    <div className="text-xs font-semibold text-zinc-100 font-mono">{formatINR(amount)}</div>
                     <div className="w-full bg-zinc-800 h-1 rounded-full mt-2 overflow-hidden">
                       <div className="bg-zinc-200 h-full rounded-full" style={{ width: `${pct}%` }} />
                     </div>
@@ -100,25 +100,25 @@ export const BudgetSummaryCard: React.FC<BudgetSummaryCardProps> = ({ items }) =
             <span className="text-xs font-semibold uppercase tracking-wider text-zinc-300">
               Workspace Overview
             </span>
-            <span className="text-[10px] font-mono text-zinc-500">COZY NOIR</span>
+            <span className="text-[10px] font-mono text-zinc-500">INDIAN STANDARDS</span>
           </div>
           <div className="space-y-2.5 text-xs text-zinc-300">
             <div className="flex justify-between items-center py-1 border-b border-zinc-850">
               <span className="text-zinc-400">Must-Have Essentials:</span>
               <span className="font-semibold font-mono text-zinc-200">
-                ${items.filter(i => i.priority === 'must-have').reduce((s, i) => s + i.price * i.quantity, 0).toLocaleString()}
+                {formatINR(items.filter(i => i.priority === 'must-have').reduce((s, i) => s + i.price * i.quantity, 0))}
               </span>
             </div>
             <div className="flex justify-between items-center py-1 border-b border-zinc-850">
               <span className="text-zinc-400">Optional / Dream Gear:</span>
               <span className="font-semibold font-mono text-zinc-200">
-                ${items.filter(i => i.priority === 'optional').reduce((s, i) => s + i.price * i.quantity, 0).toLocaleString()}
+                {formatINR(items.filter(i => i.priority === 'optional').reduce((s, i) => s + i.price * i.quantity, 0))}
               </span>
             </div>
             <div className="flex justify-between items-center py-1">
               <span className="text-zinc-400">Average Gear Price:</span>
               <span className="font-semibold font-mono text-zinc-200">
-                ${items.length > 0 ? (totalCost / items.length).toFixed(0) : '0'}
+                {formatINR(items.length > 0 ? totalCost / items.length : 0)}
               </span>
             </div>
           </div>

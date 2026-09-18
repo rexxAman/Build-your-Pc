@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { SetupItem, Category, ItemPriority, ItemStatus } from '@/types/setup';
-import { CATEGORY_LABELS, createGoogleSearchUrl, createAmazonSearchUrl } from '@/lib/searchUtils';
+import { CATEGORY_LABELS, createGoogleSearchUrl, createAmazonSearchUrl, formatINR } from '@/lib/searchUtils';
 import { 
   Plus, 
   Trash2, 
@@ -99,7 +99,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
               {filteredItems.length} items
             </span>
           </h2>
-          <p className="text-xs text-zinc-400">Track your workspace gear, paste purchase links, enter prices, and mark items as ordered.</p>
+          <p className="text-xs text-zinc-400">Track your workspace gear in INR (₹), paste purchase links, enter prices, and track orders.</p>
         </div>
 
         <div className="flex items-center gap-2">
@@ -140,9 +140,9 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
         <form onSubmit={handleSubmit} className="p-5 rounded-2xl bg-zinc-900 border border-zinc-700 shadow-2xl space-y-4 animate-in fade-in slide-in-from-top duration-200">
           <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
             <h3 className="text-sm font-semibold text-zinc-100">
-              Add Setup Item
+              Add Setup Item (India Standard)
             </h3>
-            <span className="text-xs text-zinc-500">Updates total cost automatically</span>
+            <span className="text-xs text-zinc-500">Calculates total cost in ₹ INR</span>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -153,7 +153,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g. Standing Desk 60x30, 4K Display, or MX Master 3S"
+                placeholder="e.g. Standing Desk, Featherlite Chair, or MX Master 3S"
                 className="w-full px-3 py-2 text-sm rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-500 text-zinc-100 placeholder-zinc-500"
               />
             </div>
@@ -188,27 +188,27 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
 
             <div className="lg:col-span-2">
               <label className="block text-xs font-medium text-zinc-300 mb-1">
-                Product Link / URL <span className="text-zinc-500 font-normal">(Optional)</span>
+                Product Link / URL <span className="text-zinc-500 font-normal">(Amazon.in / MDComputers / Store)</span>
               </label>
               <input
                 type="url"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                placeholder="https://amazon.com/... or store link"
+                placeholder="https://amazon.in/... or store link"
                 className="w-full px-3 py-2 text-sm rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-500 text-zinc-100 placeholder-zinc-500"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-zinc-300 mb-1">Price per unit ($) *</label>
+              <label className="block text-xs font-medium text-zinc-300 mb-1">Price per unit (₹ INR) *</label>
               <input
                 type="number"
-                step="0.01"
+                step="1"
                 min="0"
                 required
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
-                placeholder="0.00"
+                placeholder="e.g. 14999"
                 className="w-full px-3 py-2 text-sm rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-500 text-zinc-100 placeholder-zinc-500 font-mono"
               />
             </div>
@@ -226,13 +226,13 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
 
             <div className="lg:col-span-4">
               <label className="block text-xs font-medium text-zinc-300 mb-1">
-                Notes / Specs / Sizing <span className="text-zinc-500 font-normal">(Optional)</span>
+                Notes / Specs / Warranty <span className="text-zinc-500 font-normal">(Optional)</span>
               </label>
               <input
                 type="text"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                placeholder="e.g. Walnut tabletop, dual motor, 90W USB-C"
+                placeholder="e.g. 3-year warranty in India, dual motor, 65W Type-C"
                 className="w-full px-3 py-2 text-sm rounded-xl bg-zinc-950 border border-zinc-800 focus:outline-none focus:border-zinc-500 text-zinc-100 placeholder-zinc-500"
               />
             </div>
@@ -314,7 +314,7 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
             <ShoppingBag className="w-12 h-12 text-zinc-600 mx-auto mb-3" />
             <h4 className="text-sm font-semibold text-zinc-200">Your setup checklist is empty</h4>
             <p className="text-xs text-zinc-500 max-w-md mx-auto mt-1 mb-5 leading-relaxed">
-              Add your items individually, or open the step-by-step setup guide to plan your desk, seating, monitor, lighting, and cable layout.
+              Add your items individually, or open the step-by-step setup guide to plan your desk, seating, monitor, lighting, and cable layout with Indian market prices.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <button
@@ -432,10 +432,10 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                     ) : null}
 
                     <a
-                      href={createGoogleSearchUrl(`${item.name} best price deals`)}
+                      href={createGoogleSearchUrl(item.name)}
                       target="_blank"
                       rel="noreferrer"
-                      title="Search Google"
+                      title="Search Google India"
                       className="flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-zinc-300 border border-zinc-800"
                     >
                       <Search className="w-3 h-3 text-zinc-400" />
@@ -446,20 +446,20 @@ export const ChecklistManager: React.FC<ChecklistManagerProps> = ({
                       href={createAmazonSearchUrl(item.name)}
                       target="_blank"
                       rel="noreferrer"
-                      title="Search Amazon"
+                      title="Search Amazon.in"
                       className="hidden sm:flex items-center gap-1 text-[11px] px-2 py-1 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-zinc-300 border border-zinc-800"
                     >
-                      <span>Amazon</span>
+                      <span>Amazon.in</span>
                     </a>
                   </div>
 
                   <div className="text-right min-w-[90px]">
                     <div className="text-sm font-semibold text-zinc-100 font-mono">
-                      ${itemTotal.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      {formatINR(itemTotal)}
                     </div>
                     {item.quantity > 1 && (
                       <div className="text-[10px] text-zinc-500 font-mono">
-                        ${item.price.toFixed(2)} each
+                        {formatINR(item.price)} each
                       </div>
                     )}
                   </div>

@@ -2,197 +2,197 @@ import { SetupPreset } from '@/types/setup';
 
 export const SETUP_PRESETS: SetupPreset[] = [
   {
-    id: 'setup-minimalist-coder',
+    id: 'setup-minimalist-coder-in',
     title: 'Minimalist Clean Developer Desk',
-    description: 'Designed for deep focus and zero distraction with motorized height adjustment, an eye-care monitor lightbar, and ergonomic chair.',
+    description: 'Designed for deep focus with motorized height adjustment, eye-care monitor lightbar, and ergonomic mesh chair.',
     categoryTag: 'Focus & Productivity',
-    accentColor: 'from-emerald-500/20 to-teal-500/10 border-emerald-500/30',
+    accentColor: 'from-zinc-800 to-zinc-900 border-zinc-700',
     items: [
       {
-        name: 'Standing Desk (e.g. Uplift V2 or Fully Jarvis 60x30")',
+        name: 'Electric Standing Desk (Jin Office / FlowDesk Dual Motor 5x2.5 ft)',
         category: 'desk',
-        estimatedPrice: 650,
+        estimatedPrice: 24999,
         priority: 'must-have',
-        notes: 'Dual motor, solid bamboo or walnut laminate top',
-        searchQuery: 'best standing desk dual motor 60x30 wire management'
+        notes: 'Dual motor, solid engineered wood or teak top with memory presets',
+        searchQuery: 'jin office dual motor standing desk 5x2.5 ft buy online india'
       },
       {
-        name: 'Ergonomic Mesh Chair (e.g. Herman Miller Aeron or ErgoChair Pro)',
+        name: 'Ergonomic Mesh Chair (Green Soul Monster Ultimate / Featherlite Helix)',
         category: 'chair',
-        estimatedPrice: 450,
+        estimatedPrice: 16999,
         priority: 'must-have',
-        notes: 'Lumbar support, breathable mesh, adjustable 4D armrests',
-        searchQuery: 'ergonomic mesh chair lumbar support home office'
+        notes: 'Breathable mesh, dynamic lumbar support, 3D adjustable armrests',
+        searchQuery: 'featherlite helix or green soul ergonomic chair lumbar support india'
       },
       {
-        name: '34" Ultrawide USB-C Display (e.g. Dell UltraSharp U3423WE)',
+        name: '34" Ultrawide USB-C Monitor (LG 34WP65C / Dell S3422DWG)',
         category: 'monitor',
-        estimatedPrice: 799,
+        estimatedPrice: 38999,
         priority: 'must-have',
-        notes: 'Built-in KVM switch, 90W USB-C power delivery, curved IPS',
-        searchQuery: '34 inch ultrawide usb c 90w power delivery kvm ips monitor'
+        notes: 'Curved display, USB-C connectivity, high refresh rate for smooth code scrolling',
+        searchQuery: '34 inch curved ultrawide monitor price in india'
       },
       {
-        name: 'Single Monitor Heavy-Duty Gas Spring Arm',
+        name: 'Single Monitor Gas Spring Arm (AmazonBasics / Rife / Jin)',
         category: 'accessories',
-        estimatedPrice: 65,
+        estimatedPrice: 2499,
         priority: 'recommended',
-        notes: 'Clears desk space, enables effortless height and angle adjustments',
-        searchQuery: 'heavy duty monitor arm desk mount ultrawide'
+        notes: 'Clears desk space, supports up to 34" ultrawide',
+        searchQuery: 'heavy duty gas spring monitor arm desk mount india'
       },
       {
-        name: 'ScreenBar Monitor Light (e.g. BenQ ScreenBar Halo or Baseus)',
+        name: 'ScreenBar Monitor Light (Baseus i-Wok / BenQ ScreenBar)',
         category: 'lighting',
-        estimatedPrice: 95,
+        estimatedPrice: 2999,
         priority: 'recommended',
-        notes: 'Zero screen glare, auto-dimming sensor, wireless dial',
-        searchQuery: 'benq screenbar halo monitor light bar auto dimming'
+        notes: 'Zero screen reflection, auto dimming sensor, warm to cool light',
+        searchQuery: 'baseus screenbar monitor light bar price in india'
       },
       {
-        name: 'Mechanical Keyboard (e.g. Keychron Q1 Pro or NuPhy Air75)',
+        name: 'Wireless Mechanical Keyboard (Keychron K2 V2 / RK84 Hot-Swap)',
         category: 'peripherals',
-        estimatedPrice: 140,
+        estimatedPrice: 6999,
         priority: 'must-have',
-        notes: 'Wireless Bluetooth + 2.4G, Mac/Windows switch, hot-swappable switches',
-        searchQuery: 'wireless mechanical keyboard hot swappable mac windows keychron nuphy'
+        notes: 'Bluetooth + Type-C, Mac & Windows support, Gateron brown tactile switches',
+        searchQuery: 'keychron k2 v2 wireless mechanical keyboard price in india'
       },
       {
-        name: 'Ergonomic Productivity Mouse (Logitech MX Master 3S)',
+        name: 'Logitech MX Master 3S Wireless Mouse',
         category: 'peripherals',
-        estimatedPrice: 99,
+        estimatedPrice: 8495,
         priority: 'must-have',
-        notes: 'Quiet clicks, MagSpeed scroll wheel, multi-device flow',
-        searchQuery: 'logitech mx master 3s wireless mouse'
+        notes: 'Whisper-quiet clicks, MagSpeed wheel, multi-computer flow',
+        searchQuery: 'logitech mx master 3s wireless mouse price india'
       },
       {
-        name: 'Under-desk Cable Management Tray + Cable Sleeve Kit',
+        name: 'Under-Desk Metal Cable Management Tray & Wire Sleeve',
         category: 'accessories',
-        estimatedPrice: 35,
+        estimatedPrice: 1299,
         priority: 'recommended',
-        notes: 'Keeps power strips and adapters off the ground for clean floating look',
-        searchQuery: 'under desk cable management tray wire organizer'
+        notes: 'Keeps power extensions and heavy adapters hidden beneath desk',
+        searchQuery: 'under desk cable management tray metal organizer india'
       }
     ]
   },
   {
-    id: 'setup-creative-studio',
+    id: 'setup-creative-studio-in',
     title: 'Creative Designer & Video Editing Studio',
-    description: 'Calibrated color-accurate dual displays, studio active monitors, audio interface, and warm ambient desk lighting.',
+    description: 'Color-accurate 4K display, studio monitor speakers, audio interface, and warm ambient desk lighting.',
     categoryTag: 'Design & Media',
-    accentColor: 'from-purple-500/20 to-indigo-500/10 border-purple-500/30',
+    accentColor: 'from-zinc-800 to-zinc-900 border-zinc-700',
     items: [
       {
-        name: 'Solid Hardwood Desktop with Heavy Duty Sit-Stand Frame',
+        name: 'Solid Wood Finish Standing Desk (6x3 ft Heavy Duty Frame)',
         category: 'desk',
-        estimatedPrice: 750,
+        estimatedPrice: 32999,
         priority: 'must-have',
-        notes: 'Real Walnut or Oak top 72x30" for dual monitors and audio speakers',
-        searchQuery: 'solid wood standing desk walnut 72 inch'
+        notes: 'Extra spacious 72x36" surface for dual monitors and studio speakers',
+        searchQuery: 'solid wood electric standing desk 6x3 ft india'
       },
       {
-        name: '27" 4K Color-Accurate Monitor (e.g. ASUS ProArt PA279CV)',
+        name: '27" 4K Color-Accurate Monitor (ASUS ProArt PA279CV / BenQ PD2705U)',
         category: 'monitor',
-        estimatedPrice: 429,
+        estimatedPrice: 37999,
         priority: 'must-have',
-        notes: '100% sRGB, Calman verified, factory pre-calibrated Delta E < 2',
-        searchQuery: 'asus proart 27 inch 4k monitor color calibrated'
+        notes: '100% sRGB, Calman verified, factory calibrated Delta E < 2',
+        searchQuery: 'asus proart 27 inch 4k monitor price in india'
       },
       {
-        name: 'Studio Active Monitors (e.g. Yamaha HS5 or PreSonus Eris 4.5)',
+        name: 'Studio Active Desktop Speakers (PreSonus Eris 3.5 / 4.5)',
         category: 'audio',
-        estimatedPrice: 220,
+        estimatedPrice: 11999,
         priority: 'must-have',
         notes: 'Flat frequency response for accurate audio monitoring',
-        searchQuery: 'studio monitor speakers desktop flat frequency'
+        searchQuery: 'presonus eris studio monitor speakers price in india'
       },
       {
-        name: 'USB-C Audio Interface (e.g. Focusrite Scarlett 2i2 4th Gen)',
+        name: 'USB-C Audio Interface (Focusrite Scarlett Solo / 2i2 4th Gen)',
         category: 'audio',
-        estimatedPrice: 179,
+        estimatedPrice: 11499,
         priority: 'must-have',
-        notes: 'Crystal clear XLR mic preamp and dedicated headphone amp',
-        searchQuery: 'focusrite scarlett 2i2 4th gen usb audio interface'
+        notes: 'XLR mic preamp with 48V phantom power and direct monitoring',
+        searchQuery: 'focusrite scarlett solo 4th gen price in india'
       },
       {
-        name: 'Broadcast Dynamic Microphone + Boom Arm (e.g. Shure MV7+)',
+        name: 'Dynamic Microphone Kit with Boom Arm (Fifine K688 / Shure MV7)',
         category: 'audio',
-        estimatedPrice: 289,
+        estimatedPrice: 6999,
         priority: 'recommended',
-        notes: 'Voice isolation, XLR/USB hybrid connectivity',
-        searchQuery: 'shure mv7 broadcast microphone boom arm kit'
+        notes: 'Voice isolation, USB & XLR dual output with boom arm mount',
+        searchQuery: 'fifine k688 dynamic microphone boom arm kit price india'
       },
       {
-        name: 'Desk Shelf / Monitor Riser with Wool Felt Pad',
+        name: 'Dual Tier Wooden Desk Shelf / Monitor Riser',
         category: 'accessories',
-        estimatedPrice: 110,
+        estimatedPrice: 3499,
         priority: 'recommended',
-        notes: 'Adds dual-tier desk storage for notebook, audio interface, and docks',
-        searchQuery: 'wooden desk shelf monitor riser groovemade style'
+        notes: 'Elevates display while providing storage for audio interface & notebook',
+        searchQuery: 'wooden desk shelf monitor riser groovemade style india'
       },
       {
-        name: 'Smart Ambient Backlight Strip (Warm White 2700K-6500K)',
+        name: 'Smart Ambient Bias Backlight Strip (Warm White)',
         category: 'lighting',
-        estimatedPrice: 45,
+        estimatedPrice: 1499,
         priority: 'optional',
-        notes: 'Diffused bias lighting behind desk and monitors to reduce eye fatigue',
-        searchQuery: 'smart led bias lighting strip warm white tunable'
+        notes: 'Wipro / Philips Hue warm white bias lighting behind monitors',
+        searchQuery: 'smart led light strip warm white price india'
       }
     ]
   },
   {
-    id: 'setup-ergonomic-budget',
-    title: 'High-Value Ergonomic Home Office',
-    description: 'Every dollar maximized: top ergonomic comfort, reliable 100Hz+ display, and clean organization under $900 total.',
+    id: 'setup-ergonomic-budget-in',
+    title: 'High-Value Ergonomic Home Office (Under ₹45,000)',
+    description: 'Every rupee maximized: dependable ergonomic chair, electric sit-stand desk, and clean 1440p monitor.',
     categoryTag: 'Best Value / Budget',
-    accentColor: 'from-amber-500/20 to-orange-500/10 border-amber-500/30',
+    accentColor: 'from-zinc-800 to-zinc-900 border-zinc-700',
     items: [
       {
-        name: 'Dual Motor Height Adjustable Desk (48x24" or 55x28")',
+        name: 'Motorized Sit-Stand Desk (FlowDesk / Jin Single/Dual Motor 4x2 ft)',
         category: 'desk',
-        estimatedPrice: 249,
+        estimatedPrice: 14999,
         priority: 'must-have',
-        notes: 'Preset memory keypad, anti-collision sensor',
-        searchQuery: 'electric standing desk dual motor memory preset budget'
+        notes: 'Preset memory controller, anti-collision sensor',
+        searchQuery: 'motorized standing desk 4x2 ft price in india'
       },
       {
-        name: 'Ergonomic Office Chair with Dynamic Lumbar (SIHOO Doro C300/M57)',
+        name: 'Ergonomic Office Chair (Green Soul Seoul / Savya Home Apex)',
         category: 'chair',
-        estimatedPrice: 199,
+        estimatedPrice: 7999,
         priority: 'must-have',
-        notes: 'Full breathable mesh, adaptive lumbar support, 3D armrests',
-        searchQuery: 'sihoo ergonomic office chair full mesh dynamic lumbar'
+        notes: 'Breathable mesh back, lumbar support, tilting mechanism',
+        searchQuery: 'green soul ergonomic office chair price in india'
       },
       {
-        name: '27" 1440p QHD IPS Monitor (100Hz - 144Hz)',
+        name: '27" 1440p QHD IPS Monitor (Acer Nitro / LG 27QN600)',
         category: 'monitor',
-        estimatedPrice: 189,
+        estimatedPrice: 15999,
         priority: 'must-have',
-        notes: 'Sharp resolution for spreadsheet and code clarity without eye strain',
-        searchQuery: '27 inch 1440p qhd ips monitor 100hz 144hz'
+        notes: 'Sharp 2K resolution for crystal-clear code & text without eye strain',
+        searchQuery: '27 inch 1440p qhd ips monitor price in india'
       },
       {
-        name: 'Full Desk Felt & Leather Desk Pad (90x40cm)',
+        name: 'Full Desk Felt & Vegan Leather Desk Pad (90x40cm)',
         category: 'accessories',
-        estimatedPrice: 25,
+        estimatedPrice: 699,
         priority: 'recommended',
-        notes: 'Covers entire desk surface, dampens keyboard typing sound',
-        searchQuery: 'large felt desk pad mat 90x40'
+        notes: 'Dampens typing noise and protects tabletop',
+        searchQuery: 'large desk mat pad 90x40 cm price in india'
       },
       {
-        name: 'USB-C 7-in-1 Multiport Docking Hub',
+        name: 'Portronics 6-in-1 USB-C Hub (4K HDMI + 100W PD)',
         category: 'accessories',
-        estimatedPrice: 35,
+        estimatedPrice: 1899,
         priority: 'must-have',
-        notes: 'HDMI 4K, 100W PD passthrough, USB 3.0 ports',
-        searchQuery: 'usb c hub multiport adapter 100w pd hdmi 4k'
+        notes: 'HDMI 4K, 100W Power Delivery, 3x USB 3.0 ports',
+        searchQuery: 'portronics usb c hub multiport adapter 100w pd india'
       },
       {
-        name: 'Quiet Wireless Keyboard and Mouse Combo',
+        name: 'Logitech MK295 Silent Wireless Keyboard & Mouse Combo',
         category: 'peripherals',
-        estimatedPrice: 45,
+        estimatedPrice: 2295,
         priority: 'must-have',
-        notes: 'Reliable low-profile keys with silent tactile clicks',
-        searchQuery: 'wireless silent keyboard mouse combo'
+        notes: 'SilentTouch technology, 24-month battery life, spill-resistant',
+        searchQuery: 'logitech mk295 silent wireless combo price in india'
       }
     ]
   }
