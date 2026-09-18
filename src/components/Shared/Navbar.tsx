@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import { LayoutList, Cpu, Compass, Cloud, RefreshCw, Sparkles, BookOpen, LayoutGrid } from 'lucide-react';
+import { LayoutList, Cpu, Cloud, RefreshCw, Sparkles, BookOpen, LayoutGrid } from 'lucide-react';
 import { formatINR } from '@/lib/searchUtils';
 
 interface NavbarProps {
-  activeTab: 'checklist' | 'prebuilts' | 'pcbuilder' | 'recommendations';
-  setActiveTab: (tab: 'checklist' | 'prebuilts' | 'pcbuilder' | 'recommendations') => void;
+  activeTab: 'checklist' | 'prebuilts' | 'pcbuilder';
+  setActiveTab: (tab: 'checklist' | 'prebuilts' | 'pcbuilder') => void;
   itemsCount: number;
   totalCost: number;
   neonConnected: boolean;
@@ -54,11 +54,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         </div>
 
-        {/* Navigation Tabs */}
+        {/* Navigation Tabs (Checklist, Prebuilts, PC Studio) */}
         <nav className="flex items-center p-1 rounded-xl bg-zinc-900 border border-zinc-800 overflow-x-auto max-w-full">
           <button
             onClick={() => setActiveTab('checklist')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
               activeTab === 'checklist'
                 ? 'bg-zinc-100 text-zinc-950 font-semibold shadow-sm'
                 : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-850'
@@ -77,7 +77,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => setActiveTab('prebuilts')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
               activeTab === 'prebuilts'
                 ? 'bg-zinc-100 text-zinc-950 font-semibold shadow-sm'
                 : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-850'
@@ -89,7 +89,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           <button
             onClick={() => setActiveTab('pcbuilder')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
+            className={`flex items-center gap-2 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
               activeTab === 'pcbuilder'
                 ? 'bg-zinc-100 text-zinc-950 font-semibold shadow-sm'
                 : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-850'
@@ -97,18 +97,6 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             <Cpu className="w-4 h-4" />
             <span>Custom PC Studio</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('recommendations')}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all shrink-0 ${
-              activeTab === 'recommendations'
-                ? 'bg-zinc-100 text-zinc-950 font-semibold shadow-sm'
-                : 'text-zinc-400 hover:text-zinc-100 hover:bg-zinc-850'
-            }`}
-          >
-            <Compass className="w-4 h-4" />
-            <span>Workspaces</span>
           </button>
         </nav>
 

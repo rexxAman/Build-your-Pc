@@ -1,13 +1,12 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { SetupItem, PCComponent, SetupPreset, PCPartType, PCPreset } from '@/types/setup';
+import { SetupItem, PCComponent, PCPartType, PCPreset } from '@/types/setup';
 import { Navbar } from '@/components/Shared/Navbar';
 import { BudgetSummaryCard } from '@/components/Checklist/BudgetSummaryCard';
 import { ChecklistManager } from '@/components/Checklist/ChecklistManager';
 import { PCBuilder } from '@/components/PCBuilder/PCBuilder';
 import { PrebuiltsGallery } from '@/components/Prebuilts/PrebuiltsGallery';
-import { RecommendationHub } from '@/components/Recommendations/RecommendationHub';
 import { SetupWizard } from '@/components/SetupWizard/SetupWizard';
 
 const EMPTY_BUILD: Record<PCPartType, PCComponent | null> = {
@@ -22,14 +21,13 @@ const EMPTY_BUILD: Record<PCPartType, PCComponent | null> = {
 };
 
 export default function HomePage() {
-  const [activeTab, setActiveTab] = useState<'checklist' | 'prebuilts' | 'pcbuilder' | 'recommendations'>('checklist');
+  const [activeTab, setActiveTab] = useState<'checklist' | 'prebuilts' | 'pcbuilder'>('checklist');
   const [items, setItems] = useState<SetupItem[]>([]);
   const [neonConnected, setNeonConnected] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [setupId, setSetupId] = useState<string>('primary-setup');
   const [showGuide, setShowGuide] = useState(false);
 
-  // PC Studio state shared so loading from Prebuilts works seamlessly
   const [selectedParts, setSelectedParts] = useState<Record<PCPartType, PCComponent | null>>(EMPTY_BUILD);
   const [buildName, setBuildName] = useState('My Custom PC Build');
 
@@ -143,24 +141,6 @@ export default function HomePage() {
     setActiveTab('pcbuilder');
   };
 
-  const handleAddPresetItems = (presetItems: SetupPreset['items']) => {
-    const newItems: SetupItem[] = presetItems.map((pi) => ({
-      id: 'preset-' + Date.now() + '-' + Math.random().toString(36).substring(2, 6),
-      name: pi.name,
-      category: pi.category,
-      url: `https://www.google.co.in/search?q=${encodeURIComponent(pi.searchQuery || pi.name)}`,
-      price: pi.estimatedPrice,
-      quantity: 1,
-      priority: pi.priority,
-      status: 'wishlist',
-      notes: pi.notes,
-      createdAt: new Date().toISOString(),
-    }));
-
-    setItems((prev) => [...newItems, ...prev]);
-    setActiveTab('checklist');
-  };
-
   const totalCost = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
@@ -215,30 +195,12 @@ export default function HomePage() {
             onOpenPrebuiltsTab={() => setActiveTab('prebuilts')}
           />
         )}
-
-        {activeTab === 'recommendations' && (
-          <RecommendationHub
-            onAddPresetItems={handleAddPresetItems}
-            onAddItemDirectly={(item) =>
-              handleAddItem({
-                name: item.name,
-                category: item.category,
-                price: item.price,
-                priority: item.priority,
-                status: 'wishlist',
-                quantity: 1,
-                url: item.url || '',
-                notes: item.notes,
-              })
-            }
-          />
-        )}
       </main>
 
       <footer className="border-t border-zinc-900 py-6 px-4 text-center text-xs text-zinc-500 bg-[#09090b]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="text-zinc-400">
-            <span className="font-semibold text-zinc-200">SetupForge</span> — Cozy Minimalist Workspace & PC Architecture.
+            <span className="font-semibold text-zinc-200">SetupForge</span> — Minimalist Workspace & PC Architecture.
           </div>
           <div className="flex items-center gap-3 text-zinc-500">
             <span>Next.js 14</span>
